@@ -22,11 +22,8 @@ main {
     flex: 1 0 auto;
 }
 
-
-
-
 /*Footer styles*/
-footer .col-sm-2{
+footer .col-sm-2 {
     background-color: white
 }
 
