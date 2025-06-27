@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\BankSystem.AdminPart.csproj",
-      "projectName": "BankSystem.AdminPart",
-      "projectPath": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\BankSystem.AdminPart.csproj",
+      "projectUniqueName": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\WebUI.csproj",
+      "projectName": "WebUI",
+      "projectPath": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\WebUI.csproj",
       "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
       "outputPath": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\obj\\",
       "projectStyle": "PackageReference",
