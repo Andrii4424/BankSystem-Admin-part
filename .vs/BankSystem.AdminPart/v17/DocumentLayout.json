@@ -15,12 +15,20 @@
       "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\wwwroot\\stylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\wwwroot\\stylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\webui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\webui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\startupservicesinjection\\addapplicationservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,6 +54,31 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StyleSheet.css",
+              "DocumentMoniker": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\wwwroot\\StyleSheet.css",
+              "RelativeDocumentMoniker": "BankSystem.AdminPart\\wwwroot\\StyleSheet.css",
+              "ToolTip": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\wwwroot\\StyleSheet.css",
+              "RelativeToolTip": "BankSystem.AdminPart\\wwwroot\\StyleSheet.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-27T18:46:06.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "WebUI.csproj",
+              "DocumentMoniker": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\WebUI.csproj",
+              "RelativeDocumentMoniker": "BankSystem.AdminPart\\WebUI.csproj",
+              "ToolTip": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\WebUI.csproj",
+              "RelativeToolTip": "BankSystem.AdminPart\\WebUI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-27T18:16:31.693Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\_ViewStart.cshtml",
@@ -54,7 +87,8 @@
               "RelativeToolTip": "BankSystem.AdminPart\\Views\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T08:40:55.652Z"
+              "WhenOpened": "2025-06-27T08:40:55.652Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -64,7 +98,7 @@
               "RelativeDocumentMoniker": "BankSystem.AdminPart\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "BankSystem.AdminPart\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-27T08:33:56.051Z",
               "EditorCaption": ""
@@ -77,9 +111,10 @@
               "RelativeDocumentMoniker": "BankSystem.AdminPart\\Views\\Home\\Index.cshtml",
               "ToolTip": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "BankSystem.AdminPart\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T08:33:16.464Z"
+              "WhenOpened": "2025-06-27T08:33:16.464Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -91,11 +126,12 @@
               "RelativeToolTip": "BankSystem.AdminPart\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T08:32:51.623Z"
+              "WhenOpened": "2025-06-27T08:32:51.623Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Program.cs",
               "RelativeDocumentMoniker": "BankSystem.AdminPart\\Program.cs",
@@ -107,7 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "AddApplicationServices.cs",
               "DocumentMoniker": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\StartupServicesInjection\\AddApplicationServices.cs",
               "RelativeDocumentMoniker": "BankSystem.AdminPart\\StartupServicesInjection\\AddApplicationServices.cs",

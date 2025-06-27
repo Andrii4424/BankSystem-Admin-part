@@ -29,3 +29,4 @@ D:\Fullstack\BankSystem.AdminPart\BankSystem.AdminPart\obj\Debug\net8.0\refint\W
 D:\Fullstack\BankSystem.AdminPart\BankSystem.AdminPart\obj\Debug\net8.0\WebUI.pdb
 D:\Fullstack\BankSystem.AdminPart\BankSystem.AdminPart\obj\Debug\net8.0\WebUI.genruntimeconfig.cache
 D:\Fullstack\BankSystem.AdminPart\BankSystem.AdminPart\obj\Debug\net8.0\ref\WebUI.dll
+D:\Fullstack\BankSystem.AdminPart\BankSystem.AdminPart\bin\Debug\net8.0\WebUI.staticwebassets.runtime.json
