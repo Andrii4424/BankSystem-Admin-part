@@ -40,3 +40,6 @@ packages/
 
 # Publish output
 publish/
+
+.vs/
+
