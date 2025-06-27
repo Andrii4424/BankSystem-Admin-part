@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\Fullstack\\BankSystem.AdminPart\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|solutionrelative:banksystem.adminpart\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFF85DF0-8E36-4A83-BC06-1F9AC5EC17E7}|BankSystem.AdminPart\\WebUI.csproj|d:\\fullstack\\banksystem.adminpart\\banksystem.adminpart\\wwwroot\\stylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -42,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,8 +62,7 @@
               "RelativeToolTip": "BankSystem.AdminPart\\wwwroot\\StyleSheet.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-06-27T18:46:06.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-27T18:46:06.929Z"
             },
             {
               "$type": "Document",
@@ -79,7 +78,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "BankSystem.AdminPart\\Views\\_ViewStart.cshtml",
@@ -87,31 +86,30 @@
               "RelativeToolTip": "BankSystem.AdminPart\\Views\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T08:40:55.652Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-27T08:40:55.652Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "BankSystem.AdminPart\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "BankSystem.AdminPart\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAYwEEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-27T08:33:56.051Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "BankSystem.AdminPart\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "BankSystem.AdminPart\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAA==",
+              "ToolTip": "D:\\Fullstack\\BankSystem.AdminPart\\BankSystem.AdminPart\\Views\\Home\\Index.cshtml*",
+              "RelativeToolTip": "BankSystem.AdminPart\\Views\\Home\\Index.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-27T08:33:16.464Z",
               "EditorCaption": ""
@@ -126,8 +124,7 @@
               "RelativeToolTip": "BankSystem.AdminPart\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T08:32:51.623Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-27T08:32:51.623Z"
             },
             {
               "$type": "Document",
