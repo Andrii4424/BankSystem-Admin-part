@@ -48,26 +48,44 @@ main {
 .main-content-and-sidebar {
     display: flex;
     flex-direction: row;
+    height: 100%;
 }
 
 /*Sidebar*/
+aside {
+    height: 100%;
+}
+
 #open-menu-block {
     position: relative;
+    height: 100%;
+    min-width: 14vw;
+    max-width: 70vw;
 }
 
 .menu-icons {
-    width: 34px !important;
-    height: auto !important;
+    position: absolute;
     margin: 8px;
     transition: all 1s ease-in;
+    z-index: 2;
 }
+
+#open-menu {
+    width: 34px !important;
+    height: auto !important;
+}
+#close-menu {
+    width: 22.6px !important;
+    height: auto !important;
+}
+
 
 #open-menu {
     position: absolute;
     cursor: pointer;
 }
 
-#open-menu-block:hover .menu-icons {
+#open-menu-block:hover #open-menu {
     transition: all 1s ease-out;
     margin: 12px;
 }
@@ -78,15 +96,26 @@ main {
     height: 60px;
     transform: scale(0);
     transform-origin: left top;
-    cursor: pointer;
     transition: all 1s ease-in;
+    z-index:1;
 }
 
-#open-menu-block:hover #open-menu-background {
+#open-menu-icons {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+}
+    #open-menu-icons.opened {
+        width: 100%;
+        height: 100%;
+    }
+
+#open-menu-icons:hover #open-menu-background:not(.opened) {
     transition: all 1s ease-out;
     background-color: var(--dark-green-color);
     border-radius: 0 0 20px 0;
     transform: scale(1);
+    cursor: pointer;
 }
 
 /*Opening menu*/
@@ -101,21 +130,32 @@ main {
 }
 
 #close-menu {
+    transition: all 1s ease-out;
+    margin: 16px;
     cursor: pointer;
     transform: scale(1) rotate(360deg);
 }
 
-
-
-#menu {
-    display: none;
-    transform: scaleX(0);
+#menu li{
+    transform:scale(0);
+    /*z-index:2;*/
 }
 
+#open-menu-background.opened {
+    transition: all 1s ease-out;
+    width: 100%;
+    height: 100%;
+    background-color: var(--medium-green-color) !important;
+    border-radius: 0;
+    transform: scale(1);
+}
+
+
 /*Page content*/
-.page-content {
+#page-content {
     position: absolute;
     margin-left: 10vw;
+    z-index:0;
 }
 
 /*Footer styles*/
