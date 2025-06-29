@@ -51,25 +51,28 @@ main {
 }
 
 /*Sidebar*/
-open-menu {
+#open-menu-block {
     position: relative;
-    height: 60px;
 }
 
 .menu-icons {
-    position:absolute;
     width: 34px !important;
     height: auto !important;
+}
+
+#open-menu {
+    position: absolute;
     margin: 8px;
     transition: all 1s ease-out;
     cursor: pointer;
 }
-.open-menu:hover .menu-icons {
+
+#open-menu-block:hover #open-menu {
     margin: 12px;
 }
 
 
-.open-menu-background {
+#open-menu-background {
     position: absolute;
     width: 60px;
     height: 60px;
@@ -78,20 +81,23 @@ open-menu {
     transform-origin: left top;
     cursor: pointer;
 }
-    .open-menu:hover .open-menu-background {
-        background-color: var(--dark-green-color);
-        border-radius: 0 0 20px 0;
-        transform: scale(1);
-    }
+#open-menu-block:hover #open-menu-background {
+    background-color: var(--dark-green-color);
+    border-radius: 0 0 20px 0;
+    transform: scale(1);
+}
 
 
-
+#menu {
+    display: none;
+    transform: scaleX(0);
+}
 
 
 
 /*Page content*/
-.page-content{
-    position:absolute;
+.page-content {
+    position: absolute;
     margin-left: 10vw;
 }
 
