@@ -85,10 +85,7 @@ aside {
     cursor: pointer;
 }
 
-#open-menu-block:hover #open-menu {
-    transition: all 1s ease-out;
-    margin: 12px;
-}
+
 
 #open-menu-background {
     position: absolute;
@@ -96,8 +93,8 @@ aside {
     height: 60px;
     transform: scale(0);
     transform-origin: left top;
-    transition: all 1s ease-in;
-    z-index:1;
+    transition: all 1s ease-out;
+    z-index: 1;
 }
 
 #open-menu-icons {
@@ -110,8 +107,12 @@ aside {
         height: 100%;
     }
 
+    #open-menu-icons:hover #open-menu {
+        transition: all 1s ease-out;
+        margin: 12px;
+    }
+
 #open-menu-icons:hover #open-menu-background:not(.opened) {
-    transition: all 1s ease-out;
     background-color: var(--dark-green-color);
     border-radius: 0 0 20px 0;
     transform: scale(1);
@@ -142,10 +143,9 @@ aside {
 }
 
 #open-menu-background.opened {
-    transition: all 1s ease-out;
     width: 100%;
     height: 100%;
-    background-color: var(--medium-green-color) !important;
+    background-color: var(--medium-green-color);
     border-radius: 0;
     transform: scale(1);
 }
