@@ -71,18 +71,15 @@ aside {
 }
 
 #open-menu {
+    position: absolute;
+    cursor: pointer;
     width: 34px !important;
     height: auto !important;
+    margin: 12px;
 }
 #close-menu {
     width: 22.6px !important;
     height: auto !important;
-}
-
-
-#open-menu {
-    position: absolute;
-    cursor: pointer;
 }
 
 
@@ -107,10 +104,6 @@ aside {
         height: 100%;
     }
 
-    #open-menu-icons:hover #open-menu {
-        transition: all 1s ease-out;
-        margin: 12px;
-    }
 
 #open-menu-icons:hover #open-menu-background:not(.opened) {
     background-color: var(--dark-green-color);
