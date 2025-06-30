@@ -3,7 +3,7 @@
     --medium-green-color: #29cf85;
     --medium-ligth-green-color: #86caa9;
     --ligth-green-color: #97e2bf;
-    --white-green-color: #d8f0d8;
+    --white-green-color: #e0f8e0;
 }
 
 html, body {
@@ -179,16 +179,17 @@ aside {
     }
     #menu-content li:first-child {
         margin-top:0px;
-        color: var(--white-green-color);
+
     }
 
     #menu-content li {
-        margin-top: 4px
+        margin-top: 4px;
     }
 
-    #menu-content li:hover {
-        background-color: var(--dark-green-color);
-    }
+        #menu-content li:hover {
+            background-color: var(--dark-green-color);
+            color: var(--white-green-color);;
+        }
 
 /*Opening menu*/
 #open-menu.clicked {
