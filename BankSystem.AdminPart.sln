@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{1C6E9125-2EE2-0386-8438-3B1E31AD1F96}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EB495AAB-30E1-4A9F-AD3C-DEF3B7A4A9E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2785BCB1-ADA4-49B4-9D2C-9DFCBA2CE743} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{B3857B13-19F2-4B88-8BFE-319AF54AFB66} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{DAE2435D-0892-4D88-AF7D-99F41BDD55FF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{1C6E9125-2EE2-0386-8438-3B1E31AD1F96} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F576CC5D-82C0-4F72-9130-96540FB5AFEB}

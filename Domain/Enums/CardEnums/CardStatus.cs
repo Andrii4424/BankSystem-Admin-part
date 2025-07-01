@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities.Enums
+namespace Domain.Enums.CardEnums
 {
-    internal class CardStatus
+    public enum CardStatus
     {
+        Active,
+        Blocked,
+        Expired
     }
 }

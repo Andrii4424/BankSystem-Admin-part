@@ -1,12 +1,83 @@
-﻿using System;
+﻿using Domain.Entities.Banks;
+using Domain.Enums.UserEnums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities.Persons
 {
-    internal class UserEntity
+    public class UserEntity
     {
+        [Key]
+        public Guid Id { get; private set; } = Guid.NewGuid();
+
+        public Guid BankId { get; private set; }
+
+        [ForeignKey("BankId")]
+        public BankEntity Bank { get; private set; }
+
+        [StringLength(20)]
+        public string FinancalNumber { get; set; }
+
+        [StringLength(40)]
+        public string Email { get; set; }
+
+        [StringLength(40)]
+        public string FirstName { get; set; }
+
+        [StringLength(40)]
+        public string Surname { get; set; }
+
+        [StringLength(40)]
+        public string Patronymic { get; set; }
+
+        [StringLength(40)]
+        public string TaxId {  get; set; }
+
+        [StringLength(40)]
+        public string PassportNumber { get; set; }
+
+        [StringLength(4)]
+        public string BankPassword { get; set; }
+
+        public string? ProfilePicturePath { get; set; }
+
+        public string DocumentPhotoPath { get; set; }
+
+        public DateTime Birthday { get; set; }
+
+        [StringLength(20)]
+        public Nationality UserNationality { get; set; }
+
+        public Gender UserGender { get; set; }
+
+        public ICollection<UserCardEntity> UserCards { get; set; }
+
+        public UserEntity() { }
+
+        public UserEntity(Guid bankId, string financalNumber, string email, string firstName, string surname, string patronymic,
+            string taxId, string passportNumber, string bankPassword, string? profilePicturePath, string documentPhotoPath, DateTime birthday, 
+            Nationality userNationality, Gender userGender)
+        {
+            BankId = bankId;
+            FinancalNumber = financalNumber;
+            Email = email;
+            FirstName = firstName;
+            Surname = surname;
+            Patronymic = patronymic;
+            TaxId = taxId;
+            PassportNumber = passportNumber;
+            BankPassword = bankPassword;
+            ProfilePicturePath = profilePicturePath;
+            DocumentPhotoPath = documentPhotoPath;
+            Birthday = birthday;
+            UserNationality = userNationality;
+            UserGender = userGender;
+            UserCards = new List<UserCardEntity>();
+        }
     }
 }

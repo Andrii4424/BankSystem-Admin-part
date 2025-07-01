@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities.Enums.UserEnums
+namespace Domain.Enums.UserEnums
 {
-    internal class Gender
+    public enum Gender
     {
+        Male,
+        Female
     }
 }
