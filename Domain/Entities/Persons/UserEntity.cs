@@ -57,6 +57,8 @@ namespace Domain.Entities.Persons
 
         public ICollection<UserCardEntity> UserCards { get; set; }
 
+        public EmployeeEntity employee { get; set; }
+
         public UserEntity() { }
 
         public UserEntity(Guid bankId, string financalNumber, string email, string firstName, string surname, string patronymic,

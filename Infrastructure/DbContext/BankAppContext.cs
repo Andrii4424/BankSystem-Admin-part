@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Banks;
+using Domain.Entities.Banks.BankProducts;
 using Domain.Entities.Persons;
 using Domain.Enums.CardEnums;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +13,20 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Context
 {
-    public class BankAppContext : DbContext
+    public class BankAppContext : Microsoft.EntityFrameworkCore.DbContext
     {
+        public BankAppContext(DbContextOptions<BankAppContext> options) : base(options)
+        {
+
+        }
+
         public DbSet<BankEntity> Banks { get; set; }
         public DbSet<CardTariffsEntity> CardTariffs { get; set; }
         public DbSet<EmployeeEntity> Employees { get; set; }
         public DbSet<UserCardEntity> UserCards { get; set; }
         public DbSet<UserEntity> Users { get; set; }
-
+        public DbSet<CreditTariffsEntity> CreditTariffs { get; set; }
+        public DbSet<DepositTariffsEntity> DepositTariffs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +37,8 @@ namespace Infrastructure.Context
             modelBuilder.Entity<EmployeeEntity>().ToTable("Employees");
             modelBuilder.Entity<UserCardEntity>().ToTable("UserCards");
             modelBuilder.Entity<UserEntity>().ToTable("Users");
+            modelBuilder.Entity<CreditTariffsEntity>().ToTable("CreditTariffs");
+            modelBuilder.Entity<DepositTariffsEntity>().ToTable("DepositTariffs");
 
             //Enum converter
             modelBuilder.Entity<CardTariffsEntity>(c => {
@@ -59,11 +68,49 @@ namespace Infrastructure.Context
                 c.Property(card => card.ChosedPaymentSystem).HasConversion<string>();
                 c.Property(card => card.Status).HasConversion<string>();
             });
-        }
 
-        public BankAppContext(DbContextOptions<BankAppContext> options) :base(options)
-        {
+            //Relationship
+            modelBuilder.Entity<CardTariffsEntity>()
+                .HasOne(c => c.Bank)
+                .WithMany(b=>b.Cards)
+                .HasForeignKey(c => c.BankId)
+                .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<UserEntity>()
+                .HasOne(u => u.Bank)
+                .WithMany(b => b.Users)
+                .HasForeignKey(u => u.BankId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EmployeeEntity>()
+                .HasOne(e => e.User)
+                .WithOne(u => u.employee)
+                .HasForeignKey<EmployeeEntity>(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserCardEntity>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.UserCards)
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserCardEntity>()
+                .HasOne(c => c.CardTarrifs)
+                .WithMany(ct => ct.UserCards)
+                .HasForeignKey(u => u.CardTariffsId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CreditTariffsEntity>()
+                .HasOne(c => c.Bank)
+                .WithMany(b => b.Credits)
+                .HasForeignKey(c =>  c.BankId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<DepositTariffsEntity>()
+                .HasOne(d => d.Bank)
+                .WithMany(b => b.Depoosits)
+                .HasForeignKey(d => d.BankId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

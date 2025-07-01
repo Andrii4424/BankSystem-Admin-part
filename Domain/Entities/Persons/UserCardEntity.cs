@@ -15,7 +15,7 @@ namespace Domain.Entities.Persons
         [Key]
         public Guid Id { get; private set; }
 
-        public Guid CardTarriffsId { get; private set; }
+        public Guid CardTariffsId { get; private set; }
 
         [ForeignKey("CardTarrifsId")]
         public CardTariffsEntity CardTarrifs { get; init; }
@@ -47,7 +47,7 @@ namespace Domain.Entities.Persons
             string pin, PaymentSystem chosedPaymentSystem, DateOnly expirationDate, string cvv, DateTime? pinUnlockTime, CardStatus status)
         {
             Id = Guid.NewGuid();
-            CardTarriffsId = cardTariffsId;
+            CardTariffsId = cardTariffsId;
             UserId = userId;
             Balance = balance;
             ChosenCurrency = chosenCurrency;

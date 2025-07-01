@@ -17,7 +17,6 @@ namespace Domain.Entities.Persons
         public Guid UserId { get; private set; }
 
         [ForeignKey("UserId")]
-
         public UserEntity User { get; private set; }
 
         public JobTitles JobTitle { get; set; }
