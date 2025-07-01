@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Banks.BankProducts
 {
-    public class DepositTarrifsEntity
+    public class DepositTariffsEntity
     {
         [Key]
         public Guid Id { get; private set; }
@@ -26,7 +26,7 @@ namespace Domain.Entities.Banks.BankProducts
 
         public double MinDepositAmount { get; set; }
 
-        public DepositTarrifsEntity(Guid bankId, string depositName, double annualInterestRate, int[] availableDepositPeriods, double minDepositAmount)
+        public DepositTariffsEntity(Guid bankId, string depositName, double annualInterestRate, int[] availableDepositPeriods, double minDepositAmount)
         {
             BankId = bankId;
             DepositName = depositName;

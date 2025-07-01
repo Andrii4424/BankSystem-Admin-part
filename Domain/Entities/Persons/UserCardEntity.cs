@@ -18,7 +18,7 @@ namespace Domain.Entities.Persons
         public Guid CardTarriffsId { get; private set; }
 
         [ForeignKey("CardTarrifsId")]
-        public CardTarrifsEntity CardTarrifs { get; init; }
+        public CardTariffsEntity CardTarrifs { get; init; }
 
         public Guid UserId { get; private set; }
 
@@ -31,7 +31,9 @@ namespace Domain.Entities.Persons
 
         public string Pin { get; set; }
 
-        public PaymentSystem Status { get; set; }
+        public PaymentSystem ChosedPaymentSystem { get; set; }
+
+        public CardStatus Status { get; set; }
 
         public int PinTriesLeft { get; set; } = 3;
 
@@ -42,7 +44,7 @@ namespace Domain.Entities.Persons
         public string Cvv { get; set; }
 
         public UserCardEntity(Guid cardTariffsId, Guid userId, double balance, string chosenCurrency,
-            string pin, PaymentSystem status, DateOnly expirationDate, string cvv, DateTime? pinUnlockTime)
+            string pin, PaymentSystem chosedPaymentSystem, DateOnly expirationDate, string cvv, DateTime? pinUnlockTime, CardStatus status)
         {
             Id = Guid.NewGuid();
             CardTarriffsId = cardTariffsId;
@@ -50,11 +52,12 @@ namespace Domain.Entities.Persons
             Balance = balance;
             ChosenCurrency = chosenCurrency;
             Pin = pin;
-            Status = status;
+            ChosedPaymentSystem = chosedPaymentSystem;
             ExpirationDate = expirationDate;
             Cvv = cvv;
             PinTriesLeft = 3; // default value
             PinUnlockTime = pinUnlockTime;
+            Status = status;
         }
     }
 }

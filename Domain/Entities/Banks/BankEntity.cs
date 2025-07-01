@@ -51,18 +51,18 @@ namespace Domain.Entities.Banks
         public string LegalAddress { get; set; }
 
         //Child elements
-        public ICollection<CardTarrifsEntity> Cards { get; set; }
+        public ICollection<CardTariffsEntity> Cards { get; set; }
 
         public ICollection<UserEntity> Users { get; set; }
 
-        public ICollection<CreditTarrifsEntity> Credits { get; set; }
+        public ICollection<CreditTariffsEntity> Credits { get; set; }
 
-        public ICollection<DepositTarrifsEntity> Depoosits { get; set; }
+        public ICollection<DepositTariffsEntity> Depoosits { get; set; }
 
         public BankEntity()
         {
             Users = new List<UserEntity>();
-            Cards = new List<CardTarrifsEntity>();
+            Cards = new List<CardTariffsEntity>();
         }
 
         public BankEntity(string bankName, double rating, bool hasLicense, string bankFounderFullName, string bankDirectorFullName,
@@ -79,9 +79,9 @@ namespace Domain.Entities.Banks
             EstablishedDate = establishedDate;
             LegalAddress = legalAddress;
             Users = new List<UserEntity>();
-            Cards = new List<CardTarrifsEntity>();
-            Credits = new List<CreditTarrifsEntity>();
-            Depoosits = new List<DepositTarrifsEntity>();
+            Cards = new List<CardTariffsEntity>();
+            Credits = new List<CreditTariffsEntity>();
+            Depoosits = new List<DepositTariffsEntity>();
         }
     }
 }

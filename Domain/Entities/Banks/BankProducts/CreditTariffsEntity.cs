@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Banks.BankProducts
 {
-    public class CreditTarrifsEntity
+    public class CreditTariffsEntity
     {
         [Key]
         public Guid Id { get; private set; }
@@ -28,7 +28,7 @@ namespace Domain.Entities.Banks.BankProducts
 
         public double MinCreditAmount { get; set; }
 
-        public CreditTarrifsEntity(Guid bankId, string creditName, double monthlyInterestRate, int[] availableCreditPeriods, 
+        public CreditTariffsEntity(Guid bankId, string creditName, double monthlyInterestRate, int[] availableCreditPeriods, 
             double maxCreditAmount, double minCreditAmount)
         {
             BankId = bankId;

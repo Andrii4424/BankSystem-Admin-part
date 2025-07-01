@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Banks
 {
-    public class CardTarrifsEntity
+    public class CardTariffsEntity
     {
         [Key]
         public Guid Id { get; private set; } = Guid.NewGuid();
@@ -39,15 +39,20 @@ namespace Domain.Entities.Banks
 
         public int AnnualMaintenanceCost { get; set; }
 
+        public double P2PToAnotherBankCommission { get; set; }
+
+        public double P2PInternalCommission { get; set; }
+
         [StringLength(4)]
         public string CardNumberMasked { get; set; }
 
         public ICollection<UserCardEntity> UserCards { get; set; }
 
-        public CardTarrifsEntity() { }
+        public CardTariffsEntity() { }
 
-        public CardTarrifsEntity(Guid bankId, string cardName, CardType type, CardLevel level, double validityPeriod, int maxCreditLimit, 
-            PaymentSystem[] enabledPaymentSystem, double? interestRate, string[] curency, int annualMaintenanceCost, string cardNumberMasked)
+        public CardTariffsEntity(Guid bankId, string cardName, CardType type, CardLevel level, double validityPeriod, int maxCreditLimit, 
+            PaymentSystem[] enabledPaymentSystem, double? interestRate, string[] curency, int annualMaintenanceCost, string cardNumberMasked,
+            double p2pInternalCommission, double p2pToAnotherBankCommission)
         {
             BankId = bankId;
             CardName = cardName;
@@ -61,6 +66,8 @@ namespace Domain.Entities.Banks
             AnnualMaintenanceCost = annualMaintenanceCost;
             CardNumberMasked = cardNumberMasked;
             UserCards = new List<UserCardEntity>();
+            P2PInternalCommission = p2pInternalCommission;
+            P2PToAnotherBankCommission = p2pToAnotherBankCommission;
         }
     }
 }
