@@ -1,9 +1,18 @@
-﻿namespace WebUI.StartupServicesInjection
+﻿using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
+
+namespace WebUI.StartupServicesInjection
 {
     public static class AddApplicationServices
     {
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<BankAppContext>(
+                options =>
+                {
+                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                }
+                );
 
 
             return services;
