@@ -50,7 +50,6 @@ namespace Domain.Entities.Persons
 
         public DateTime Birthday { get; set; }
 
-        [StringLength(20)]
         public Nationality UserNationality { get; set; }
 
         public Gender UserGender { get; set; }
