@@ -39,12 +39,15 @@ namespace Domain.Entities.Persons
 
         public DateTime? PinUnlockTime { get; set; }
 
+        [StringLength(16)]
+        public string CardNumber { get; set; }
+
         public DateOnly ExpirationDate { get; set; }
 
         public string Cvv { get; set; }
 
-        public UserCardEntity(Guid cardTariffsId, Guid userId, double balance, string chosenCurrency,
-            string pin, PaymentSystem chosedPaymentSystem, DateOnly expirationDate, string cvv, DateTime? pinUnlockTime, CardStatus status)
+        public UserCardEntity(Guid cardTariffsId, Guid userId, double balance, string chosenCurrency, string pin, 
+            PaymentSystem chosedPaymentSystem, DateOnly expirationDate, string cardNumber, string cvv, DateTime? pinUnlockTime, CardStatus status)
         {
             Id = Guid.NewGuid();
             CardTariffsId = cardTariffsId;
@@ -53,6 +56,7 @@ namespace Domain.Entities.Persons
             ChosenCurrency = chosenCurrency;
             Pin = pin;
             ChosedPaymentSystem = chosedPaymentSystem;
+            CardNumber = cardNumber;
             ExpirationDate = expirationDate;
             Cvv = cvv;
             PinTriesLeft = 3; // default value
