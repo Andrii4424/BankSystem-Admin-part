@@ -13,6 +13,8 @@ namespace WebUI.StartupServicesInjection
     {
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddControllersWithViews();
+
             services.AddDbContext<BankAppContext>(
                 options =>
                 {

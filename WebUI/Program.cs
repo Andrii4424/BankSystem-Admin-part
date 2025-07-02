@@ -2,13 +2,10 @@ using WebUI.StartupServicesInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
-var app = builder.Build();
-
-
-
 
 AddApplicationServices.AddServices(builder.Services, builder.Configuration);
+
+var app = builder.Build();
 
 app.UseStaticFiles();
 
