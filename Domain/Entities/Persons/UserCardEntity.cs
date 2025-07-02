@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Banks;
+﻿using Domain.Abstractions;
+using Domain.Entities.Banks;
 using Domain.Enums.CardEnums;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Persons
 {
-    public class UserCardEntity
+    public class UserCardEntity : IHasId
     {
         [Key]
         public Guid Id { get; private set; }

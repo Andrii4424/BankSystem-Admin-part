@@ -1,4 +1,5 @@
-﻿using Domain.Enums.EmployeeEnums;
+﻿using Domain.Abstractions;
+using Domain.Enums.EmployeeEnums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Persons
 {
-    public class EmployeeEntity
+    public class EmployeeEntity : IHasId
     {
         [Key]
         public Guid Id {  get; private set; }

@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Banks.BankProducts;
+﻿using Domain.Abstractions;
+using Domain.Entities.Banks.BankProducts;
 using Domain.Entities.Persons;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Banks
 {
-    public class BankEntity
+    public class BankEntity : IHasId
     {
         [Key]
         public Guid Id { get; private set; } = Guid.NewGuid();
