@@ -1,4 +1,6 @@
-﻿using Infrastructure.Context;
+﻿using Application.Services.BankServices;
+using Domain.RepositoryContracts;
+using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebUI.StartupServicesInjection
@@ -14,6 +16,9 @@ namespace WebUI.StartupServicesInjection
                 }
                 );
 
+            //Services
+
+            services.AddScoped<IBankRepository, BankReadService>();
 
             return services;
         }

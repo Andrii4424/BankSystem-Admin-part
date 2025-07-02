@@ -1,4 +1,5 @@
 ﻿using Domain.Abstractions;
+using Domain.RepositoryContracts;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public class GenericRepository<T> where T : class, IHasId
+    public class GenericRepository<T>:IGenericRepository<T> where T : class, IHasId
     {
         private readonly BankAppContext _context;
         private readonly DbSet<T> _dbSet;
