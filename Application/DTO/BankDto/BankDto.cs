@@ -10,8 +10,6 @@ namespace Application.DTO.BankDto
 {
     public class BankDto
     {
-        [Required(ErrorMessage = "{0} has to be provided")]
-        [Display(Name = "Id")]
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "{0} has to be provided")]

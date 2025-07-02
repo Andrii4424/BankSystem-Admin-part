@@ -12,6 +12,8 @@ namespace Application.DTO.PersonDto
 {
     public class UserDto
     {
+        public Guid Id { get; set; }
+
         [Required(ErrorMessage = "{0} has to be provided")]
         [Display(Name = "Bank Id")]
         public Guid BankId { get; set; }
