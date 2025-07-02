@@ -13,12 +13,8 @@ namespace Application.DTO.BankDto
     public class CardTariffsDto :IValidatableObject
     {
         [Required(ErrorMessage = "{0} has to be provided")]
-        [Display(Name = "Id")]
-        public Guid Id { get; private set; } = Guid.NewGuid();
-
-        [Required(ErrorMessage = "{0} has to be provided")]
-        [Display(Name = "Id")]
-        public Guid BankId { get; private set; }
+        [Display(Name = "Bank Id")]
+        public Guid BankId { get; set; }
 
         [Required(ErrorMessage = "{0} has to be provided")]
         [StringLength(40)]
