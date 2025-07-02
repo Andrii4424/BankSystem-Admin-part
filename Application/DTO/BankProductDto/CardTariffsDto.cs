@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTO.BankDto
+namespace Application.DTO.BankProductDto
 {
     public class CardTariffsDto :IValidatableObject
     {

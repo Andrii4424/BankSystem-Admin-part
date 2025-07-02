@@ -1,5 +1,4 @@
 ﻿using Application.DTO.BankProductDto;
-using Domain.Entities.Banks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.ServiceContracts.BankServiceContracts
 {
-    public interface IBankReadService
+    public interface IBankAddService
     {
-        public Task<List<BankDto>?> GetBankList();
-        public Task<BankDto> GetBankById(Guid bankdId);
+        public Task AddBank(BankDto bankDto);
     }
 }
