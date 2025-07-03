@@ -1,5 +1,7 @@
-﻿using Application.ServiceContracts.BankServiceContracts;
+﻿using Application.DTO.BankProductDto;
+using Application.ServiceContracts.BankServiceContracts;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Filters;
 
 namespace WebUI.Controllers
 {
@@ -19,10 +21,51 @@ namespace WebUI.Controllers
             _bankDeleteService = bankDeleteService;
         }
 
-        [Route("/bank")]
-        public IActionResult Index()
+        [Route("/banks")]
+        public async Task<IActionResult> BanksList()
         {
-            return View();
+            return View(await _bankReadService.GetBanksList());
+        }
+
+        [Route("/bank/{bankId:Guid}")]
+        public async Task<IActionResult> BanksList(Guid bankId)
+        {
+            return View(await _bankReadService.GetBankById(bankId));
+        }
+
+        [HttpGet("/add-bank")]
+        public IActionResult AddBank()
+        {
+            return View(new BankDto());
+        }
+
+        [TypeFilter(typeof(ModelBindingFilter))]
+        [HttpPost("/add-bank")]
+        public IActionResult AddBank([FromForm] BankDto bankDto)
+        {
+            if(ModelState.IsValid) _bankAddService.AddBank(bankDto);
+            return View(bankDto);
+        }
+
+        [HttpGet("/update-bank/{bankId:Guid}")]
+        public IActionResult UpdateBank(Guid bankId)
+        {
+            return View(_bankReadService.GetBankById(bankId));
+        }
+
+        [TypeFilter(typeof(ModelBindingFilter))]
+        [HttpPost("/update-bank/{bankId:Guid}")]
+        public IActionResult UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId)
+        {
+            if (ModelState.IsValid) _bankUpdateService.UpdateBank(bankId, bankDto);
+            return View(bankDto);
+        }
+
+        [HttpPost("/delete-bank/{bankId:Guid}")]
+        public IActionResult DeleteBank([FromRoute] Guid bankId)
+        {
+            _bankDeleteService.DeleteBank(bankId);
+            return RedirectToAction("BanksList");
         }
     }
 }

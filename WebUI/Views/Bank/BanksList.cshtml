@@ -1,0 +1,58 @@
+﻿@model List<BankDto>
+
+<div class="cards-block">
+	@if(Model.Count==0)
+	{
+		<h4 class="empty-list">
+			Bank list is empty, you can create bank by button bellow
+		</h4>
+	}
+	@foreach(BankDto bank in Model)
+	{
+		<a href="">
+			<table class="bank-table">
+				<tr>
+					<th>
+						Bank name: @bank.BankName
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Our rating is @bank.Rating
+					</th>
+				</tr>
+				<tr>
+					<th>
+						We have @bank.ActiveClientsCount active clients
+					</th>
+				</tr>
+			</table>
+		</a>
+	}
+	<h1>1</h1>
+	<h1>2</h1>
+	<h1>3</h1>
+	<h1>4</h1>
+	<h1>5</h1>
+	<h1>6</h1>
+	<h1>7</h1>
+	<h1>8</h1>
+	<h1>9</h1>
+	<h1>10</h1>
+	<h1>11</h1>
+	<h1>12</h1>
+	<h1>13</h1>
+	<h1>14</h1>
+	<h1>15</h1>
+	<h1>16</h1>
+	<h1>17</h1>
+	<h1>18</h1>
+	<h1>19</h1>
+	<h1>20</h1>
+	<h1>21</h1>
+	<h1>22</h1>
+
+	<form asp-controller="Bank" asp-action="AddBank" method="get">
+		<button class="add-element" type="submit">Add Bank</button>
+	</form>
+</div>

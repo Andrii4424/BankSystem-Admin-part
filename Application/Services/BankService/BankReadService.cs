@@ -22,7 +22,7 @@ namespace Application.Services.BankServices
             _mapper = mapper;
         }
 
-        public async Task<List<BankDto>?> GetBankList()
+        public async Task<List<BankDto>?> GetBanksList()
         {
             List<BankEntity>? bankEntities = await _bankRepository.GetAllValuesAsync() as List<BankEntity>;
             return _mapper.Map<List<BankDto>>(bankEntities);
