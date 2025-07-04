@@ -1,50 +1,53 @@
 ﻿@model BankDto
 
 
-<div class="add-entity-block">
-    <form asp-controller="Bank" asp-action="AddBank" method="post" class="add-form">
-        <input asp-for="BankName" placeholder="Bank Name:">
-        <input asp-for="Rating" step="0.1" placeholder="Rating:" oninput="this.value = this.value.replace('.', ',')">
-        <div class="radio-elements">
-            <span>Bank has a license?</span>
-            <div class="radio-buttons">
-                <label>
-                    <input asp-for="HasLicense" type="radio" value="true" /> Yes
-                </label>
-                <label>
-                    <input asp-for="HasLicense" type="radio" value="false" /> No
-                </label>
-            </div>
-        </div>
-        <input asp-for="BankFounderFullName" placeholder="Founder Name:">
-        <input asp-for="BankDirectorFullName" placeholder="Director Name:">
-        <input asp-for="Capitalization" placeholder="Capitalization:">
-        <input asp-for="WebsiteUrl" placeholder="Website Url(optional):">
-        <input asp-for="ContactPhone" type="number" placeholder="Contact Phone:">
-        <input asp-for="EstablishedDate" type="hidden" value="@DateTime.UtcNow">
-        <input asp-for="LegalAddress" placeholder="Legal Address:">
-
-        @if (ViewBag.Message != null)
-        {
-            @if (ViewBag.Message == "Success!")
-            {
-                <span class="success-message">@ViewBag.Message</span>
-            }
-            @if (ViewBag.Message != "Success!")
-            {
-                <div class="error-validation-message">
-                    <span>@ViewBag.Message</span>
-                    <ul>
-                        @foreach (var error in ViewBag.Errors)
-                        {
-                            <li>@error</li>
-                        }
-                    </ul>
+<div class="main-content-block">
+    <div class="add-entity-block">
+        <form asp-controller="Bank" asp-action="AddBank" method="post" class="add-form">
+            <input asp-for="BankName" placeholder="Bank Name:">
+            <input asp-for="Rating" step="0.1" placeholder="Rating:" oninput="this.value = this.value.replace('.', ',')">
+            <div class="radio-elements">
+                <span>Bank has a license?</span>
+                <div class="radio-buttons">
+                    <label>
+                        <input asp-for="HasLicense" type="radio" value="true" /> Yes
+                    </label>
+                    <label>
+                        <input asp-for="HasLicense" type="radio" value="false" /> No
+                    </label>
                 </div>
+            </div>
+            <input asp-for="BankFounderFullName" placeholder="Founder Name:">
+            <input asp-for="BankDirectorFullName" placeholder="Director Name:">
+            <input asp-for="Capitalization" placeholder="Capitalization:">
+            <input asp-for="WebsiteUrl" placeholder="Website Url(optional):">
+            <input asp-for="ContactPhone" type="number" placeholder="Contact Phone:">
+            <input asp-for="EstablishedDate" type="hidden" value="@DateTime.UtcNow">
+            <input asp-for="LegalAddress" placeholder="Legal Address:">
+
+            @if (ViewBag.Message != null)
+            {
+                @if (ViewBag.Message == "Success!")
+                {
+                    <span class="success-message">@ViewBag.Message</span>
+                }
+                @if (ViewBag.Message != "Success!")
+                {
+                    <div class="error-validation-message">
+                        <span>@ViewBag.Message</span>
+                        <ul>
+                            @foreach (var error in ViewBag.Errors)
+                            {
+                                <li>@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
             }
 
-        }
+            <button type="submit" class="create-element">Create Bank</button>
+        </form>
+    </div>
 
-        <button type="submit" class="create-element">Create Bank</button>
-    </form>
 </div>

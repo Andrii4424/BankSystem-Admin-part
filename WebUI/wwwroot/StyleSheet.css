@@ -141,12 +141,12 @@ footer {
 
 
 /*Page content*/
-.cards-block{
-    margin-top:4vh;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.main-content-block {
+    margin-bottom: 1vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .empty-list {
@@ -168,7 +168,7 @@ footer {
     border: 0px;
     border-radius: 6px;
     padding: 16px 42px;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .add-entity-block {
@@ -179,7 +179,8 @@ footer {
     border-radius: 10px;
     border: 4px solid var(--dark-green-color);
     padding: 10px 40px;
-    font-size: 16px
+    font-size: 16px;
+    max-width: 48vw;
 }
 
 .add-form {
@@ -189,7 +190,7 @@ footer {
 }
     .add-form input:not([type="radio"]) {
         margin-top: 16px;
-        width: 40vw;
+        width: 100%;
         height: 4vh;
         background-color: var(--ligth-green-color);
         border: 1px solid grey;
@@ -256,3 +257,31 @@ footer {
     .bank-table th {
         padding: 12px;
     }
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap:40px;
+    font-size: 18px;
+    margin-top: 12px;
+}
+
+#update-element {
+    color: white;
+    background-color: #4169E1;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 6px;
+    padding: 8px 21px;
+    font-weight: bold;
+}
+
+#delete-element {
+    color: white;
+    background-color: #DC143C;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 6px;
+    padding: 8px 21px;
+    font-weight: bold;
+}
