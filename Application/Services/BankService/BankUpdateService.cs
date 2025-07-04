@@ -24,8 +24,10 @@ namespace Application.Services.BankService
 
         public async Task UpdateBank(Guid bankId, BankDto bankDto)
         {
-            BankEntity bankEntity = _mapper.Map<BankEntity>(bankDto);
-             _bankRepository.UpdateObject(bankEntity);
+            BankEntity? bank = await _bankRepository.GetValueByIdAsync(bankId);
+            if(bank == null) throw new NullReferenceException("This bank doesnt exist");
+            bank = _mapper.Map(bankDto, bank);
+             _bankRepository.UpdateObject(bank);
             await _bankRepository.SaveAsync();
         }
     }

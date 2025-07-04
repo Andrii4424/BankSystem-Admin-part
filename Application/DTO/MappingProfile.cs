@@ -13,7 +13,8 @@ namespace Application.DTO
     {
         public MappingProfile() {
             CreateMap<BankEntity, BankDto>();
-            CreateMap<BankDto, BankEntity>();
+            CreateMap<BankDto, BankEntity>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore()); 
         }
     }
 }

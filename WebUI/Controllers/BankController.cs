@@ -49,16 +49,16 @@ namespace WebUI.Controllers
         }
 
         [HttpGet("/update-bank/{bankId:Guid}")]
-        public IActionResult UpdateBank(Guid bankId)
+        public async Task<IActionResult> UpdateBank(Guid bankId)
         {
-            return View(_bankReadService.GetBankById(bankId));
+            return View(await _bankReadService.GetBankById(bankId));
         }
 
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/update-bank/{bankId:Guid}")]
-        public IActionResult UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId)
+        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId)
         {
-            if (ModelState.IsValid) _bankUpdateService.UpdateBank(bankId, bankDto);
+            if (ModelState.IsValid) await _bankUpdateService.UpdateBank(bankId, bankDto);
             return View(bankDto);
         }
 
