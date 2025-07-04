@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebUI.Filters
 {
@@ -14,11 +15,14 @@ namespace WebUI.Filters
                 {
                     controller.ViewBag.Message = "Error!";
                     List<string> errors= new List<string>();
-                    foreach(var error in controller.ModelState)
+                    foreach(var value in controller.ModelState.Values)
                     {
-                        errors.Add(error.ToString());
+                        foreach(var error in value.Errors)
+                        {
+                            errors.Add(error.ErrorMessage);
+                        }
                     }
-
+                    controller.ViewBag.Errors = errors;
                 }
                 else
                 {
