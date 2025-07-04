@@ -1,6 +1,7 @@
 ﻿using Application.DTO.BankProductDto;
 using Application.ServiceContracts.BankServiceContracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using WebUI.Filters;
 
 namespace WebUI.Controllers
@@ -62,9 +63,9 @@ namespace WebUI.Controllers
         }
 
         [HttpPost("/delete-bank/{bankId:Guid}")]
-        public IActionResult DeleteBank([FromRoute] Guid bankId)
+        public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId)
         {
-            _bankDeleteService.DeleteBank(bankId);
+            await _bankDeleteService.DeleteBank(bankId);
             return RedirectToAction("BanksList");
         }
     }

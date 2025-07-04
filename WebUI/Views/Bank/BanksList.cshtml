@@ -33,7 +33,7 @@
 			<form asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId=@bank.Id id="add-form" method="get">
 				<button id="update-element" type="submit">Update Bank</button>
 			</form>
-			<form asp-controller="Bank" asp-action="DeleteBank" asp-route-bankId=@bank.Id id="add-form" method="get">
+			<form asp-controller="Bank" asp-action="DeleteBank" asp-route-bankId=@bank.Id id="add-form" method="post">
 				<button id="delete-element" type="submit">Delete Bank</button>
 			</form>
 		</div>
