@@ -306,3 +306,19 @@ footer {
     width:34px;
     height:auto
 }
+#colums{
+    margin-left:94%;
+    margin-top:14px;
+}
+
+    #colums img {
+        width: 44px;
+        height: auto;
+        cursor: pointer;
+        border-radius:12px;
+        padding: 4px;
+    }
+
+        #colums img.chosen {
+            background-color: #c7c3c3;
+        }
