@@ -57,15 +57,17 @@ namespace WebUI.Controllers
             return View(bankDto);
         }
 
+        [TypeFilter(typeof(LoadPageFilter))]
         [HttpGet("/update-bank/{bankId:Guid}")]
-        public async Task<IActionResult> UpdateBank(Guid bankId)
+        public async Task<IActionResult> UpdateBank(Guid bankId, [FromQuery] int? loadPageCount)
         {
             return View(await _bankReadService.GetBankById(bankId));
         }
 
+        [TypeFilter(typeof(LoadPageFilter))]
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/update-bank/{bankId:Guid}")]
-        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId)
+        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId, [FromForm] int? loadPageCount)
         {
             if (ModelState.IsValid) await _bankUpdateService.UpdateBank(bankId, bankDto);
             return View(bankDto);

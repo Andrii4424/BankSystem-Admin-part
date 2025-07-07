@@ -282,7 +282,7 @@ footer {
     margin-top: 8px;
 }
 
-#update-element {
+.update-element {
     color: white;
     background-color: #4169E1;
     cursor: pointer;
