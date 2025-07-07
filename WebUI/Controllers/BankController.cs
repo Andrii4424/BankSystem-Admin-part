@@ -66,7 +66,7 @@ namespace WebUI.Controllers
         public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement)
         {
             await _bankDeleteService.DeleteBank(bankId);
-            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement, 1));
+            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement-1, 1));
         }
 
         [HttpGet("/load-banks/{firstElement:int}")]

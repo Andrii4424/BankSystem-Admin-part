@@ -1,5 +1,10 @@
 ﻿const loadBanks = document.getElementById("load-banks");
 
+if (document.querySelectorAll(".element-table").length == 0) {
+    loadBanks.style.display = "none";
+}
+
+
 loadBanks.addEventListener("click", async () => {
     const elements = document.getElementById("elements-block");
     let count = document.querySelectorAll(".element-table").length;

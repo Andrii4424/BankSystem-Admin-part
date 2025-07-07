@@ -1,14 +1,20 @@
 ﻿const elementsBlock = document.getElementById("elements-block");
+let elementsListCount = parseInt(elementsBlock.dataset.elementsListCount);
 
 elementsBlock.addEventListener("click", async (event) => {
     if (event.target.matches(".delete-element")) {
         const button = event.target;
         const id = button.dataset.elementId;
-        const firstElement = document.querySelectorAll(".element-table").length;
-        const response = await DeleteItem(`/delete-bank/bankId/${id}/firstElement/${firstElement}`);
+        const count = document.querySelectorAll(".element-table").length;
+        const response = await DeleteItem(`/delete-bank/bankId/${id}/firstElement/${count}`);
 
         elementsBlock.insertAdjacentHTML("beforeend", response);
         button.closest(".element-block").remove();
+        elementsListCount --;
+
+        if (elementsListCount == count) {
+            loadBanks.style.display = "none";
+        }
         if (document.querySelectorAll(".element-block").length === 0) {
 
         }
