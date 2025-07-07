@@ -159,15 +159,29 @@ footer {
     border-radius: 10px;
 }
 
+.action-panel {
+    margin-top: 64px;
+    margin-bottom: 32px;
+}
 .add-element {
-    margin-top: 4vh;
-    font-size: 18px;
     background-color: var(--dark-green-color);
+    padding: 14px 48px;
+    border-radius: 6px;
+    border: 0px;
+    font-size: 18px;
     color: white;
     cursor: pointer;
-    border: 0px;
+    font-weight: bold;
+}
+
+.load-more {
+    background-color: #007bff;
+    padding: 14px 48px;
     border-radius: 6px;
-    padding: 16px 42px;
+    border: 0px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
     font-weight: bold;
 }
 
@@ -265,7 +279,7 @@ footer {
     justify-content: center;
     gap:40px;
     font-size: 18px;
-    margin-top: 12px;
+    margin-top: 8px;
 }
 
 #update-element {

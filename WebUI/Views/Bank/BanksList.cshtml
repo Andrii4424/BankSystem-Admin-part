@@ -7,7 +7,7 @@
 			Bank list is empty, you can create bank by button bellow
 		</h4>
 	}
-	<div id="elements-block">
+	<div id="elements-block" data-items="@Model">
 		@foreach (BankDto bank in Model)
 		{
 			<a href="" class="text-reset text-decoration-none">
@@ -38,12 +38,17 @@
 					<button id="delete-element" type="submit">Delete Bank</button>
 				</form>
 			</div>
+
+			//@await Html.PartialAsync("_LoadBanks");
 		}
 	</div>
-	
-	<form asp-controller="Bank" asp-action="AddBank" id="add-form" method="get">
-		<button class="add-element" type="submit">Add Bank</button>
-	</form>
+
+	<div class="d-flex flex-row align-items-center action-panel gap-4">
+		<button class="load-more">Load More</button>
+		<form asp-controller="Bank" asp-action="AddBank" id="add-form" method="get">
+			<button class="add-element" type="submit">Add Bank</button>
+		</form>
+	</div>
 </div>
 
 @section backButton {
