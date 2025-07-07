@@ -28,21 +28,30 @@ namespace WebUI.Controllers
             return View(await _bankReadService.GetBanksList());
         }
 
+        [TypeFilter(typeof(LoadPageFilter))]
+        [Route("/banks/{loadPageCount:int?}")]
+        public async Task<IActionResult> BanksList([FromRoute] int? loadPageCount)
+        {
+            return View(await _bankReadService.GetBanksList());
+        }
+
         [Route("/bank/{bankId:Guid}")]
-        public async Task<IActionResult> BanksList(Guid bankId)
+        public async Task<IActionResult> Bank(Guid bankId)
         {
             return View(await _bankReadService.GetBankById(bankId));
         }
 
+        [TypeFilter(typeof(LoadPageFilter))]
         [HttpGet("/add-bank")]
-        public IActionResult AddBank()
+        public IActionResult AddBank([FromQuery] int? loadPageCount)
         {
             return View(new BankDto());
         }
 
+        [TypeFilter(typeof(LoadPageFilter))]
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/add-bank")]
-        public IActionResult AddBank([FromForm] BankDto bankDto)
+        public IActionResult AddBank([FromForm] BankDto bankDto, [FromForm] int? loadPageCount)
         {
             if(ModelState.IsValid) _bankAddService.AddBank(bankDto);
             return View(bankDto);

@@ -301,3 +301,8 @@ footer {
     padding: 8px 21px;
     font-weight: bold;
 }
+
+.back-link img{
+    width:34px;
+    height:auto
+}

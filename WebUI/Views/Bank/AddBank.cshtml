@@ -51,3 +51,18 @@
     </div>
 
 </div>
+
+@section backButton {
+    @if (ViewBag.StartCount!=null)
+    {
+        <a asp-controller="Bank" asp-action="BanksList" asp-route-loadPageCount=@ViewBag.StartCount class="text-reset text-decoration-none back-link">
+            <img src="~/images/arrow-to-left-icon.svg" alt="Back" />
+        </a>
+    }
+    else
+    {
+        <a asp-controller="Bank" asp-action="BanksList" class="text-reset text-decoration-none back-link">
+            <img src="~/images/arrow-to-left-icon.svg" alt="Back" />
+        </a>
+    }
+}

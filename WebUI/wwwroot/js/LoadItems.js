@@ -1,4 +1,6 @@
 ﻿const loadBanks = document.getElementById("load-banks");
+const addBank = document.querySelector(".add-element");
+
 
 if (document.querySelectorAll(".element-table").length == 0) {
     loadBanks.style.display = "none";
@@ -25,3 +27,9 @@ async function LoadMore(url) {
     });
     return await response.text();
 }
+
+addBank.addEventListener("click", () => {
+    const input = document.getElementById("add-bank-input");
+    let count = document.querySelectorAll(".element-table").length;
+    input.value = count;
+});

@@ -2,6 +2,7 @@
 @{
 	int basicCount = Model.Count;
 	if (Model.Count >= 3) basicCount = 3;
+	if (ViewBag.StartCount != null && ViewBag.StartCount>=3) basicCount = ViewBag.StartCount;
 }
 
 
@@ -50,13 +51,16 @@
 	<div class="d-flex flex-row align-items-center action-panel gap-4">
 		<button class="load-more" id="load-banks">Load More</button>
 		<form asp-controller="Bank" asp-action="AddBank" id="add-form" method="get">
+			<input name="loadPageCount" id="add-bank-input" type="hidden">
 			<button class="add-element" type="submit">Add Bank</button>
 		</form>
 	</div>
 </div>
 
 @section backButton {
-	<a asp-controller="Home" asp-action="Index" class="text-reset text-decoration-none">Back to main page</a>
+	<a asp-controller="Home" asp-action="Index" class="text-reset text-decoration-none back-link">
+		<img src="~/images/arrow-to-left-icon.svg" alt="Back" />
+	</a>
 }
 @section additionalScripts {
 	<script src="~/js/LoadItems.js"></script>
