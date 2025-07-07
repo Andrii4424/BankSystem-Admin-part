@@ -62,17 +62,17 @@ namespace WebUI.Controllers
             return View(bankDto);
         }
 
-        [HttpPost("/delete-bank/{bankId:Guid}")]
-        public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId)
+        [HttpPost("/delete-bank/bankId/{bankId:guid}/firstElement/{firstElement:int}")]
+        public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement)
         {
             await _bankDeleteService.DeleteBank(bankId);
-            return RedirectToAction("BanksList");
+            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement, 1));
         }
 
-        [HttpGet("/load-banks/{elementsCount:int}")]
-        public async Task<IActionResult> LoadBanks([FromRoute] int elementsCount)
+        [HttpGet("/load-banks/{firstElement:int}")]
+        public async Task<IActionResult> LoadBanks([FromRoute] int firstElement)
         {
-            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(elementsCount));
+            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement, 3));
         }
     }
 }

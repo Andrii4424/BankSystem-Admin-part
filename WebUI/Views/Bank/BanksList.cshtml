@@ -16,33 +16,33 @@
 		@for(int i=0; i<basicCount; i++)
 		{
 			BankDto bank = Model[i];
-			<a href="" class="text-reset text-decoration-none">
-				<table class="element-table">
-					<tr>
-						<th>
-							Bank name: @bank.BankName
-						</th>
-					</tr>
-					<tr>
-						<th>
-							Our rating is @bank.Rating
-						</th>
-					</tr>
-					<tr>
-						<th>
-							We have @bank.ActiveClientsCount active clients
-						</th>
-					</tr>
-				</table>
-			</a>
+			<div class="element-block">
+				<a href="" class="text-reset text-decoration-none">
+					<table class="element-table">
+						<tr>
+							<th>
+								Bank name: @bank.BankName
+							</th>
+						</tr>
+						<tr>
+							<th>
+								Our rating is @bank.Rating
+							</th>
+						</tr>
+						<tr>
+							<th>
+								We have @bank.ActiveClientsCount active clients
+							</th>
+						</tr>
+					</table>
+				</a>
 
-			<div class="action-buttons">
-				<form asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId=@bank.Id id="add-form" method="get">
-					<button id="update-element" type="submit">Update Bank</button>
-				</form>
-				<form asp-controller="Bank" asp-action="DeleteBank" asp-route-bankId=@bank.Id id="add-form" method="post">
-					<button id="delete-element" type="submit">Delete Bank</button>
-				</form>
+				<div class="action-buttons">
+					<form asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId=@bank.Id id="add-form" method="get">
+						<button id="update-element" type="submit">Update Bank</button>
+					</form>
+					<button class="delete-element" data-element-id="@bank.Id">Delete Bank</button>
+				</div>
 			</div>
 		}
 	</div>
@@ -60,4 +60,5 @@
 }
 @section additionalScripts {
 	<script src="~/js/LoadItems.js"></script>
+	<script src="~/js/DeleteItemHandler.js"></script>
 }

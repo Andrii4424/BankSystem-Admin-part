@@ -12,6 +12,6 @@ namespace Application.ServiceContracts.BankServiceContracts
     {
         public Task<List<BankDto>?> GetBanksList();
         public Task<BankDto> GetBankById(Guid bankdId);
-        public Task<List<BankDto>> GetLimitedBanksList(int firstElement);
+        public Task<List<BankDto>> GetLimitedBanksList(int firstElement, int itemsToLoad);
     }
 }

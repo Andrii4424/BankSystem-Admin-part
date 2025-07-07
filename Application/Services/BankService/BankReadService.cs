@@ -35,14 +35,14 @@ namespace Application.Services.BankServices
             return _mapper.Map<BankDto>(bankEntity);
         }
 
-        public async Task<List<BankDto>> GetLimitedBanksList(int firstElement)
+        public async Task<List<BankDto>> GetLimitedBanksList(int firstElement, int itemsToLoad)
         {
             List<BankEntity>? bankEntities = await _bankRepository.GetAllValuesAsync() as List<BankEntity>;
             if (bankEntities == null) { throw new NullReferenceException("No one bank is exist"); }
             List<BankDto> bankDtoList = new List<BankDto>();
-            if (bankEntities.Count >= firstElement+3)
+            if (bankEntities.Count >= firstElement+itemsToLoad)
             {
-                for (int i=firstElement; i<firstElement+3; i++)
+                for (int i=firstElement; i<firstElement+ itemsToLoad; i++)
                 {
                     bankDtoList.Add(_mapper.Map<BankDto>(bankEntities[i]));
                 }

@@ -292,7 +292,7 @@ footer {
     font-weight: bold;
 }
 
-#delete-element {
+.delete-element {
     color: white;
     background-color: #DC143C;
     cursor: pointer;
