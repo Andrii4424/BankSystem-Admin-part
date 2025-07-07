@@ -256,7 +256,7 @@ footer {
         font-weight: bold;
     }
 
-.bank-table {
+.element-table {
     width: 40vw;
     margin-top: 4vh;
     background-color: var(--medium-green-color);
@@ -268,7 +268,7 @@ footer {
     color: var(--white-green-color);
 }
 
-    .bank-table th {
+    .element-table th {
         padding: 12px;
     }
 

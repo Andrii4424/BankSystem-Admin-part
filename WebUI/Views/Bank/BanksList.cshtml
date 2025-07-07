@@ -1,17 +1,23 @@
 ﻿@model List<BankDto>
+@{
+	int basicCount = Model.Count;
+	if (Model.Count >= 3) basicCount = 3;
+}
+
 
 <div class="main-content-block">
 	@if(Model.Count==0)
 	{
-		<h4 class="empty-list">
+		<h4 class="empty-list mt-5">
 			Bank list is empty, you can create bank by button bellow
 		</h4>
 	}
-	<div id="elements-block" data-items="@Model">
-		@foreach (BankDto bank in Model)
+	<div id="elements-block" data-elements-list-count="@Model.Count">
+		@for(int i=0; i<basicCount; i++)
 		{
+			BankDto bank = Model[i];
 			<a href="" class="text-reset text-decoration-none">
-				<table class="bank-table">
+				<table class="element-table">
 					<tr>
 						<th>
 							Bank name: @bank.BankName
@@ -38,13 +44,11 @@
 					<button id="delete-element" type="submit">Delete Bank</button>
 				</form>
 			</div>
-
-			//@await Html.PartialAsync("_LoadBanks");
 		}
 	</div>
 
 	<div class="d-flex flex-row align-items-center action-panel gap-4">
-		<button class="load-more">Load More</button>
+		<button class="load-more" id="load-banks">Load More</button>
 		<form asp-controller="Bank" asp-action="AddBank" id="add-form" method="get">
 			<button class="add-element" type="submit">Add Bank</button>
 		</form>
@@ -53,4 +57,7 @@
 
 @section backButton {
 	<a asp-controller="Home" asp-action="Index" class="text-reset text-decoration-none">Back to main page</a>
+}
+@section additionalScripts {
+	<script src="~/js/LoadItems.js"></script>
 }

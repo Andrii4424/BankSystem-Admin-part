@@ -68,5 +68,11 @@ namespace WebUI.Controllers
             await _bankDeleteService.DeleteBank(bankId);
             return RedirectToAction("BanksList");
         }
+
+        [HttpGet("/load-banks/{elementsCount:int}")]
+        public async Task<IActionResult> LoadBanks([FromRoute] int elementsCount)
+        {
+            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(elementsCount));
+        }
     }
 }
