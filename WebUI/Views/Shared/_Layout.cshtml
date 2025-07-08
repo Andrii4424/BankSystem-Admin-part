@@ -10,7 +10,7 @@
 <body>
     <header class="container-fluid">
         <div class="row">
-            <div class="col-sm-4 d-flex flex-row gap-3 p-4 align-items-center">
+            <div class="col-sm-4 d-flex flex-row gap-3 p-3 align-items-center">
                 @RenderSection("backButton", required: false)
                 <h2 class="header-info ml-4">Admin Panel</h2>
             </div>
@@ -18,12 +18,14 @@
         </div>
     </header>
 
-    <aside>
-        <div id="menu">
-            <img src="/images/menu/menu.svg" alt="open-menu" id="open-menu" class="">
-            <img src="/images/menu/cross.svg" alt="close-menu" id="close-menu" class="clicked">
+    <section id="header-functionality">
+        <aside>
+            <div id="aside-icons">
+                <img src="/images/menu/menu.svg" alt="open-menu" id="open-menu" class="">
+                <img src="/images/menu/cross.svg" alt="close-menu" id="close-menu" class="clicked">
+            </div>
 
-            <ul class="ul-none d-flex flex-column gap-3 align-items-center">
+            <ul class="ul-none d-flex flex-column gap-3 align-items-center" id="menu">
                 <li><a asp-controller="Bank" asp-action="BanksList" class="text-reset text-decoration-none">Banks</a></li>
                 <li><a href="#" class="text-reset text-decoration-none">Cards</a></li>
                 <li><a href="#" class="text-reset text-decoration-none">Clients</a></li>
@@ -31,8 +33,11 @@
                 <li><a href="#" class="text-reset text-decoration-none">News</a></li>
                 <li><a href="#" class="text-reset text-decoration-none">Vacancies</a></li>
             </ul>
-        </div>
-    </aside>
+        </aside>
+
+
+    </section>
+
 
     <main>
         @RenderBody()
