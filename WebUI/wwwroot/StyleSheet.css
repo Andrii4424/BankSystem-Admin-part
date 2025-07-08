@@ -264,7 +264,10 @@ footer {
     top: 0px;
     background-color: var(--medium-green-color);
     box-sizing: border-box;
-    z-index: 2; 
+    z-index: 2;
+    transform: scaleY(1);
+    transform-origin: center bottom;
+    transition: transform 0.4s linear;
 }
 
     #header-functionality::after {
