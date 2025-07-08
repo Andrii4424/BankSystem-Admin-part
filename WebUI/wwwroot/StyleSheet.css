@@ -21,13 +21,23 @@ html, body {
     padding: 0;
 }
 
+img, svg {
+    user-select: none;
+    -webkit-user-drag: none; 
+    outline: none;
+}
+
+
 /*Header section*/
 header {
     background-color: var(--dark-green-color);
     color: white;
+    min-height: 68px;
+    max-height: 68px;
+    width: 100%;
 }
-
-
+#header-logo{
+}
 /*Main*/
 main {
     flex: 1 0 auto;
@@ -248,11 +258,25 @@ footer {
     grid-column-gap:40px;
 }
 
-#header-functionality{
-    width:100%;
-    height:80px;
+#header-functionality {
+    position: sticky;
+    min-height: 70px;
+    top: 0px;
     background-color: var(--medium-green-color);
+    box-sizing: border-box;
+    z-index: 2; 
 }
+
+    #header-functionality::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; 
+        left: 0;
+        right: 0;
+        height: 10px;
+        background: var(--medium-green-color);
+        z-index: 2;
+    }
 
 /*SideBar*/
 aside{
@@ -299,18 +323,20 @@ aside{
         transform: scale(0);
     }
 
+
 #menu {
     display: flex;
     flex-direction: column;
-    top:72px;
     gap: 40px;
     align-items: center;
     position: absolute;
-    min-width: 20%;
+    top: 70px;
+    min-width: 18%;
     background-color: var(--menu-green-color);
     transform-origin: left center;
     transform: scaleX(0);
     transition: transform 0.2s ease-out;
+    z-index: 1; 
 }
 
     #menu.opened {
@@ -319,22 +345,23 @@ aside{
     }
 
     #menu li {
-        color: var(--white-green-color); 
-        font-size:18px;
-        font-weight:500;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
         display: flex;
         width: 100%;
+        padding: 0 20px 0 20px;
         align-items: center;
         justify-content: center;
         transition: background-color 1s ease-out;
     }
 
     #menu li:first-child{
-        margin-top:18px;
+        margin-top:24px;
     }
 
     #menu li:last-child {
-        margin-bottom: 18px;
+        margin-bottom: 24px;
     }
 
         #menu li:hover {
@@ -348,3 +375,10 @@ aside{
         text-align: center;
         padding: 10px 0 10px 0;
     }
+
+#back-icon{
+    display:flex;
+    align-items:center;
+    min-width:40px;
+    margin-right:10px;
+}

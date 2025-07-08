@@ -3,6 +3,7 @@ const closeMenu = document.getElementById("close-menu");
 const menu = document.getElementById("menu");
 
 
+
 openMenu.addEventListener("click", () => {
     openMenu.classList.add("clicked");
     closeMenu.classList.remove("clicked");
