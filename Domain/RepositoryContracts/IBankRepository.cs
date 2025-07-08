@@ -9,5 +9,6 @@ namespace Domain.RepositoryContracts
 {
     public interface IBankRepository :IGenericRepository<BankEntity>
     {
+        public Task<List<BankEntity>?> GetLimitedBankList(int firstItem, int countOfItems);
     }
 }

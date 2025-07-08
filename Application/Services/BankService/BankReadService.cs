@@ -37,25 +37,7 @@ namespace Application.Services.BankServices
 
         public async Task<List<BankDto>> GetLimitedBanksList(int firstElement, int itemsToLoad)
         {
-            List<BankEntity>? bankEntities = await _bankRepository.GetAllValuesAsync() as List<BankEntity>;
-            if (bankEntities == null) { throw new NullReferenceException("No one bank is exist"); }
-            List<BankDto> bankDtoList = new List<BankDto>();
-            if (bankEntities.Count >= firstElement+itemsToLoad)
-            {
-                for (int i=firstElement; i<firstElement+ itemsToLoad; i++)
-                {
-                    bankDtoList.Add(_mapper.Map<BankDto>(bankEntities[i]));
-                }
-            }
-            else
-            {
-                for (int i = firstElement; i < bankEntities.Count; i++)
-                {
-                    bankDtoList.Add(_mapper.Map<BankDto>(bankEntities[i]));
-                }
-            }
-
-            return bankDtoList;
+            return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad));
         }
     }
 }

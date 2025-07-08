@@ -25,14 +25,15 @@ namespace WebUI.Controllers
         [Route("/banks")]
         public async Task<IActionResult> BanksList()
         {
-            return View(await _bankReadService.GetBanksList());
+            return View(await _bankReadService.GetLimitedBanksList(0, 6));
         }
 
         [TypeFilter(typeof(LoadPageFilter))]
         [Route("/banks/{loadPageCount:int?}")]
         public async Task<IActionResult> BanksList([FromRoute] int? loadPageCount)
         {
-            return View(await _bankReadService.GetBanksList());
+            int loadCount = loadPageCount.HasValue? loadPageCount.Value: 0;
+            return View(await _bankReadService.GetLimitedBanksList(0, loadCount));
         }
 
         [Route("/bank/{bankId:Guid}")]
@@ -77,7 +78,7 @@ namespace WebUI.Controllers
         public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement)
         {
             await _bankDeleteService.DeleteBank(bankId);
-            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement-1, 1));
+            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement-1, 1));
         }
 
         [HttpGet("/load-banks/{firstElement:int}")]
