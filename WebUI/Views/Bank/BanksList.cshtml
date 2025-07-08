@@ -1,15 +1,15 @@
 ﻿@model List<BankDto>
 @{
 	int basicCount = Model.Count;
-	if (Model.Count >= 3) basicCount = 3;
-	if (ViewBag.StartCount != null && ViewBag.StartCount>=3) basicCount = ViewBag.StartCount;
+	if (Model.Count >= 6) basicCount = 6;
+	if (ViewBag.StartCount != null && ViewBag.StartCount>=6) basicCount = ViewBag.StartCount;
 }
 
 
 <div class="main-content-block">
 	<div id="colums" class="d-flex flex-row gap-1">
 		<img src="~/images/main-page/one-column.svg" class="chosen" id="one-column" alt="One column" />
-		<img src="~/images/main-page/two-colums.svg" id="two-colums" alt="Two columns" />
+		<img src="~/images/main-page/two-columns.svg" id="two-columns" alt="Two columns" />
 	</div>
 	@if(Model.Count==0)
 	{

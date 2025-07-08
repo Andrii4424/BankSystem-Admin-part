@@ -83,7 +83,7 @@ namespace WebUI.Controllers
         [HttpGet("/load-banks/{firstElement:int}")]
         public async Task<IActionResult> LoadBanks([FromRoute] int firstElement)
         {
-            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement, 3));
+            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement, 6));
         }
     }
 }

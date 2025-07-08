@@ -272,12 +272,16 @@ footer {
         padding: 12px;
     }
 
+#elements-block {
+    margin-top: -4vh;
+}
+
 .action-buttons {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap:40px;
+    gap: 40px;
     font-size: 18px;
     margin-top: 8px;
 }
@@ -322,3 +326,9 @@ footer {
         #colums img.chosen {
             background-color: #c7c3c3;
         }
+
+#elements-block.two-columns{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap:40px;
+}
