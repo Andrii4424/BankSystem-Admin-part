@@ -67,6 +67,7 @@ footer {
 
 /*Page content*/
 .main-content-block {
+    margin-top: 4vh;
     margin-bottom: 1vh;
     width: 100%;
     display: flex;
@@ -111,7 +112,6 @@ footer {
 }
 
 .add-entity-block {
-    margin-top: 4vh;
     display: flex;
     flex-direction: column;
     background-color: var(--medium-green-color);
@@ -120,6 +120,7 @@ footer {
     padding: 10px 40px;
     font-size: 16px;
     max-width: 48vw;
+    margin-bottom: 4vh;
 }
 
 .add-form {
@@ -236,20 +237,21 @@ footer {
     height:auto
 }
 #colums{
-    margin-left:94%;
-    margin-top:14px;
+    position: absolute;
+    margin-top:18px;
+    right: 1%;
 }
 
     #colums img {
-        width: 44px;
+        width: 38px;
         height: auto;
         cursor: pointer;
-        border-radius:12px;
+        border-radius: 12px;
         padding: 4px;
     }
 
         #colums img.chosen {
-            background-color: #c7c3c3;
+            background-color: var(--dark-green-color);
         }
 
 #elements-block.two-columns{
@@ -283,6 +285,8 @@ footer {
 
 /*SideBar*/
 aside{
+    display:flex;
+    flex-direction:row;
     position:relative;
 }
 
