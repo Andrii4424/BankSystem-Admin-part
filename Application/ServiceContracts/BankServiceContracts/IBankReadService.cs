@@ -12,7 +12,7 @@ namespace Application.ServiceContracts.BankServiceContracts
     {
         public Task<List<BankDto>?> GetBanksListAsync();
         public Task<BankDto> GetBankByIdAsync(Guid bankdId);
-        public Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad);
+        public Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad, string? orderMethod);
         public Task<int> GetBanksCountAsync();
     }
 }

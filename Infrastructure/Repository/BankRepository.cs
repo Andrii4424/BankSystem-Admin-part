@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,13 +18,15 @@ namespace Infrastructure.Repository
             _dbSet = dbContext.Set<BankEntity>();
         }
 
-        public async Task<List<BankEntity>?> GetLimitedBankList(int firstItem, int countOfItems)
+        public async Task<List<BankEntity>?> GetLimitedBankList<TSel>(int firstItem, int countOfItems,
+            Expression<Func<BankEntity, TSel>> selector, bool ascending=true)
         {
-            return await _dbSet
-                .OrderByDescending(x => x.EstablishedDate)
-                .Skip(firstItem)
-                .Take(countOfItems)
-                .ToListAsync();
+            var _dbSetSorted = ascending? _dbSet.OrderBy(selector): _dbSet.OrderByDescending(selector);
+            return await _dbSetSorted
+             .ThenBy(b=>b.Id)
+            .Skip(firstItem)
+            .Take(countOfItems)
+            .ToListAsync();
         }
     }
 }

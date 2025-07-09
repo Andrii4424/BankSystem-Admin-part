@@ -6,6 +6,7 @@ using Domain.RepositoryContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,9 +36,33 @@ namespace Application.Services.BankServices
             return _mapper.Map<BankDto>(bankEntity);
         }
 
-        public async Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad)
+        public async Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad, string? orderMethod)
         {
-            return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad));
+            Expression<Func<BankEntity, object>> selector;
+            bool asceding = true;
+            switch (orderMethod)
+            {
+                case "oldest":
+                    selector = b => b.EstablishedDate;
+                    asceding = false;
+                    break;
+                case "newest":
+                    selector = b => b.EstablishedDate;
+                    break;
+                case "rating-descending":
+                    selector = b =>b.Rating;
+                    asceding = false;
+                    break;
+                case "popularity-descending":
+                    selector = b => b.ActiveClientsCount;
+                    asceding = false; 
+                    break;
+                default:
+                    selector = b => b.EstablishedDate;
+                    asceding = false;
+                    break;
+            }
+            return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad, selector, asceding));
         }
 
         public async Task<int> GetBanksCountAsync(){

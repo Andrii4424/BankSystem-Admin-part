@@ -26,16 +26,16 @@ namespace WebUI.Controllers
         public async Task<IActionResult> BanksList()
         {
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
-            return View(await _bankReadService.GetLimitedBanksListAsync(0, 6));
+            return View(await _bankReadService.GetLimitedBanksListAsync(0, 6, null));
         }
 
         [TypeFilter(typeof(LoadPageFilter))]
-        [Route("/banks/{loadPageCount:int?}")]
-        public async Task<IActionResult> BanksList([FromRoute] int? loadPageCount)
+        [Route("/banks/{loadPageCount:int?}/{orderMethod?}")]
+        public async Task<IActionResult> BanksList([FromRoute] int? loadPageCount, [FromRoute] string? orderMethod)
         {
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
             int loadCount = loadPageCount.HasValue? loadPageCount.Value: 0;
-            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount));
+            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, null));
         }
 
         [Route("/bank/{bankId:Guid}")]
@@ -76,17 +76,17 @@ namespace WebUI.Controllers
             return View(bankDto);
         }
 
-        [HttpPost("/delete-bank/bankId/{bankId:guid}/firstElement/{firstElement:int}")]
-        public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement)
+        [HttpPost("/delete-bank/bank-id/{bankId:guid}/first-element/{firstElement:int}/order-method/{orderMethod?}")]
+        public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement,[FromRoute] string? orderMethod)
         {
             await _bankDeleteService.DeleteBankAsync(bankId);
-            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement-1, 1));
+            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement-1, 1, orderMethod));
         }
 
-        [HttpGet("/load-banks/{firstElement:int}")]
-        public async Task<IActionResult> LoadBanks([FromRoute] int firstElement)
+        [HttpGet("/load-banks/{firstElement:int}/{elementsToLoad:int}/{orderMethod?}")]
+        public async Task<IActionResult> LoadBanks([FromRoute] int firstElement,[FromRoute] int elementsToLoad, [FromRoute] string? orderMethod)
         {
-            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement, 6));
+            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement, elementsToLoad, orderMethod));
         }
     }
 }
