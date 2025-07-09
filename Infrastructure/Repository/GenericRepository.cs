@@ -56,5 +56,9 @@ namespace Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<int> GetElementsCountAsync()
+        {
+            return await _dbSet.CountAsync();
+        }
     }
 }

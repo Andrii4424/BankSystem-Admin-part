@@ -22,22 +22,27 @@ namespace Application.Services.BankServices
             _mapper = mapper;
         }
 
-        public async Task<List<BankDto>?> GetBanksList()
+        public async Task<List<BankDto>?> GetBanksListAsync()
         {
             List<BankEntity>? bankEntities = await _bankRepository.GetAllValuesAsync() as List<BankEntity>;
             return _mapper.Map<List<BankDto>>(bankEntities);
         }
 
-        public async Task<BankDto> GetBankById(Guid bankdId)
+        public async Task<BankDto> GetBankByIdAsync(Guid bankdId)
         {
             BankEntity? bankEntity = await _bankRepository.GetValueByIdAsync(bankdId);
             if (bankEntity == null) { throw new NullReferenceException("Bank with this id doesnt exist"); }
             return _mapper.Map<BankDto>(bankEntity);
         }
 
-        public async Task<List<BankDto>> GetLimitedBanksList(int firstElement, int itemsToLoad)
+        public async Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad)
         {
             return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad));
         }
+
+        public async Task<int> GetBanksCountAsync(){
+            return await _bankRepository.GetElementsCountAsync();
+        }
+
     }
 }

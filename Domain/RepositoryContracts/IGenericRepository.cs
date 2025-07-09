@@ -15,5 +15,6 @@ namespace Domain.RepositoryContracts
         public void DeleteElement(T entity);
         public void UpdateObject(T entity);
         public Task SaveAsync();
+        public Task<int> GetElementsCountAsync();
     }
 }

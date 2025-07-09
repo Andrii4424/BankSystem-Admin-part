@@ -22,7 +22,7 @@ namespace Application.Services.BankService
             _mapper = mapper;
         }
 
-        public async Task UpdateBank(Guid bankId, BankDto bankDto)
+        public async Task UpdateBankAsync(Guid bankId, BankDto bankDto)
         {
             BankEntity? bank = await _bankRepository.GetValueByIdAsync(bankId);
             if(bank == null) throw new NullReferenceException("This bank doesnt exist");

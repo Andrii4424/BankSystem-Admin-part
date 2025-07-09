@@ -14,7 +14,7 @@
 			Bank list is empty, you can create bank by button bellow
 		</h4>
 	}
-	<div id="elements-block" data-elements-list-count="@Model.Count">
+	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount">
 		@for(int i=0; i<basicCount; i++)
 		{
 			BankDto bank = Model[i];

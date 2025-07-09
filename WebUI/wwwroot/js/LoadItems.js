@@ -1,7 +1,7 @@
 ﻿const loadBanks = document.getElementById("load-banks");
-const addBank = document.querySelector(".add-element");
+const AddBankAsync = document.querySelector(".add-element");
 let elementsDiv = document.getElementById("elements-block");
-
+let count = document.querySelectorAll(".element-table").length;
 
 
 if (document.querySelectorAll(".element-table").length == 0) {
@@ -11,11 +11,10 @@ if (document.querySelectorAll(".element-table").length == 0) {
 
 loadBanks.addEventListener("click", async () => {
     const elements = document.getElementById("elements-block");
-    let count = document.querySelectorAll(".element-table").length;
     const response = await LoadMore("/load-banks/" + count);
     const elementsListCount = parseInt(elements.dataset.elementsListCount);
     elements.insertAdjacentHTML("beforeend", response);
-
+    count--;
 
     count = document.querySelectorAll(".element-table").length;
     if (elementsListCount == count) {
@@ -31,7 +30,7 @@ async function LoadMore(url) {
     return await response.text();
 }
 
-addBank.addEventListener("click", () => {
+AddBankAsync.addEventListener("click", () => {
     const input = document.getElementById("add-bank-input");
     let count = document.querySelectorAll(".element-table").length;
     input.value = count;

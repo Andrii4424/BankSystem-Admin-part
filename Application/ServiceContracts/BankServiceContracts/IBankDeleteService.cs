@@ -8,6 +8,6 @@ namespace Application.ServiceContracts.BankServiceContracts
 {
     public interface IBankDeleteService
     {
-        public Task DeleteBank(Guid bankId);
+        public Task DeleteBankAsync(Guid bankId);
     }
 }

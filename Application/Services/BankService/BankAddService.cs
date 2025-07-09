@@ -22,7 +22,7 @@ namespace Application.Services.BankService
             _mapper = mapper;
         }
 
-        public async Task AddBank(BankDto bankDto)
+        public async Task AddBankAsync(BankDto bankDto)
         {
             await _bankRepository.AddAsync(_mapper.Map<BankEntity>(bankDto));
             await _bankRepository.SaveAsync();

@@ -25,21 +25,23 @@ namespace WebUI.Controllers
         [Route("/banks")]
         public async Task<IActionResult> BanksList()
         {
-            return View(await _bankReadService.GetLimitedBanksList(0, 6));
+            ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
+            return View(await _bankReadService.GetLimitedBanksListAsync(0, 6));
         }
 
         [TypeFilter(typeof(LoadPageFilter))]
         [Route("/banks/{loadPageCount:int?}")]
         public async Task<IActionResult> BanksList([FromRoute] int? loadPageCount)
         {
+            ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
             int loadCount = loadPageCount.HasValue? loadPageCount.Value: 0;
-            return View(await _bankReadService.GetLimitedBanksList(0, loadCount));
+            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount));
         }
 
         [Route("/bank/{bankId:Guid}")]
         public async Task<IActionResult> Bank(Guid bankId)
         {
-            return View(await _bankReadService.GetBankById(bankId));
+            return View(await _bankReadService.GetBankByIdAsync(bankId));
         }
 
         [TypeFilter(typeof(LoadPageFilter))]
@@ -54,7 +56,7 @@ namespace WebUI.Controllers
         [HttpPost("/add-bank")]
         public IActionResult AddBank([FromForm] BankDto bankDto, [FromForm] int? loadPageCount)
         {
-            if(ModelState.IsValid) _bankAddService.AddBank(bankDto);
+            if(ModelState.IsValid) _bankAddService.AddBankAsync(bankDto);
             return View(bankDto);
         }
 
@@ -62,7 +64,7 @@ namespace WebUI.Controllers
         [HttpGet("/update-bank/{bankId:Guid}")]
         public async Task<IActionResult> UpdateBank(Guid bankId, [FromQuery] int? loadPageCount)
         {
-            return View(await _bankReadService.GetBankById(bankId));
+            return View(await _bankReadService.GetBankByIdAsync(bankId));
         }
 
         [TypeFilter(typeof(LoadPageFilter))]
@@ -70,21 +72,21 @@ namespace WebUI.Controllers
         [HttpPost("/update-bank/{bankId:Guid}")]
         public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId, [FromForm] int? loadPageCount)
         {
-            if (ModelState.IsValid) await _bankUpdateService.UpdateBank(bankId, bankDto);
+            if (ModelState.IsValid) await _bankUpdateService.UpdateBankAsync(bankId, bankDto);
             return View(bankDto);
         }
 
         [HttpPost("/delete-bank/bankId/{bankId:guid}/firstElement/{firstElement:int}")]
         public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement)
         {
-            await _bankDeleteService.DeleteBank(bankId);
-            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement-1, 1));
+            await _bankDeleteService.DeleteBankAsync(bankId);
+            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement-1, 1));
         }
 
         [HttpGet("/load-banks/{firstElement:int}")]
         public async Task<IActionResult> LoadBanks([FromRoute] int firstElement)
         {
-            return View("_LoadBanks", await _bankReadService.GetLimitedBanksList(firstElement, 6));
+            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement, 6));
         }
     }
 }
