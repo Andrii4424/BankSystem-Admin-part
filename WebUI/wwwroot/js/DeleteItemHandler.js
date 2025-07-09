@@ -1,5 +1,4 @@
 ﻿const elementsBlock = document.getElementById("elements-block");
-let elementsListCount = parseInt(elementsBlock.dataset.elementsListCount);
 
 elementsBlock.addEventListener("click", async (event) => {
     if (event.target.matches(".delete-element")) {
@@ -11,14 +10,6 @@ elementsBlock.addEventListener("click", async (event) => {
          
         elementsBlock.insertAdjacentHTML("beforeend", response);
         button.closest(".element-block").remove();
-        elementsListCount --;
-
-        if (elementsListCount == count) {
-            loadBanks.style.display = "none";
-        }
-        if (document.querySelectorAll(".element-block").length === 0) {
-
-        }
     }
 });
 

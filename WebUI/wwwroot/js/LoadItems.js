@@ -1,8 +1,10 @@
 ﻿//Load elements
+const elementsListBlock = document.getElementById("elements-block");
 const loadBanks = document.getElementById("load-banks");
 const addBank = document.querySelector(".add-element");
-let elementsDiv = document.getElementById("elements-block");
 let count = document.querySelectorAll(".element-table").length;
+let elementsListCount = parseInt(elementsListBlock.dataset.elementsListCount);
+
 
 //Sort elements
 const sortButton = document.getElementById("sort-icon");
@@ -10,7 +12,7 @@ const sortList = document.getElementById("banks-sort-list");
 const radioInputs = document.querySelectorAll('input[name="sort"]');
 
 //Load methods
-if (document.querySelectorAll(".element-table").length == 0) {
+if (elementsListCount == count) {
     loadBanks.style.display = "none";
 }
 
@@ -21,11 +23,9 @@ loadBanks.addEventListener("click", async () => {
 
 
 async function LoadMore(url) {
-    const elements = document.getElementById("elements-block");
     const response = await fetch(url, {
         method: "GET"
     });
-    const elementsListCount = parseInt(elements.dataset.elementsListCount);
     await addElementsToEnd(response);
 
     count = document.querySelectorAll(".element-table").length;
@@ -40,7 +40,7 @@ addBank.addEventListener("click", () => {
     input.value = count;
 });
 
-elementsDiv.addEventListener("click", (event) => {
+elementsListBlock.addEventListener("click", (event) => {
     if (event.target.matches(".update-element")) {
         let count = document.querySelectorAll(".element-table").length;
         event.target.closest("form").querySelector(".update-bank-input").value = count;
@@ -69,13 +69,15 @@ async function orderElements(url) {
 };
 
 async function addElementsToEnd(response) {
-    const elements = document.getElementById("elements-block");
-    elements.insertAdjacentHTML("beforeend", await response.text());
+    elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
 }
 
 //Decraese when element is deleting
-document.getElementById("elements-block").addEventListener("click", async (event) => {
+elementsListBlock.addEventListener("click", async (event) => {
     if (event.target.matches(".delete-element")) {
-        count--;
+        elementsListCount--;
+        if (elementsListCount == count) {
+            loadBanks.style.display = "none";
+        }
     }
 });

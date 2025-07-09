@@ -1,10 +1,4 @@
 ﻿@model List<BankDto>
-@{
-	int basicCount = Model.Count;
-	if (Model.Count >= 6) basicCount = 6;
-	if (ViewBag.StartCount != null && ViewBag.StartCount>=6) basicCount = ViewBag.StartCount;
-}
-
 
 <div class="main-content-block">
 
@@ -15,9 +9,8 @@
 		</h4>
 	}
 	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount">
-		@for(int i=0; i<basicCount; i++)
+		@foreach(BankDto bank in Model)
 		{
-			BankDto bank = Model[i];
 			<div class="element-block">
 				<a href="" class="text-reset text-decoration-none">
 					<table class="element-table">
