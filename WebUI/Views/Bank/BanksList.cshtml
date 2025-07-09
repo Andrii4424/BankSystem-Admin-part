@@ -67,7 +67,7 @@
 @section additionalScripts {
 	<script src="~/js/LoadItems.js"></script>
 	<script src="~/js/DeleteItemHandler.js"></script>
-	<script src="~/js/ColumsHandler.js"></script>
+	<script src="~/js/ColumnsHandler.js"></script>
 }
 @section ColumsHandler{
 	<div id="colums" class="d-flex flex-row gap-1">
@@ -83,7 +83,29 @@
 		</div>
 
 		<div id="filters" class="d-flex flex-row align-items-center">
-			<img src="~/images/main-page/sort-icon.svg" alt="Sort" />
+			<img src="~/images/main-page/sort-icon.svg" alt="Sort" id="sort-icon" />
+			<div id="banks-sort-list">
+				<label>
+					<input type="radio" name="sort" value="oldest" checked>
+					The oldest banks
+				</label>
+
+				<label>
+					<input type="radio" name="sort" value="newest">
+					The newest banks
+				</label>
+
+				<label>
+					<input type="radio" name="sort" value="rating-descending">
+					By rating
+				</label>
+
+				<label>
+					<input type="radio" name="sort" value="popularity-descending">
+					By popularity
+				</label>
+
+			</div>
 			<img src="~/images/main-page/filter-icon.svg" alt="Filter" />
 		</div>
 	</div>

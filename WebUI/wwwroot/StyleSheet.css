@@ -413,7 +413,6 @@ aside{
 }
 #find-element button {
     position:absolute;
-
     height: 40px;
     background-color: var(--dark-green-color);
     border-radius: 14px;
@@ -433,3 +432,23 @@ aside{
     width: 34px;
     height: auto;
 }
+
+#banks-sort-list {
+    position: absolute;
+    top: 64px;
+    width: 168px;
+    display: none;
+    padding: 10px;
+    border-radius:14px;
+}
+#banks-sort-list.opened{
+    display: flex;
+    flex-direction: column;
+    background-color:white;
+    border: 1px solid lightgrey;
+}
+
+    #banks-sort-list label, #banks-sort-list input {
+        display: inline-block;
+        vertical-align: middle;
+    }
