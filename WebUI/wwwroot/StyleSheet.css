@@ -452,3 +452,40 @@ aside{
         display: inline-block;
         vertical-align: middle;
     }
+
+#banks-filter-list {
+    position: absolute;
+    top: 64px;
+    width: 218px;
+    display: none;
+    padding: 10px;
+    border-radius: 14px;
+}
+
+    #banks-filter-list.opened {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border: 1px solid lightgrey;
+    }
+
+    #banks-filter-list label, #banks-filter-list input {
+        display: inline-block;
+        vertical-align: middle;
+    }
+        #banks-filter-list input[type="checkbox"]{
+            height:auto;
+        }
+        #banks-filter-list input[type="number"] {
+            width: 100%;
+        }
+#submit-filters{
+    width:100%;
+    text-align:center;
+    color:white;
+    height:30px;
+    margin-top:10px;
+    border-radius: 8px;
+    border:none;
+    background-color: var(--dark-green-color);
+}

@@ -13,6 +13,25 @@ const sortList = document.getElementById("banks-sort-list");
 const radioInputs = document.querySelectorAll('input[name="sort"]');
 let orderMethod = elementsListBlock.dataset.orderMethod;
 
+
+//Filter elements
+const filterButton = document.getElementById("filter-icon");
+const filterList = document.getElementById("banks-filter-list");
+const filterSetting = filterList.querySelectorAll('input[type="checkbox"][name="filter"]');
+
+filterButton.addEventListener("click", () => {
+    filterList.classList.toggle("opened");
+    sortList.classList.remove("opened");
+});
+filterSetting.forEach(button => {
+    button.addEventListener("change", () => {
+        const inputValue = filterList.querySelector(`input[type="number"][class="${button.value}"]`);
+        if (inputValue !== null) {
+            inputValue.disabled = !button.checked;
+        }
+    });
+});
+
 //Load methods
 if (elementsListCount == count) {
     loadBanks.style.display = "none";
@@ -64,6 +83,7 @@ elementsListBlock.addEventListener("click", (event) => {
 //sort methods
 sortButton.addEventListener("click", () => {
     sortList.classList.toggle("opened");
+    filterList.classList.remove("opened");
 });
 
 radioInputs.forEach(async function(button) {
