@@ -63,7 +63,7 @@ namespace WebUI.Controllers
 
         [TypeFilter(typeof(LoadPageFilter))]
         [HttpGet("/update-bank/{bankId:Guid}")]
-        public async Task<IActionResult> UpdateBank(Guid bankId, [FromQuery] int? loadPageCount)
+        public async Task<IActionResult> UpdateBank(Guid bankId, [FromQuery] int? loadPageCount, [FromQuery] string? orderMethod)
         {
             return View(await _bankReadService.GetBankByIdAsync(bankId));
         }
@@ -71,7 +71,8 @@ namespace WebUI.Controllers
         [TypeFilter(typeof(LoadPageFilter))]
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/update-bank/{bankId:Guid}")]
-        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId, [FromForm] int? loadPageCount)
+        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId, [FromForm] int? loadPageCount,
+            [FromForm] string? orderMethod)
         {
             if (ModelState.IsValid) await _bankUpdateService.UpdateBankAsync(bankId, bankDto);
             return View(bankDto);

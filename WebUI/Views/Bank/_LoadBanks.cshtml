@@ -31,7 +31,7 @@
 		<div class="action-buttons">
 			<form asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId=@bank.Id id="add-form" method="get">
 				<input name="loadPageCount" class="update-bank-input" type="hidden">
-				<input name="orderMethod" class="update-bank-input" type="hidden">
+				<input name="orderMethod" class="update-bank-order-method" type="hidden">
 				<button class="update-element" type="submit">Update Bank</button>
 			</form>
 			<button class="delete-element" data-element-id="@bank.Id">Delete Bank</button>

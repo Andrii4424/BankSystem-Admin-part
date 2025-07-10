@@ -56,6 +56,8 @@ elementsListBlock.addEventListener("click", (event) => {
     if (event.target.matches(".update-element")) {
         let count = document.querySelectorAll(".element-table").length;
         event.target.closest("form").querySelector(".update-bank-input").value = count;
+        const method = document.querySelector('input[name="sort"]:checked').value
+        event.target.closest("form").querySelector(".update-bank-order-method").value = method;
     }
 })
 
