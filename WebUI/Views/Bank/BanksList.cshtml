@@ -8,7 +8,7 @@
 			Bank list is empty, you can create bank by button bellow
 		</h4>
 	}
-	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount">
+	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount" data-order-method="@ViewBag.OrderMethod">
 		@foreach(BankDto bank in Model)
 		{
 			<div class="element-block">
@@ -35,6 +35,7 @@
 				<div class="action-buttons">
 					<form asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId=@bank.Id id="add-form" method="get">
 						<input name="loadPageCount" class="update-bank-input" type="hidden">
+						<input name="orderMethod" class="update-bank-input" type="hidden">
 						<button class="update-element" type="submit">Update Bank</button>
 					</form>
 					<button class="delete-element" data-element-id="@bank.Id">Delete Bank</button>
@@ -47,6 +48,8 @@
 		<button class="load-more" id="load-banks">Load More</button>
 		<form asp-controller="Bank" asp-action="AddBank" id="add-form" method="get">
 			<input name="loadPageCount" id="add-bank-input" type="hidden">
+			<input name="orderMethod" id="add-bank-input-method" type="hidden">
+
 			<button class="add-element" type="submit">Add Bank</button>
 		</form>
 	</div>

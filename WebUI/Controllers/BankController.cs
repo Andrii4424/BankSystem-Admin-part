@@ -30,12 +30,13 @@ namespace WebUI.Controllers
         }
 
         [TypeFilter(typeof(LoadPageFilter))]
-        [Route("/banks/{loadPageCount:int?}/{orderMethod?}")]
+        [Route("/banks/{loadPageCount:int?}/start-method/{orderMethod?}")]
         public async Task<IActionResult> BanksList([FromRoute] int? loadPageCount, [FromRoute] string? orderMethod)
         {
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
             int loadCount = loadPageCount.HasValue? loadPageCount.Value: 0;
-            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, null));
+            ViewBag.OrderMethod = orderMethod;
+            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, orderMethod));
         }
 
         [Route("/bank/{bankId:Guid}")]
@@ -46,7 +47,7 @@ namespace WebUI.Controllers
 
         [TypeFilter(typeof(LoadPageFilter))]
         [HttpGet("/add-bank")]
-        public IActionResult AddBank([FromQuery] int? loadPageCount)
+        public IActionResult AddBank([FromQuery] int? loadPageCount, [FromQuery] string? orderMethod)
         {
             return View(new BankDto());
         }
@@ -54,7 +55,7 @@ namespace WebUI.Controllers
         [TypeFilter(typeof(LoadPageFilter))]
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/add-bank")]
-        public IActionResult AddBank([FromForm] BankDto bankDto, [FromForm] int? loadPageCount)
+        public IActionResult AddBank([FromForm] BankDto bankDto, [FromForm] int? loadPageCount, [FromForm] string? orderMethod)
         {
             if(ModelState.IsValid) _bankAddService.AddBankAsync(bankDto);
             return View(bankDto);

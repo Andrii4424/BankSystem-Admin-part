@@ -45,6 +45,8 @@
                 }
 
             }
+            <input name="loadPageCount" type="hidden" value="@ViewBag.StartCount">
+            <input name="orderMethod" type="hidden" value="@ViewBag.OrderMethod">
 
             <button type="submit" class="create-element">Create Bank</button>
         </form>
@@ -55,7 +57,7 @@
 @section backButton {
     @if (ViewBag.StartCount!=null)
     {
-        <a asp-controller="Bank" asp-action="BanksList" asp-route-loadPageCount=@ViewBag.StartCount class="text-reset text-decoration-none back-link d-flex align-items-center">
+        <a asp-controller="Bank" asp-action="BanksList" asp-route-loadPageCount=@ViewBag.StartCount asp-route-orderMethod=@ViewBag.OrderMethod class="text-reset text-decoration-none back-link d-flex align-items-center">
             <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
         </a>
     }

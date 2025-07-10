@@ -6,14 +6,24 @@ let count = document.querySelectorAll(".element-table").length;
 let elementsListCount = parseInt(elementsListBlock.dataset.elementsListCount);
 
 
+
 //Sort elements
 const sortButton = document.getElementById("sort-icon");
 const sortList = document.getElementById("banks-sort-list");
 const radioInputs = document.querySelectorAll('input[name="sort"]');
+let orderMethod = elementsListBlock.dataset.orderMethod;
 
 //Load methods
 if (elementsListCount == count) {
     loadBanks.style.display = "none";
+}
+
+if (orderMethod!==null && orderMethod!==undefined && orderMethod!=="") {
+    radioInputs.forEach(button => {
+        if(button.value===orderMethod) {
+            button.checked = true;
+        }
+    });
 }
 
 
@@ -36,8 +46,10 @@ async function LoadMore(url) {
 
 addBank.addEventListener("click", () => {
     const input = document.getElementById("add-bank-input");
+    const inputMethod = document.getElementById("add-bank-input-method");
     let count = document.querySelectorAll(".element-table").length;
     input.value = count;
+    inputMethod.value = document.querySelector('input[name="sort"]:checked').value;
 });
 
 elementsListBlock.addEventListener("click", (event) => {

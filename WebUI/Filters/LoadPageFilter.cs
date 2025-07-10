@@ -12,6 +12,7 @@ namespace WebUI.Filters
                 if(context.ActionArguments.ContainsKey("loadPageCount") && context.ActionArguments["loadPageCount"] != null)
                 {
                     controller.ViewBag.StartCount = Convert.ToInt32(context.ActionArguments["loadPageCount"]);
+                    controller.ViewBag.OrderMethod = context.ActionArguments["orderMethod"];
                 }
             }
             await next();

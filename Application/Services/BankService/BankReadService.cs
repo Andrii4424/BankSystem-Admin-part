@@ -44,10 +44,10 @@ namespace Application.Services.BankServices
             {
                 case "oldest":
                     selector = b => b.EstablishedDate;
-                    asceding = false;
                     break;
                 case "newest":
                     selector = b => b.EstablishedDate;
+                    asceding = false;
                     break;
                 case "rating-descending":
                     selector = b =>b.Rating;
@@ -59,7 +59,6 @@ namespace Application.Services.BankServices
                     break;
                 default:
                     selector = b => b.EstablishedDate;
-                    asceding = false;
                     break;
             }
             return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad, selector, asceding));
