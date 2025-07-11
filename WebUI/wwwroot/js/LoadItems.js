@@ -1,13 +1,13 @@
 ﻿//Load elements
+//Bank elements
 const elementsListBlock = document.getElementById("elements-block");
 const loadBanks = document.getElementById("load-banks");
 const addBank = document.querySelector(".add-element");
 let count = document.querySelectorAll(".element-table").length;
 let elementsListCount = parseInt(elementsListBlock.dataset.elementsListCount);
 
-
-
 //Sort elements
+//Bank elements
 const sortButton = document.getElementById("sort-icon");
 const sortList = document.getElementById("banks-sort-list");
 const radioInputs = document.querySelectorAll('input[name="sort"]');
@@ -15,12 +15,15 @@ let orderMethod = elementsListBlock.dataset.orderMethod;
 
 
 //Filter elements
+//Bank filters
 const filterButton = document.getElementById("filter-icon");
 const filterList = document.getElementById("banks-filter-list");
 const filterSetting = filterList.querySelectorAll('input[type="checkbox"][name="filter"]');
 const submitFilters = document.getElementById("submit-filters");
 const inputRating = document.querySelector('.rating');
 
+//Input settings
+//Bank inputs
 inputRating.addEventListener('input', () => {
     if (inputRating.value > 5) inputRating.value = 5;
     if (inputRating.value < 1) inputRating.value = null;
@@ -28,11 +31,51 @@ inputRating.addEventListener('input', () => {
         inputRating.value = inputRating.value.slice(0, 3);
     }
 });
-
+//Icons handlers
+//Sort and filrer icons
 filterButton.addEventListener("click", () => {
     filterList.classList.toggle("opened");
     sortList.classList.remove("opened");
 });
+
+sortButton.addEventListener("click", () => {
+    sortList.classList.toggle("opened");
+    filterList.classList.remove("opened");
+});
+
+
+//General methods
+function getSortUrl() {
+    return document.querySelector('input[name="sort"]:checked').value;
+}
+
+async function addElementsToEnd(response) {
+    elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
+}
+
+//Filters sort and search handlers
+//Bank handlers
+//Request handlers
+radioInputs.forEach(async function (button) {
+    button.addEventListener("change", async () => {
+        await sortAndFilterBanks();
+    });
+});
+
+submitFilters.addEventListener("click", async () => {
+    await sortAndFilterBanks();
+});
+
+async function sortAndFilterBanks() {
+    const url = `/load-banks/0/${count}/${getSortUrl()}${getBankFiltersUrl()}`
+    const response = await fetch(url, {
+        method: "GET"
+    });
+    document.querySelectorAll(".element-block").forEach(element => element.remove());
+    await addElementsToEnd(response);
+}
+
+//Additional bank filtration handler methods
 filterSetting.forEach(button => {
     button.addEventListener("change", () => {
         const inputValue = filterList.querySelector(`input[type="number"][class="${button.value}"]`);
@@ -44,13 +87,6 @@ filterSetting.forEach(button => {
 });
 
 
-submitFilters.addEventListener("click", async () => {
-    const url = `/load-banks/0/${count}/${getSortUrl()}${getBankFiltersUrl()}`
-    console.log(url);
-    await sortAndFilterBanks(url);
-    
-});
-
 function getBankFiltersUrl() {
     const filters = filterList.querySelectorAll(`input[type="checkbox"][name="filter"]`);
     let url = "";
@@ -60,7 +96,6 @@ function getBankFiltersUrl() {
             filter.checked = (filterValue !== null && filterValue!=="");
         }
     });
-
 
     filters.forEach(filter => {
         switch (filter.value) {
@@ -87,21 +122,8 @@ function getBankFiltersUrl() {
 }
 
 
-
-function getSortUrl() {
-    return document.querySelector('input[name="sort"]:checked').value;
-}
-
-async function sortAndFilterBanks(url) {
-    const response = await fetch(url, {
-        method: "GET"
-    });
-    document.querySelectorAll(".element-block").forEach(element => element.remove());
-    await addElementsToEnd(response);
-}
-
-
-//Load methods
+//Pagination methods
+//Bank methods
 if (elementsListCount == count) {
     loadBanks.style.display = "none";
 }
@@ -148,32 +170,6 @@ elementsListBlock.addEventListener("click", (event) => {
         event.target.closest("form").querySelector(".update-bank-order-method").value = method;
     }
 })
-
-//sort methods
-sortButton.addEventListener("click", () => {
-    sortList.classList.toggle("opened");
-    filterList.classList.remove("opened");
-});
-
-radioInputs.forEach(async function(button) {
-    button.addEventListener("change", async () => {
-        let x = button.value;
-        let url = "/load-banks/0/"+count+"/"+button.value;
-        orderElements(url);
-    });
-});
-
-async function orderElements(url) {
-    const response = await fetch(url, {
-        method: "GET"
-    });
-    document.querySelectorAll(".element-block").forEach(element => element.remove());
-    addElementsToEnd(response);
-};
-
-async function addElementsToEnd(response) {
-    elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
-}
 
 //Decraese when element is deleting
 elementsListBlock.addEventListener("click", async (event) => {

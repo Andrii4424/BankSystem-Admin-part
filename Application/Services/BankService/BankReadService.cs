@@ -45,9 +45,9 @@ namespace Application.Services.BankServices
 
             filters.Add((licenseFilter.HasValue && licenseFilter == true) ? b => b.HasLicense : null);
             filters.Add((siteFilter.HasValue && siteFilter == true) ? b => b.WebsiteUrl!=null: null);
-            filters.Add((ratingFilter.HasValue && ratingFilter!=0) ? b => b.Rating>ratingFilter: null);
-            filters.Add((clientsCountFilter.HasValue && clientsCountFilter!=0) ? b => b.ActiveClientsCount > clientsCountFilter : null);
-            filters.Add((capitalizationFilter.HasValue && capitalizationFilter != 0) ? b => b.Capitalization > capitalizationFilter : null);
+            filters.Add((ratingFilter.HasValue && ratingFilter!=0) ? b => b.Rating>=ratingFilter: null);
+            filters.Add((clientsCountFilter.HasValue && clientsCountFilter!=0) ? b => b.ActiveClientsCount >= clientsCountFilter : null);
+            filters.Add((capitalizationFilter.HasValue && capitalizationFilter != 0) ? b => b.Capitalization >= capitalizationFilter : null);
 
             bool asceding = true;
             switch (orderMethod)
