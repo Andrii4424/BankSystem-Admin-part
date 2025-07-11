@@ -5,7 +5,7 @@
     <div class="add-entity-block">
         <form asp-controller="Bank" asp-action="AddBank" method="post" class="add-form">
             <input asp-for="BankName" placeholder="Bank Name:">
-            <input asp-for="Rating" step="0.1" placeholder="Rating:" required oninput="this.value = this.value.replace('.', ',')">
+            <input asp-for="Rating" step="0.1" placeholder="Rating:" maxlength="3" required oninput="this.value = this.value.replace('.', ',')">
             <div class="radio-elements">
                 <span>Bank has a license?</span>
                 <div class="radio-buttons">
