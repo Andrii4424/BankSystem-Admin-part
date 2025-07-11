@@ -10,7 +10,7 @@ namespace Domain.RepositoryContracts
 {
     public interface IBankRepository :IGenericRepository<BankEntity>
     {
-        public Task<List<BankEntity>?> GetLimitedBankList<TSel>(int firstItem, int countOfItems, 
-            Expression<Func<BankEntity, TSel>> selector, bool ascending = true);
+        public Task<List<BankEntity>?> GetLimitedBankList<TSelector>(int firstItem, int countOfItems,
+            Expression<Func<BankEntity, TSelector>> selector, bool ascending, List<Expression<Func<BankEntity, bool>>?> filters);
     }
 }

@@ -18,15 +18,20 @@ namespace Infrastructure.Repository
             _dbSet = dbContext.Set<BankEntity>();
         }
 
-        public async Task<List<BankEntity>?> GetLimitedBankList<TSel>(int firstItem, int countOfItems,
-            Expression<Func<BankEntity, TSel>> selector, bool ascending=true)
+        public async Task<List<BankEntity>?> GetLimitedBankList<TSelector>(int firstItem, int countOfItems,
+            Expression<Func<BankEntity, TSelector>> selector, bool ascending, List<Expression<Func<BankEntity, bool>>?> filters)
         {
-            var _dbSetSorted = ascending? _dbSet.OrderBy(selector): _dbSet.OrderByDescending(selector);
-            return await _dbSetSorted
-             .ThenBy(b=>b.Id)
+            var query = _dbSet.AsQueryable();
+            filters = filters.Where(val => val!= null).ToList();
+            foreach (var filter in filters) { 
+                query = query.Where(filter);
+            }
+            query = (ascending? query.OrderBy(selector): query.OrderByDescending(selector)).ThenBy(b => b.Id);
+            return await query
             .Skip(firstItem)
             .Take(countOfItems)
             .ToListAsync();
         }
+
     }
 }

@@ -26,7 +26,7 @@ namespace WebUI.Controllers
         public async Task<IActionResult> BanksList()
         {
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
-            return View(await _bankReadService.GetLimitedBanksListAsync(0, 6, null));
+            return View(await _bankReadService.GetLimitedBanksListAsync(0, 6, null, null, null, null, null, null));
         }
 
         [TypeFilter(typeof(LoadPageFilter))]
@@ -36,7 +36,7 @@ namespace WebUI.Controllers
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
             int loadCount = loadPageCount.HasValue? loadPageCount.Value: 0;
             ViewBag.OrderMethod = orderMethod;
-            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, orderMethod));
+            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, orderMethod, null, null, null, null, null));
         }
 
         [Route("/bank/{bankId:Guid}")]
@@ -82,13 +82,17 @@ namespace WebUI.Controllers
         public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement,[FromRoute] string? orderMethod)
         {
             await _bankDeleteService.DeleteBankAsync(bankId);
-            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement-1, 1, orderMethod));
+            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement-1, 1, orderMethod, null, null, 
+                null, null, null));
         }
 
-        [HttpGet("/load-banks/{firstElement:int}/{elementsToLoad:int}/{orderMethod?}")]
-        public async Task<IActionResult> LoadBanks([FromRoute] int firstElement,[FromRoute] int elementsToLoad, [FromRoute] string? orderMethod)
+        [HttpGet("/load-banks/{firstElement:int}/{elementsToLoad:int}/{orderMethod:?}/{licenseFilter:bool?}/{siteFilter:bool?}/{ratingFilter:double?}/{clientsCountFilter:int?}/{capitalizationFilter:int?}")]
+        public async Task<IActionResult> LoadBanks([FromRoute] int firstElement,[FromRoute] int elementsToLoad, [FromRoute] string? orderMethod,
+            [FromRoute] bool? licenseFilter, [FromRoute] bool? siteFilter, [FromRoute] double? ratingFilter,
+            [FromRoute] int? clientsCountFilter, [FromRoute] int? capitalizationFilter)
         {
-            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement, elementsToLoad, orderMethod));
+            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement, elementsToLoad, orderMethod,
+                licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter));
         }
     }
 }
