@@ -1,6 +1,13 @@
 ﻿//Load elements
-//Bank elements
+//General DOM elements
 const elementsListBlock = document.getElementById("elements-block");
+const sortButton = document.getElementById("sort-icon");
+const filterButton = document.getElementById("filter-icon");
+const submitFilters = document.getElementById("submit-filters");
+const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
+
+//Bank general elements
 const loadBanks = document.getElementById("load-banks");
 const addBank = document.querySelector(".add-element");
 let count = document.querySelectorAll(".element-table").length;
@@ -8,18 +15,14 @@ let elementsListCount = parseInt(elementsListBlock.dataset.elementsListCount);
 
 //Sort elements
 //Bank elements
-const sortButton = document.getElementById("sort-icon");
 const sortList = document.getElementById("banks-sort-list");
 const radioInputs = document.querySelectorAll('input[name="sort"]');
 let orderMethod = elementsListBlock.dataset.orderMethod;
 
-
 //Filter elements
 //Bank filters
-const filterButton = document.getElementById("filter-icon");
 const filterList = document.getElementById("banks-filter-list");
 const filterSetting = filterList.querySelectorAll('input[type="checkbox"][name="filter"]');
-const submitFilters = document.getElementById("submit-filters");
 const inputRating = document.querySelector('.rating');
 
 //Input settings
@@ -48,6 +51,9 @@ sortButton.addEventListener("click", () => {
 function getSortUrl() {
     return document.querySelector('input[name="sort"]:checked').value;
 }
+function getSearchUrl() {
+    return (searchInput.value !== "" && searchInput.value !== null)? searchInput.value: "0";
+}
 
 async function addElementsToEnd(response) {
     elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
@@ -66,8 +72,12 @@ submitFilters.addEventListener("click", async () => {
     await sortAndFilterBanks();
 });
 
+searchButton.addEventListener("click", async () => {
+    await sortAndFilterBanks();
+});
+
 async function sortAndFilterBanks() {
-    const url = `/load-banks/0/${count}/${getSortUrl()}${getBankFiltersUrl()}`
+    const url = `/load-banks/0/${count}/${getSearchUrl()}/${getSortUrl()}${getBankFiltersUrl()}`
     const response = await fetch(url, {
         method: "GET"
     });

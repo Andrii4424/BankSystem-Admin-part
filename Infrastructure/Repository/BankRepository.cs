@@ -18,10 +18,12 @@ namespace Infrastructure.Repository
             _dbSet = dbContext.Set<BankEntity>();
         }
 
-        public async Task<List<BankEntity>?> GetLimitedBankList<TSelector>(int firstItem, int countOfItems,
-            Expression<Func<BankEntity, TSelector>> selector, bool ascending, List<Expression<Func<BankEntity, bool>>?> filters)
+        public async Task<List<BankEntity>?> GetLimitedBankList<TSelector>(int firstItem, int countOfItems, 
+            Expression<Func<BankEntity, bool>>? searchFilter, Expression<Func<BankEntity, TSelector>> selector, 
+            bool ascending, List<Expression<Func<BankEntity, bool>>?> filters)
         {
             var query = _dbSet.AsQueryable();
+            if(searchFilter!=null) query = query.Where(searchFilter);
             filters = filters.Where(val => val!= null).ToList();
             foreach (var filter in filters) { 
                 query = query.Where(filter);

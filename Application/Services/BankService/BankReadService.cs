@@ -37,12 +37,13 @@ namespace Application.Services.BankServices
             return _mapper.Map<BankDto>(bankEntity);
         }
 
-        public async Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad, string? orderMethod, 
+        public async Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad, string? searchValue, string? orderMethod, 
             bool? licenseFilter, bool? siteFilter, double? ratingFilter, int? clientsCountFilter, int? capitalizationFilter)
         {
+            Expression<Func<BankEntity, bool>>? searchFilter= (searchValue!=null && searchValue!="0")? b => b.BankName.Contains(searchValue):null;
             Expression<Func<BankEntity, object>> selector;
             List<Expression<Func<BankEntity, bool>>?> filters= new List<Expression<Func<BankEntity, bool>>?>();
-
+            
             filters.Add((licenseFilter.HasValue && licenseFilter == true) ? b => b.HasLicense : null);
             filters.Add((siteFilter.HasValue && siteFilter == true) ? b => b.WebsiteUrl!=null: null);
             filters.Add((ratingFilter.HasValue && ratingFilter!=0) ? b => b.Rating>=ratingFilter: null);
@@ -71,13 +72,13 @@ namespace Application.Services.BankServices
                     selector = b => b.EstablishedDate;
                     break;
             }
-            return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad, selector, asceding, filters));
+            //настроишь потом вызов репозитория и вызов функции в контроллере 
+            return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad, searchFilter, selector, 
+                asceding,  filters));
         }
 
         public async Task<int> GetBanksCountAsync(){
             return await _bankRepository.GetElementsCountAsync();
         }
-
-
     }
 }
