@@ -78,12 +78,15 @@ namespace WebUI.Controllers
             return View(bankDto);
         }
 
-        [HttpPost("/delete-bank/bank-id/{bankId:guid}/first-element/{firstElement:int}/order-method/{orderMethod?}")]
-        public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement,[FromRoute] string? orderMethod)
+        [HttpPost("/delete-bank/bank-id/{bankId:guid}/first-element/{firstElement:int}/{searchValue?}/{orderMethod:?}/{licenseFilter:bool?}/{siteFilter:bool?}/{ratingFilter:double?}/{clientsCountFilter:int?}/{capitalizationFilter:int?}")]
+        public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId, [FromRoute] int firstElement, [FromRoute] string? searchValue,
+            [FromRoute] string? orderMethod, [FromRoute] bool? licenseFilter, [FromRoute] bool? siteFilter, [FromRoute] double? ratingFilter,
+            [FromRoute] int? clientsCountFilter, [FromRoute] int? capitalizationFilter)
         {
             await _bankDeleteService.DeleteBankAsync(bankId);
-            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement-1, 1,null, orderMethod, null, null, 
-                null, null, null));
+            ViewBag.ElementsCount = await _bankReadService.GetBanksCountAsync(searchValue, licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter);
+            return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement-1, 1, searchValue, orderMethod,
+                licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter));
         }
 
         [HttpGet("/load-banks/{firstElement:int}/{elementsToLoad:int}/{searchValue?}/{orderMethod:?}/{licenseFilter:bool?}/{siteFilter:bool?}/{ratingFilter:double?}/{clientsCountFilter:int?}/{capitalizationFilter:int?}")]

@@ -1,4 +1,7 @@
-﻿//Load elements
+﻿//General elements
+let deletedElementsCount=0;
+
+//Load elements
 //General DOM elements
 const elementsListBlock = document.getElementById("elements-block");
 const sortButton = document.getElementById("sort-icon");
@@ -148,12 +151,13 @@ async function LoadItems(firstElement, itemsToLoad) {
 
 
 function LoadButtonChecker() {
+    //This method choses last partial view block with count of all list elements, if partial view doesnt exist it 
+    //take basic view elements value with startup value(without filters)
     const partialBlockLength = document.querySelectorAll(".partial-counter")[document.querySelectorAll(".partial-counter").length-1];
     let allItemsCount;
     if (partialBlockLength !== undefined) allItemsCount = parseInt(partialBlockLength.dataset.elementsCount);
-    else allItemsCount = parseInt(elementsListBlock.dataset.elementsListCount);
+    else allItemsCount = parseInt(elementsListBlock.dataset.elementsListCount)-deletedElementsCount;
     const elementsListCount = document.querySelectorAll(".element-table").length;
-    //Сделать паршиал вью блок длина, проверять именно последний элемент 
     if (allItemsCount === elementsListCount) {
         loadBanks.style.display = "none";
     } else if (elementsListCount === 0) {
@@ -195,13 +199,27 @@ elementsListBlock.addEventListener("click", (event) => {
         event.target.closest("form").querySelector(".update-bank-order-method").value = method;
     }
 })
-
+//Deleting elements
 //Decraese when element is deleting
 elementsListBlock.addEventListener("click", async (event) => {
     if (event.target.matches(".delete-element")) {
-        elementsListCount--;
-        if (elementsListCount == count) {
-            loadBanks.style.display = "none";
-        }
+        const button = event.target;
+        const id = button.dataset.elementId;
+        const count = document.querySelectorAll(".element-table").length;
+        const sortMethod = document.querySelector('input[name="sort"]:checked').value;
+        deletedElementsCount++;
+        button.closest(".element-block").remove();
+        await DeleteItem(`/delete-bank/bank-id/${id}/first-element/${count}/${getSearchUrl()}/${sortMethod}${getBankFiltersUrl()}`);
     }
 });
+
+async function DeleteItem(url) {
+    const replacedElement = await fetch(url, {
+        method: "POST"
+    });
+
+    await addElementsToEnd(replacedElement);
+    LoadButtonChecker();
+}
+
+
