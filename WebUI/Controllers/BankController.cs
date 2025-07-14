@@ -25,7 +25,7 @@ namespace WebUI.Controllers
         [Route("/banks")]
         public async Task<IActionResult> BanksList()
         {
-            ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
+            ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync(null, null, null, null, null, null);
             return View(await _bankReadService.GetLimitedBanksListAsync(0, 6, null, null, null, null, null, null, null));
         }
 
@@ -33,7 +33,7 @@ namespace WebUI.Controllers
         [Route("/banks/{loadPageCount:int?}/start-method/{orderMethod?}")]
         public async Task<IActionResult> BanksList([FromRoute] int? loadPageCount, [FromRoute] string? orderMethod)
         {
-            ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync();
+            ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync(null, null, null, null, null, null);
             int loadCount = loadPageCount.HasValue? loadPageCount.Value: 0;
             ViewBag.OrderMethod = orderMethod;
             return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, null, orderMethod, null, null, null, null, null));
@@ -91,6 +91,7 @@ namespace WebUI.Controllers
             [FromRoute] string? orderMethod, [FromRoute] bool? licenseFilter, [FromRoute] bool? siteFilter, [FromRoute] double? ratingFilter,
             [FromRoute] int? clientsCountFilter, [FromRoute] int? capitalizationFilter)
         {
+            ViewBag.ElementsCount =await _bankReadService.GetBanksCountAsync(searchValue, licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter);
             return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement, elementsToLoad, searchValue, orderMethod,
                 licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter));
         }

@@ -40,17 +40,35 @@ namespace Application.Services.BankServices
         public async Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad, string? searchValue, string? orderMethod, 
             bool? licenseFilter, bool? siteFilter, double? ratingFilter, int? clientsCountFilter, int? capitalizationFilter)
         {
-            Expression<Func<BankEntity, bool>>? searchFilter= (searchValue!=null && searchValue!="0")? b => b.BankName.Contains(searchValue):null;
+            Expression<Func<BankEntity, bool>>? searchFilter=GetSearchFilter(searchValue);
             Expression<Func<BankEntity, object>> selector;
-            List<Expression<Func<BankEntity, bool>>?> filters= new List<Expression<Func<BankEntity, bool>>?>();
+            bool asceding;
+            GetSelector(out selector, out asceding, orderMethod);
+            List<Expression<Func<BankEntity, bool>>?> filters= GetFilters(licenseFilter, siteFilter, ratingFilter, 
+                clientsCountFilter, capitalizationFilter);
             
-            filters.Add((licenseFilter.HasValue && licenseFilter == true) ? b => b.HasLicense : null);
-            filters.Add((siteFilter.HasValue && siteFilter == true) ? b => b.WebsiteUrl!=null: null);
-            filters.Add((ratingFilter.HasValue && ratingFilter!=0) ? b => b.Rating>=ratingFilter: null);
-            filters.Add((clientsCountFilter.HasValue && clientsCountFilter!=0) ? b => b.ActiveClientsCount >= clientsCountFilter : null);
-            filters.Add((capitalizationFilter.HasValue && capitalizationFilter != 0) ? b => b.Capitalization >= capitalizationFilter : null);
+            return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad, searchFilter, selector, 
+                asceding,  filters));
+        }
 
-            bool asceding = true;
+        public async Task<int> GetBanksCountAsync(string? searchValue, bool? licenseFilter, bool? siteFilter, double? ratingFilter, 
+            int? clientsCountFilter, int? capitalizationFilter)
+        {
+            Expression<Func<BankEntity, bool>>? searchFilter = GetSearchFilter(searchValue);
+            List<Expression<Func<BankEntity, bool>>?> filters = GetFilters(licenseFilter, siteFilter, ratingFilter,
+                clientsCountFilter, capitalizationFilter);
+
+            return await _bankRepository.CountAsync(searchFilter, filters);
+        }
+
+        private Expression<Func<BankEntity, bool>>? GetSearchFilter(string? searchValue)
+        {
+            return (searchValue != null && searchValue != "0") ? b => b.BankName.Contains(searchValue) : null;
+        }
+
+        private void GetSelector(out Expression<Func<BankEntity, object>> selector, out bool asceding, string? orderMethod)
+        {
+            asceding = true;
             switch (orderMethod)
             {
                 case "oldest":
@@ -61,24 +79,30 @@ namespace Application.Services.BankServices
                     asceding = false;
                     break;
                 case "rating-descending":
-                    selector = b =>b.Rating;
+                    selector = b => b.Rating;
                     asceding = false;
                     break;
                 case "popularity-descending":
                     selector = b => b.ActiveClientsCount;
-                    asceding = false; 
+                    asceding = false;
                     break;
                 default:
                     selector = b => b.EstablishedDate;
                     break;
             }
-            //настроишь потом вызов репозитория и вызов функции в контроллере 
-            return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad, searchFilter, selector, 
-                asceding,  filters));
         }
 
-        public async Task<int> GetBanksCountAsync(){
-            return await _bankRepository.GetElementsCountAsync();
+        private List<Expression<Func<BankEntity, bool>>?> GetFilters(bool? licenseFilter, bool? siteFilter, double? ratingFilter, 
+            int? clientsCountFilter, int? capitalizationFilter) {
+            List<Expression<Func<BankEntity, bool>>?> filters = new List<Expression<Func<BankEntity, bool>>?>();
+
+            filters.Add((licenseFilter.HasValue && licenseFilter == true) ? b => b.HasLicense : null);
+            filters.Add((siteFilter.HasValue && siteFilter == true) ? b => b.WebsiteUrl != null : null);
+            filters.Add((ratingFilter.HasValue && ratingFilter != 0) ? b => b.Rating >= ratingFilter : null);
+            filters.Add((clientsCountFilter.HasValue && clientsCountFilter != 0) ? b => b.ActiveClientsCount >= clientsCountFilter : null);
+            filters.Add((capitalizationFilter.HasValue && capitalizationFilter != 0) ? b => b.Capitalization >= capitalizationFilter : null);
+
+            return filters;
         }
     }
 }

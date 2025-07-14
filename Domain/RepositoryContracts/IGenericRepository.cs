@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,6 @@ namespace Domain.RepositoryContracts
         public void DeleteElement(T entity);
         public void UpdateObject(T entity);
         public Task SaveAsync();
-        public Task<int> GetElementsCountAsync();
+        public Task<int> CountAsync(Expression<Func<T, bool>>? searchFilter, List<Expression<Func<T, bool>>?> filters);
     }
 }

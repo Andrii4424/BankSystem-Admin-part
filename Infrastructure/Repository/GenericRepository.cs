@@ -1,10 +1,12 @@
 ﻿using Domain.Abstractions;
+using Domain.Entities.Banks;
 using Domain.RepositoryContracts;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,9 +58,16 @@ namespace Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<int> GetElementsCountAsync()
+        public async Task<int> CountAsync(Expression<Func<T, bool>>? searchFilter, List<Expression<Func<T, bool>>?> filters)
         {
-            return await _dbSet.CountAsync();
+            var query = _dbSet.AsQueryable();
+            if (searchFilter != null) query = query.Where(searchFilter);
+            filters = filters.Where(val => val != null).ToList();
+            foreach (var filter in filters)
+            {
+                query = query.Where(filter);
+            }
+            return await query.CountAsync();
         }
     }
 }

@@ -48,42 +48,41 @@ sortButton.addEventListener("click", () => {
 
 
 //General methods
+async function addElementsToEnd(response) {
+    elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
+}
+function GetElementsCount() {
+    return (document.querySelectorAll(".element-table").length) > 6 ? document.querySelectorAll(".element-table").length: 6;
+}
+
+//Filters sort and search handlers
 function getSortUrl() {
     return document.querySelector('input[name="sort"]:checked').value;
 }
 function getSearchUrl() {
-    return (searchInput.value !== "" && searchInput.value !== null)? searchInput.value: "0";
+    return (searchInput.value !== "" && searchInput.value !== null) ? searchInput.value : "0";
 }
 
-async function addElementsToEnd(response) {
-    elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
-}
-
-//Filters sort and search handlers
 //Bank handlers
+async function UpdateItems(firstElement, itemsToLoad) {
+    document.querySelectorAll(".element-block").forEach(element => element.remove());
+    await LoadItems(firstElement, itemsToLoad);
+}
 //Request handlers
 radioInputs.forEach(async function (button) {
     button.addEventListener("change", async () => {
-        await sortAndFilterBanks();
+        await UpdateItems(0, GetElementsCount());
     });
 });
 
 submitFilters.addEventListener("click", async () => {
-    await sortAndFilterBanks();
+    await UpdateItems(0, GetElementsCount());
 });
 
 searchButton.addEventListener("click", async () => {
-    await sortAndFilterBanks();
+    await UpdateItems(0, GetElementsCount());
 });
 
-async function sortAndFilterBanks() {
-    const url = `/load-banks/0/${count}/${getSearchUrl()}/${getSortUrl()}${getBankFiltersUrl()}`
-    const response = await fetch(url, {
-        method: "GET"
-    });
-    document.querySelectorAll(".element-block").forEach(element => element.remove());
-    await addElementsToEnd(response);
-}
 
 //Additional bank filtration handler methods
 filterSetting.forEach(button => {
@@ -138,6 +137,32 @@ if (elementsListCount == count) {
     loadBanks.style.display = "none";
 }
 
+async function LoadItems(firstElement, itemsToLoad) {
+    const url = `/load-banks/${firstElement}/${itemsToLoad}/${getSearchUrl()}/${getSortUrl()}${getBankFiltersUrl()}`
+    const response = await fetch(url, {
+        method: "GET"
+    });
+    await addElementsToEnd(response);
+    LoadButtonChecker();
+}
+
+
+function LoadButtonChecker() {
+    const partialBlockLength = document.querySelectorAll(".partial-counter")[document.querySelectorAll(".partial-counter").length-1];
+    let allItemsCount;
+    if (partialBlockLength !== undefined) allItemsCount = parseInt(partialBlockLength.dataset.elementsCount);
+    else allItemsCount = parseInt(elementsListBlock.dataset.elementsListCount);
+    const elementsListCount = document.querySelectorAll(".element-table").length;
+    //Сделать паршиал вью блок длина, проверять именно последний элемент 
+    if (allItemsCount === elementsListCount) {
+        loadBanks.style.display = "none";
+    } else if (elementsListCount === 0) {
+        loadBanks.style.display = "none";
+    } else {
+        loadBanks.style.display = "block";
+    }
+}
+
 if (orderMethod!==null && orderMethod!==undefined && orderMethod!=="") {
     radioInputs.forEach(button => {
         if(button.value===orderMethod) {
@@ -148,21 +173,11 @@ if (orderMethod!==null && orderMethod!==undefined && orderMethod!=="") {
 
 
 loadBanks.addEventListener("click", async () => {
-    await LoadMore("/load-banks/" + count +"/"+6 +"/"+ document.querySelector('input[name="sort"]:checked').value);
+    count = document.querySelectorAll(".element-table").length;
+    await LoadItems(count, 6);
+    LoadButtonChecker();
 });
 
-
-async function LoadMore(url) {
-    const response = await fetch(url, {
-        method: "GET"
-    });
-    await addElementsToEnd(response);
-
-    count = document.querySelectorAll(".element-table").length;
-    if (elementsListCount == count) {
-        loadBanks.style.display = "none";
-    }
-}
 
 addBank.addEventListener("click", () => {
     const input = document.getElementById("add-bank-input");

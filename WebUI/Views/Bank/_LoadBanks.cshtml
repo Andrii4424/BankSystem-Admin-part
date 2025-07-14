@@ -4,10 +4,10 @@
 
 
 @model List<BankDto>
-
+<span class="partial-counter" data-elements-count="@ViewBag.ElementsCount" style="display: none"></span>
 @foreach (BankDto bank in Model)
 {
-	<div class="element-block">
+	<div class="element-block partial-view-element-block">
 		<a href="" class="text-reset text-decoration-none">
 			<table class="element-table">
 				<tr>
