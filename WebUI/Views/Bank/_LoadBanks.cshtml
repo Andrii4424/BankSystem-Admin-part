@@ -30,8 +30,14 @@
 
 		<div class="action-buttons">
 			<form asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId=@bank.Id id="add-form" method="get">
-				<input name="loadPageCount" class="update-bank-input" type="hidden">
-				<input name="orderMethod" class="update-bank-order-method" type="hidden">
+				<input name="elementsToLoad" class="update-bank-input" type="hidden">
+				<input name="orderMethod" class="update-bank-input-method" type="hidden">
+				<input name="searchValue" class="update-bank-input-search" type="hidden">
+				<input name="licenseFilter" class="update-bank-input-license-filter" type="hidden">
+				<input name="siteFilter" class="update-bank-input-site-filter" type="hidden">
+				<input name="ratingFilter" class="update-bank-input-rating-filter" type="hidden">
+				<input name="clientsCountFilter" class="update-bank-input-clients-filter" type="hidden">
+				<input name="capitalizationFilter" class="update-bank-input-capitalization-filter" type="hidden">
 				<button class="update-element" type="submit">Update Bank</button>
 			</form>
 			<button class="delete-element" data-element-id="@bank.Id">Delete Bank</button>

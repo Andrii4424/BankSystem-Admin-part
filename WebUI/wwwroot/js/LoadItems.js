@@ -178,8 +178,9 @@ if (oldOrderMethod !== null && oldOrderMethod !== undefined && oldOrderMethod !=
         }
     });
 }
-if (oldSearchValue !== null) {
+if (oldSearchValue !== null && oldSearchValue != "" && oldSearchValue!="0") {
     searchInput.value = oldSearchValue;
+    LoadButtonChecker();
 }
 
 if (oldFilters !== null && oldFilters !== undefined) {
@@ -198,6 +199,7 @@ if (oldFilters !== null && oldFilters !== undefined) {
         document.querySelector(`input[type="checkbox"][name="filter"][value="capitalization"]`).checked = true;
         document.querySelector(`input[type="number"][name="filter"][class="capitalization"]`).value = oldFilters["CapitalizationFilter"];
     }
+    LoadButtonChecker();
 }
 
 function ToBoolean(value) {
@@ -270,11 +272,20 @@ function setHiddenBankFiltersInputValues(countHiddenInput, searchHiddenInput, or
 
 elementsListBlock.addEventListener("click", (event) => {
     if (event.target.matches(".update-element")) {
-        let count = document.querySelectorAll(".element-table").length;
-        event.target.closest("form").querySelector(".update-bank-input").value = count;
-        const method = document.querySelector('input[name="sort"]:checked').value
-        event.target.closest("form").querySelector(".update-bank-order-method").value = method;
+        const countHiddenInput = event.target.closest("form").querySelector(".update-bank-input");
+        const searchHiddenInput = event.target.closest("form").querySelector(".update-bank-input-search");
+        const orderHiddenInput = event.target.closest("form").querySelector(".update-bank-input-method");
+
+        const licenseHiddenInput = event.target.closest("form").querySelector(".update-bank-input-license-filter");
+        const siteHiddenInput = event.target.closest("form").querySelector(".update-bank-input-site-filter");
+        const ratingHiddenInput = event.target.closest("form").querySelector(".update-bank-input-rating-filter");
+        const clientsCountHiddenInput = event.target.closest("form").querySelector(".update-bank-input-clients-filter");
+        const capitalizationHiddenInput = event.target.closest("form").querySelector(".update-bank-input-capitalization-filter");
+
+        setHiddenBankFiltersInputValues(countHiddenInput, searchHiddenInput, orderHiddenInput, licenseHiddenInput, siteHiddenInput,
+            ratingHiddenInput, clientsCountHiddenInput, capitalizationHiddenInput);
     }
+
 })
 //Deleting elements
 //Decraese when element is deleting

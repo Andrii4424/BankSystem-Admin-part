@@ -73,7 +73,9 @@ namespace WebUI.Controllers
 
         [TypeFilter(typeof(LoadPageFilter))]
         [HttpGet("/update-bank/{bankId:Guid}")]
-        public async Task<IActionResult> UpdateBank(Guid bankId, [FromQuery] int? loadPageCount, [FromQuery] string? orderMethod)
+        public async Task<IActionResult> UpdateBank([FromRoute] Guid bankId, [FromQuery] int? elementsToLoad, [FromQuery] string? orderMethod, 
+            [FromQuery] string? searchValue,[FromQuery] bool? licenseFilter, [FromQuery] bool? siteFilter, [FromQuery] double? ratingFilter,
+            [FromQuery] int? clientsCountFilter, [FromQuery] int? capitalizationFilter)
         {
             return View(await _bankReadService.GetBankByIdAsync(bankId));
         }
@@ -81,8 +83,9 @@ namespace WebUI.Controllers
         [TypeFilter(typeof(LoadPageFilter))]
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/update-bank/{bankId:Guid}")]
-        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId, [FromForm] int? loadPageCount,
-            [FromForm] string? orderMethod)
+        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId, [FromForm] int? elementsToLoad, 
+            [FromForm] string? orderMethod, [FromForm] string? searchValue, [FromForm] bool? licenseFilter, [FromForm] bool? siteFilter,
+            [FromForm] double? ratingFilter, [FromForm] int? clientsCountFilter, [FromForm] int? capitalizationFilter)
         {
             if (ModelState.IsValid) await _bankUpdateService.UpdateBankAsync(bankId, bankDto);
             return View(bankDto);
