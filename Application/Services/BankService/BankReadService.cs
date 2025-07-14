@@ -44,6 +44,7 @@ namespace Application.Services.BankServices
             Expression<Func<BankEntity, object>> selector;
             bool asceding;
             GetSelector(out selector, out asceding, orderMethod);
+            if (ratingFilter > 5) ratingFilter = ratingFilter / 10;
             List<Expression<Func<BankEntity, bool>>?> filters= GetFilters(licenseFilter, siteFilter, ratingFilter, 
                 clientsCountFilter, capitalizationFilter);
             
@@ -91,6 +92,22 @@ namespace Application.Services.BankServices
                     break;
             }
         }
+
+        public bool IsObjectMatchesFilters(BankDto bank, string? searchValue, bool? licenseFilter, bool? siteFilter, double? ratingFilter,
+            int? clientsCountFilter, int? capitalizationFilter) {
+            if((licenseFilter ==true && bank.HasLicense==false) || (siteFilter==true && bank.WebsiteUrl==null)) return false;
+            else if((ratingFilter.HasValue && bank.Rating<ratingFilter) || (clientsCountFilter.HasValue && bank.ClientsCount < clientsCountFilter) 
+                || (capitalizationFilter.HasValue && bank.Capitalization < capitalizationFilter))
+            {
+                return false;
+            }
+
+            if(searchValue!=null){
+                if(bank.BankName.Contains(searchValue)) return false;
+            }
+
+            return true;
+        } 
 
         private List<Expression<Func<BankEntity, bool>>?> GetFilters(bool? licenseFilter, bool? siteFilter, double? ratingFilter, 
             int? clientsCountFilter, int? capitalizationFilter) {

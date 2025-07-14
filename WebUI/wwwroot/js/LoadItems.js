@@ -20,12 +20,14 @@ let elementsListCount = parseInt(elementsListBlock.dataset.elementsListCount);
 //Bank elements
 const sortList = document.getElementById("banks-sort-list");
 const radioInputs = document.querySelectorAll('input[name="sort"]');
-let orderMethod = elementsListBlock.dataset.orderMethod;
+let oldOrderMethod = elementsListBlock.dataset.orderMethod;
+let oldSearchValue = elementsListBlock.dataset.searchValue;
+let oldFilters = JSON.parse(elementsListBlock.dataset.filters);
 
 //Filter elements
 //Bank filters
 const filterList = document.getElementById("banks-filter-list");
-const filterSetting = filterList.querySelectorAll('input[type="checkbox"][name="filter"]');
+const filterSettings = filterList.querySelectorAll('input[type="checkbox"][name="filter"]');
 const inputRating = document.querySelector('.rating');
 
 //Input settings
@@ -88,7 +90,7 @@ searchButton.addEventListener("click", async () => {
 
 
 //Additional bank filtration handler methods
-filterSetting.forEach(button => {
+filterSettings.forEach(button => {
     button.addEventListener("change", () => {
         const inputValue = filterList.querySelector(`input[type="number"][class="${button.value}"]`);
         if (inputValue !== null) {
@@ -167,14 +169,49 @@ function LoadButtonChecker() {
     }
 }
 
-if (orderMethod!==null && orderMethod!==undefined && orderMethod!=="") {
+
+//Loads old filters when user back from update/add element page
+if (oldOrderMethod !== null && oldOrderMethod !== undefined && oldOrderMethod !=="") {
     radioInputs.forEach(button => {
-        if(button.value===orderMethod) {
+        if (button.value === oldOrderMethod) {
             button.checked = true;
         }
     });
 }
+if (oldSearchValue !== null) {
+    searchInput.value = oldSearchValue;
+}
 
+if (oldFilters !== null && oldFilters !== undefined) {
+    document.querySelector(`input[type="checkbox"][name="filter"][value="license-required"]`).checked = ToBoolean(oldFilters["LicenseFilter"]);
+    document.querySelector(`input[type="checkbox"][name="filter"][value="site-required"]`).checked = ToBoolean(oldFilters["SiteFilter"]);
+    if (ToBoolean(oldFilters["RatingFilter"])) {
+        document.querySelector(`input[type="checkbox"][name="filter"][value="rating"]`).checked = true; 
+        let ratingValue = oldFilters["RatingFilter"].length > 1 ? oldFilters["RatingFilter"] / 10: oldFilters["RatingFilter"];
+        document.querySelector(`input[type="number"][name="filter"][class="rating"]`).value = ratingValue;
+    }
+    if (ToBoolean(oldFilters["ClientsCountFilter"])) {
+        document.querySelector(`input[type="checkbox"][name="filter"][value="clients-count"]`).checked = true;
+        document.querySelector(`input[type="number"][name="filter"][class="clients-count"]`).value = oldFilters["ClientsCountFilter"];
+    }
+    if (ToBoolean(oldFilters["CapitalizationFilter"])) {
+        document.querySelector(`input[type="checkbox"][name="filter"][value="capitalization"]`).checked = true;
+        document.querySelector(`input[type="number"][name="filter"][class="capitalization"]`).value = oldFilters["CapitalizationFilter"];
+    }
+}
+
+function ToBoolean(value) {
+    if (value === "true" || value === "True" || value === "TRUE") {
+        return true;
+    }
+    else if (parseInt(value)>0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+}
 
 loadBanks.addEventListener("click", async () => {
     count = document.querySelectorAll(".element-table").length;
@@ -184,12 +221,52 @@ loadBanks.addEventListener("click", async () => {
 
 
 addBank.addEventListener("click", () => {
-    const input = document.getElementById("add-bank-input");
-    const inputMethod = document.getElementById("add-bank-input-method");
-    let count = document.querySelectorAll(".element-table").length;
-    input.value = count;
-    inputMethod.value = document.querySelector('input[name="sort"]:checked').value;
+    const countHiddenInput = document.getElementById("add-bank-input");
+    const searchHiddenInput = document.getElementById("add-bank-input-search");
+    const orderHiddenInput = document.getElementById("add-bank-input-method");
+    
+    const licenseHiddenInput = document.getElementById("add-bank-input-license-filter");
+    const siteHiddenInput = document.getElementById("add-bank-input-site-filter");
+    const ratingHiddenInput = document.getElementById("add-bank-input-rating-filter");
+    const clientsCountHiddenInput = document.getElementById("add-bank-input-clients-filter");
+    const capitalizationHiddenInput = document.getElementById("add-bank-input-capitalization-filter");
+
+    setHiddenBankFiltersInputValues(countHiddenInput, searchHiddenInput, orderHiddenInput, licenseHiddenInput, siteHiddenInput,
+        ratingHiddenInput, clientsCountHiddenInput, capitalizationHiddenInput);
 });
+
+function setHiddenBankFiltersInputValues(countHiddenInput, searchHiddenInput, orderHiddenInput, licenseHiddenInput, siteHiddenInput,
+    ratingHiddenInput, clientsCountHiddenInput, capitalizationHiddenInput) {
+
+    let count = document.querySelectorAll(".element-table").length;
+    countHiddenInput.value = count;
+    searchHiddenInput.value = getSearchUrl();
+    orderHiddenInput.value = getSortUrl();
+
+    const filters = filterList.querySelectorAll(`input[type="checkbox"][name="filter"]`);
+
+    filters.forEach(filter => {
+        switch (filter.value) {
+            case "license-required":
+                licenseHiddenInput.value =  filter.checked;
+                break;
+            case "site-required":
+                siteHiddenInput.value = filter.checked;
+                break;
+            case "rating":
+                filter.checked ? ratingHiddenInput.value = filterList.querySelector(`input[type="number"][class="${filter.value}"]`).value : ratingHiddenInput.value = "0";
+                break;
+            case "clients-count":
+                filter.checked ? clientsCountHiddenInput.value = filterList.querySelector(`input[type="number"][class="${filter.value}"]`).value : clientsCountHiddenInput.value = "0";
+                break;
+            case "capitalization":
+                filter.checked ? capitalizationHiddenInput.value = filterList.querySelector(`input[type="number"][class="${filter.value}"]`).value : capitalizationHiddenInput.value = "0";
+                break;
+            default:
+                break;
+        }
+    })
+}
 
 elementsListBlock.addEventListener("click", (event) => {
     if (event.target.matches(".update-element")) {

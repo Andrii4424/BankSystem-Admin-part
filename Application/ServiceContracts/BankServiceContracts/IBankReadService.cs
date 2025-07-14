@@ -16,5 +16,8 @@ namespace Application.ServiceContracts.BankServiceContracts
             bool? licenseFilter, bool? siteFilter, double? ratingFilter, int? clientsCountFilter, int? capitalizationFilter);
         public Task<int> GetBanksCountAsync(string? searchValue, bool? licenseFilter, bool? siteFilter, double? ratingFilter,
             int? clientsCountFilter, int? capitalizationFilter);
+        public bool IsObjectMatchesFilters(BankDto bank, string? searchValue, bool? licenseFilter, bool? siteFilter, double? ratingFilter,
+            int? clientsCountFilter, int? capitalizationFilter);
+
     }
 }

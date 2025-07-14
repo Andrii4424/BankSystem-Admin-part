@@ -8,7 +8,8 @@
 			Bank list is empty, you can create bank by button bellow
 		</h4>
 	}
-	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount" data-order-method="@ViewBag.OrderMethod">
+	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount" data-order-method="@ViewBag.OrderMethod"
+		 data-search-value="@ViewBag.SearchFilter" data-filters='@Html.Raw(JsonConvert.SerializeObject(ViewBag.FiltersValue))'>
 		@foreach(BankDto bank in Model)
 		{
 			<div class="element-block">
@@ -47,9 +48,14 @@
 	<div class="d-flex flex-row align-items-center action-panel gap-4">
 		<button class="load-more" id="load-banks">Load More</button>
 		<form asp-controller="Bank" asp-action="AddBank" id="add-form" method="get">
-			<input name="loadPageCount" id="add-bank-input" type="hidden">
+			<input name="elementsToLoad" id="add-bank-input" type="hidden">
 			<input name="orderMethod" id="add-bank-input-method" type="hidden">
-
+			<input name="searchValue" id="add-bank-input-search" type="hidden">
+			<input name="licenseFilter" id="add-bank-input-license-filter" type="hidden">
+			<input name="siteFilter" id="add-bank-input-site-filter" type="hidden">
+			<input name="ratingFilter" id="add-bank-input-rating-filter" type="hidden">
+			<input name="clientsCountFilter" id="add-bank-input-clients-filter" type="hidden">
+			<input name="capitalizationFilter" id="add-bank-input-capitalization-filter" type="hidden">
 			<button class="add-element" type="submit">Add Bank</button>
 		</form>
 	</div>
@@ -62,7 +68,6 @@
 }
 @section additionalScripts {
 	<script src="~/js/LoadItems.js"></script>
-	<script src="~/js/DeleteItemHandler.js"></script>
 	<script src="~/js/ColumnsHandler.js"></script>
 }
 @section ColumsHandler{

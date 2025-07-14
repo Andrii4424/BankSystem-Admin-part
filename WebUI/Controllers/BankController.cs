@@ -1,6 +1,7 @@
 ﻿using Application.DTO.BankProductDto;
 using Application.ServiceContracts.BankServiceContracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Buffers;
 using System.Threading.Tasks;
 using WebUI.Filters;
 
@@ -30,13 +31,16 @@ namespace WebUI.Controllers
         }
 
         [TypeFilter(typeof(LoadPageFilter))]
-        [Route("/banks/{loadPageCount:int?}/start-method/{orderMethod?}")]
-        public async Task<IActionResult> BanksList([FromRoute] int? loadPageCount, [FromRoute] string? orderMethod)
+        [Route("/banks/{elementsToLoad:int?}/{searchValue?}/{orderMethod:?}/{licenseFilter:bool?}/{siteFilter:bool?}/{ratingFilter:double?}/{clientsCountFilter:int?}/{capitalizationFilter:int?}")]
+        public async Task<IActionResult> BanksList( [FromRoute] int? elementsToLoad, [FromRoute] string? searchValue,
+            [FromRoute] string? orderMethod, [FromRoute] bool? licenseFilter, [FromRoute] bool? siteFilter, [FromRoute] double? ratingFilter,
+            [FromRoute] int? clientsCountFilter, [FromRoute] int? capitalizationFilter)
         {
-            ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync(null, null, null, null, null, null);
-            int loadCount = loadPageCount.HasValue? loadPageCount.Value: 0;
+            ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync(searchValue, licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter);
+            int loadCount = elementsToLoad.HasValue? elementsToLoad.Value: 0;
             ViewBag.OrderMethod = orderMethod;
-            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, null, orderMethod, null, null, null, null, null));
+            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, searchValue, orderMethod, licenseFilter, 
+                siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter));
         }
 
         [Route("/bank/{bankId:Guid}")]
@@ -47,7 +51,9 @@ namespace WebUI.Controllers
 
         [TypeFilter(typeof(LoadPageFilter))]
         [HttpGet("/add-bank")]
-        public IActionResult AddBank([FromQuery] int? loadPageCount, [FromQuery] string? orderMethod)
+        public IActionResult AddBank([FromQuery] int? elementsToLoad, [FromQuery] string? orderMethod, [FromQuery] string? searchValue, 
+            [FromQuery] bool? licenseFilter, [FromQuery] bool? siteFilter, [FromQuery] double? ratingFilter, 
+            [FromQuery] int? clientsCountFilter, [FromQuery] int? capitalizationFilter)
         {
             return View(new BankDto());
         }
@@ -55,9 +61,13 @@ namespace WebUI.Controllers
         [TypeFilter(typeof(LoadPageFilter))]
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/add-bank")]
-        public IActionResult AddBank([FromForm] BankDto bankDto, [FromForm] int? loadPageCount, [FromForm] string? orderMethod)
+        public IActionResult AddBank([FromForm] BankDto bankDto, [FromForm] int? elementsToLoad, [FromForm] string? orderMethod, 
+            [FromForm] string? searchValue,[FromForm] bool? licenseFilter, [FromForm] bool? siteFilter, 
+            [FromForm] double? ratingFilter, [FromForm] int? clientsCountFilter, [FromForm] int? capitalizationFilter)
         {
             if(ModelState.IsValid) _bankAddService.AddBankAsync(bankDto);
+            ViewBag.StartCount = (elementsToLoad%6!=0 && _bankReadService.IsObjectMatchesFilters(bankDto, searchValue, licenseFilter,
+                siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter))? elementsToLoad+1: elementsToLoad; 
             return View(bankDto);
         }
 
