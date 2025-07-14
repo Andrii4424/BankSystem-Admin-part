@@ -2,6 +2,11 @@
 const twoColumns = document.getElementById("two-columns");
 const tableBlock = document.getElementById("elements-block");
 
+if (document.querySelectorAll(".element-table").length <= 2) {
+    oneColumn.style.display = "none";
+    twoColumns.style.display = "none";
+
+}
 
 oneColumn.addEventListener("click", () => {
     oneColumn.classList.add("chosen");

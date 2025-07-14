@@ -66,8 +66,8 @@ namespace WebUI.Controllers
             [FromForm] double? ratingFilter, [FromForm] int? clientsCountFilter, [FromForm] int? capitalizationFilter)
         {
             if(ModelState.IsValid) _bankAddService.AddBankAsync(bankDto);
-            ViewBag.StartCount = (elementsToLoad%6!=0 && _bankReadService.IsObjectMatchesFilters(bankDto, searchValue, licenseFilter,
-                siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter))? elementsToLoad+1: elementsToLoad; 
+            ViewBag.StartCount = ((elementsToLoad%6!=0 || elementsToLoad==0) && _bankReadService.IsObjectMatchesFilters(bankDto, searchValue, 
+                licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter))? elementsToLoad+1: elementsToLoad; 
             return View(bankDto);
         }
 

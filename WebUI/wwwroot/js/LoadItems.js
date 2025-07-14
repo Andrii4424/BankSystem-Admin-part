@@ -9,7 +9,7 @@ const filterButton = document.getElementById("filter-icon");
 const submitFilters = document.getElementById("submit-filters");
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
-
+const emptyListTitle = document.getElementById("empty-list-title");
 //Bank general elements
 const loadBanks = document.getElementById("load-banks");
 const addBank = document.querySelector(".add-element");
@@ -39,6 +39,7 @@ inputRating.addEventListener('input', () => {
         inputRating.value = inputRating.value.slice(0, 3);
     }
 });
+
 //Icons handlers
 //Sort and filrer icons
 filterButton.addEventListener("click", () => {
@@ -53,6 +54,13 @@ sortButton.addEventListener("click", () => {
 
 
 //General methods
+EmptyListTitleChecker();
+function EmptyListTitleChecker() {
+    count = document.querySelectorAll(".element-table").length;
+    if (count === 0) { emptyListTitle.style.display = "block" }
+    else {emptyListTitle.style.display="none" }
+}
+
 async function addElementsToEnd(response) {
     elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
 }
@@ -149,6 +157,7 @@ async function LoadItems(firstElement, itemsToLoad) {
     });
     await addElementsToEnd(response);
     LoadButtonChecker();
+    EmptyListTitleChecker();
 }
 
 
@@ -308,6 +317,7 @@ async function DeleteItem(url) {
 
     await addElementsToEnd(replacedElement);
     LoadButtonChecker();
+    EmptyListTitleChecker();
 }
 
 
