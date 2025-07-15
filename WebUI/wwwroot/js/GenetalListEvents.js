@@ -12,13 +12,14 @@ GeneralListMethods.checkAndApplyColumns();
 GeneralListMethods.oneColumn.addEventListener("click", () => {
     GeneralListMethods.oneColumn.classList.add("chosen");
     GeneralListMethods.twoColumns.classList.remove("chosen");
-    GeneralListMethods.tableBlock.classList.remove("two-columns");
+    GeneralListMethods.elementsListBlock.classList.remove("two-columns");
 });
 
 GeneralListMethods.twoColumns.addEventListener("click", () => {
     GeneralListMethods.twoColumns.classList.add("chosen");
     GeneralListMethods.oneColumn.classList.remove("chosen");
-    GeneralListMethods.tableBlock.classList.add("two-columns");
+    GeneralListMethods.elementsListBlock.classList.add("two-columns");
+    GeneralListMethods.CheckLastColumn();
 });
 
 filterIcon.addEventListener("click", () => {

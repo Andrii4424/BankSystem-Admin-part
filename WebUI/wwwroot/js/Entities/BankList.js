@@ -111,6 +111,7 @@ function LoadButtonChecker() {
     } else {
         loadBanks.style.display = "block";
     }
+    GeneralListMethods.CheckLastColumn();
 }
 
 //Loads old filters when user back from update/add element page
@@ -242,5 +243,3 @@ async function DeleteItem(url) {
 
     await GeneralListMethods.AddElementsToEnd(replacedElement);
 }
-
-

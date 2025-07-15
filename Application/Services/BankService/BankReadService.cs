@@ -65,7 +65,7 @@ namespace Application.Services.BankServices
         private Expression<Func<BankEntity, bool>>? GetSearchFilter(string? searchValue)
         {
             //Trim() deleting all the spaces if value contains only one word
-            return (searchValue != null && searchValue.Trim() != "0") ? b => b.BankName.Contains(searchValue) : null;
+            return (searchValue != null && searchValue.Trim() != "0") ? b => b.BankName.Contains(searchValue.Trim()) : null;
         }
 
         private void GetSelector(out Expression<Func<BankEntity, object>> selector, out bool asceding, string? orderMethod)

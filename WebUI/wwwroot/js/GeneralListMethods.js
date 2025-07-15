@@ -7,7 +7,6 @@
     static searchInput = document.getElementById("search-input");
     static oneColumn = document.getElementById("one-column");
     static twoColumns = document.getElementById("two-columns");
-    static tableBlock = document.getElementById("elements-block");
 
     //checkers
     static EmptyListTitleChecker() {
@@ -18,12 +17,25 @@
         if (this.GetElementsCount() >= 2) {
             this.oneColumn.style.display = "block";
             this.twoColumns.style.display = "block";
+            this.CheckLastColumn();
         }
         else {
             this.oneColumn.style.display = "none";
             this.twoColumns.style.display = "none";
+            this.elementsListBlock.classList.remove("two-columns");
             this.oneColumn.classList.add = "chosen";
             this.twoColumns.classList.remove = "chosen";
+        }
+    }
+
+    static CheckLastColumn() {
+        if (this.GetElementsCount() % 2 === 1 && this.twoColumns.classList.contains("chosen")) {
+            document.querySelectorAll(".element-block")[this.GetElementsCount() - 1].classList.add("last-column-element");
+        }
+        else {
+            document.querySelectorAll(".element-block").forEach(block => {
+                block.classList.remove("last-column-element");
+            });
         }
     }
 
