@@ -24,6 +24,7 @@ namespace Application.Services.BankService
 
         public async Task AddBankAsync(BankDto bankDto)
         {
+            bankDto.BankName =bankDto.BankName.Trim();
             await _bankRepository.AddAsync(_mapper.Map<BankEntity>(bankDto));
             await _bankRepository.SaveAsync();
         }
