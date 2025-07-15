@@ -70,10 +70,6 @@
 		<img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
 	</a>
 }
-@section additionalScripts {
-	<script src="~/js/LoadItems.js"></script>
-	<script src="~/js/ColumnsHandler.js"></script>
-}
 @section ColumsHandler{
 	<div id="colums" class="d-flex flex-row gap-1">
 		<img src="~/images/main-page/one-column.svg" class="chosen" id="one-column" alt="One column" />
@@ -113,7 +109,7 @@
 			</div>
 			<img src="~/images/main-page/filter-icon.svg" alt="Filter" id="filter-icon" />
 
-			<div id="banks-filter-list">
+			<div id="filter-list">
 				<label>
 					<input type="checkbox" name="filter" value="license-required" />
 					Only bank with licenses
@@ -147,4 +143,10 @@
 
 		</div>
 	</div>
+}
+
+@section additionalScripts {
+	<script type="module" src="~/js/Entities/BankList.js"></script>
+	<script type="module" src="~/js/GenetalListEvents.js"></script>
+	<script src="~/js/ColumnsHandler.js"></script>
 }

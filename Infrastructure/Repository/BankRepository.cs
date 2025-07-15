@@ -25,7 +25,7 @@ namespace Infrastructure.Repository
             var query = _dbSet.AsQueryable();
             if(searchFilter!=null) query = query.Where(searchFilter);
             filters = filters.Where(val => val!= null).ToList();
-            foreach (var filter in filters) { 
+            foreach (var filter in filters) {
                 query = query.Where(filter);
             }
             query = (ascending? query.OrderBy(selector): query.OrderByDescending(selector)).ThenBy(b => b.Id);

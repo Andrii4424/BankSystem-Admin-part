@@ -47,7 +47,7 @@ namespace Application.Services.BankServices
             if (ratingFilter > 5) ratingFilter = ratingFilter / 10;
             List<Expression<Func<BankEntity, bool>>?> filters= GetFilters(licenseFilter, siteFilter, ratingFilter, 
                 clientsCountFilter, capitalizationFilter);
-            
+
             return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad, searchFilter, selector, 
                 asceding,  filters));
         }
@@ -64,7 +64,8 @@ namespace Application.Services.BankServices
 
         private Expression<Func<BankEntity, bool>>? GetSearchFilter(string? searchValue)
         {
-            return (searchValue != null && searchValue != "0") ? b => b.BankName.Contains(searchValue) : null;
+            //Trim() deleting all the spaces if value contains only one word
+            return (searchValue != null && searchValue.Trim() != "0") ? b => b.BankName.Contains(searchValue) : null;
         }
 
         private void GetSelector(out Expression<Func<BankEntity, object>> selector, out bool asceding, string? orderMethod)

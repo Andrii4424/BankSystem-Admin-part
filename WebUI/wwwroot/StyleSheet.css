@@ -453,7 +453,7 @@ aside{
         vertical-align: middle;
     }
 
-#banks-filter-list {
+#filter-list {
     position: absolute;
     top: 64px;
     width: 218px;
@@ -462,21 +462,21 @@ aside{
     border-radius: 14px;
 }
 
-    #banks-filter-list.opened {
+    #filter-list.opened {
         display: flex;
         flex-direction: column;
         background-color: white;
         border: 1px solid lightgrey;
     }
 
-    #banks-filter-list label, #banks-filter-list input {
+    #filter-list label, #filter-list input {
         display: inline-block;
         vertical-align: middle;
     }
-        #banks-filter-list input[type="checkbox"]{
-            height:auto;
+        #filter-list input[type="checkbox"] {
+            height: auto;
         }
-        #banks-filter-list input[type="number"] {
+        #filter-list input[type="number"] {
             width: 100%;
         }
 #submit-filters{
