@@ -5,11 +5,26 @@
     static elementsListBlock = document.getElementById("elements-block");
     static filterList = document.getElementById("filter-list");
     static searchInput = document.getElementById("search-input");
+    static oneColumn = document.getElementById("one-column");
+    static twoColumns = document.getElementById("two-columns");
+    static tableBlock = document.getElementById("elements-block");
 
     //checkers
     static EmptyListTitleChecker() {
         if (this.GetElementsCount() === 0) { this.emptyListTitle.style.display = "block" }
         else { this.emptyListTitle.style.display = "none" }
+    }
+    static checkAndApplyColumns() {
+        if (this.GetElementsCount() >= 2) {
+            this.oneColumn.style.display = "block";
+            this.twoColumns.style.display = "block";
+        }
+        else {
+            this.oneColumn.style.display = "none";
+            this.twoColumns.style.display = "none";
+            this.oneColumn.classList.add = "chosen";
+            this.twoColumns.classList.remove = "chosen";
+        }
     }
 
     //Getters

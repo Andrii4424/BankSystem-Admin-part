@@ -7,6 +7,19 @@ const filterSettings = GeneralListMethods.filterList.querySelectorAll('input[typ
 
 //Event listeners
 GeneralListMethods.EmptyListTitleChecker();
+GeneralListMethods.checkAndApplyColumns();
+
+GeneralListMethods.oneColumn.addEventListener("click", () => {
+    GeneralListMethods.oneColumn.classList.add("chosen");
+    GeneralListMethods.twoColumns.classList.remove("chosen");
+    GeneralListMethods.tableBlock.classList.remove("two-columns");
+});
+
+GeneralListMethods.twoColumns.addEventListener("click", () => {
+    GeneralListMethods.twoColumns.classList.add("chosen");
+    GeneralListMethods.oneColumn.classList.remove("chosen");
+    GeneralListMethods.tableBlock.classList.add("two-columns");
+});
 
 filterIcon.addEventListener("click", () => {
     GeneralListMethods.filterList.classList.toggle("opened");
@@ -27,4 +40,3 @@ filterSettings.forEach(button => {
         }
     });
 });
-

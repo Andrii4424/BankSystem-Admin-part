@@ -231,6 +231,7 @@ GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => 
 
         LoadButtonChecker();
         GeneralListMethods.EmptyListTitleChecker();
+        GeneralListMethods.checkAndApplyColumns();
     }
 });
 
