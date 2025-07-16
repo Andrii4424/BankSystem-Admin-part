@@ -8,10 +8,23 @@
     static oneColumn = document.getElementById("one-column");
     static twoColumns = document.getElementById("two-columns");
     static lastSearch;
-    //checkers
-    static EmptyListTitleChecker() {
-        if (this.GetElementsCount() === 0) { this.emptyListTitle.style.display = "block" }
-        else { this.emptyListTitle.style.display = "none" }
+
+    //Checkers
+    //Checks whether to display a message about an empty list
+    static EmptyListTitleChecker(propertyName) {
+        propertyName = propertyName.toLowerCase()
+        if (this.GetElementsCount() === 0 && this.CheckForFilters()) {
+            this.emptyListTitle.style.display = "block"
+            this.emptyListTitle.textContent = `No ${propertyName}s matched your search. You can create a new ${propertyName} by clicking the button below`;
+        }
+        else if (this.GetElementsCount() === 0 && !this.CheckForFilters()) {
+            this.emptyListTitle.style.display = "block"
+            const titlePropertyName = propertyName[0].toUpperCase() + propertyName.slice(1);
+            this.emptyListTitle.textContent = `${titlePropertyName} list is empty, you can create ${propertyName} by button bellow`;
+        }
+        else {
+            this.emptyListTitle.style.display = "none"
+        }
     }
     static checkAndApplyColumns() {
         if (this.GetElementsCount() >= 2) {
@@ -23,8 +36,8 @@
             this.oneColumn.style.display = "none";
             this.twoColumns.style.display = "none";
             this.elementsListBlock.classList.remove("two-columns");
-            this.oneColumn.classList.add = "chosen";
-            this.twoColumns.classList.remove = "chosen";
+            this.oneColumn.classList.add("chosen");
+            this.twoColumns.classList.remove("chosen");
         }
     }
 
@@ -37,6 +50,14 @@
                 block.classList.remove("last-column-element");
             });
         }
+    }
+
+    //Returns true if chosen some filter otherwise false 
+    static CheckForFilters() {
+        const filters = this.filterList.querySelectorAll('input[type="checkbox"][name="filter"]')
+        if (Array.from(filters).some(filter => filter.checked)) return true;
+        if (this.searchInput.value !== "" && this.searchInput.value !== null) return true;
+        return false;
     }
 
     //Getters

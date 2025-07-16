@@ -27,8 +27,8 @@ inputRating.addEventListener('input', () => {
 });
 
 //General methods
-GeneralListMethods.EmptyListTitleChecker();
 LoadButtonChecker();
+GeneralListMethods.EmptyListTitleChecker("Bank");
 
 async function LoadItems(firstElement, itemsToLoad) {
     const url = `/load-banks/${firstElement}/${itemsToLoad}/${GeneralListMethods.GetSearchUrl()}/${GeneralListMethods.GetSortUrl()}${getBankFiltersUrl()}`
@@ -37,7 +37,8 @@ async function LoadItems(firstElement, itemsToLoad) {
     });
     await GeneralListMethods.AddElementsToEnd(response);
     LoadButtonChecker();
-    GeneralListMethods.EmptyListTitleChecker();
+    GeneralListMethods.checkAndApplyColumns();
+    GeneralListMethods.EmptyListTitleChecker("Bank");
 }
 
 //Filters sort and search handlers
@@ -231,7 +232,7 @@ GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => 
         button.closest(".element-block").remove();
 
         LoadButtonChecker();
-        GeneralListMethods.EmptyListTitleChecker();
+        GeneralListMethods.EmptyListTitleChecker("Bank");
         GeneralListMethods.checkAndApplyColumns();
     }
 });

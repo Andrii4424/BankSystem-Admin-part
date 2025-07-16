@@ -5,10 +5,17 @@ const filterIcon = document.getElementById("filter-icon");
 const sortList = document.getElementById("banks-sort-list");
 const filterSettings = GeneralListMethods.filterList.querySelectorAll('input[type="checkbox"][name="filter"]');
 
-//Event listeners
-GeneralListMethods.EmptyListTitleChecker();
+//Default chekings when DOM update
 GeneralListMethods.checkAndApplyColumns();
 
+filterSettings.forEach(button => {
+    const inputValue = GeneralListMethods.filterList.querySelector(`input[type="number"][class="${button.value}"]`);
+    if (inputValue !== null && button.checked) {
+        inputValue.disabled = false;
+    }
+});
+
+//Event listeners
 GeneralListMethods.oneColumn.addEventListener("click", () => {
     GeneralListMethods.oneColumn.classList.add("chosen");
     GeneralListMethods.twoColumns.classList.remove("chosen");
@@ -41,3 +48,4 @@ filterSettings.forEach(button => {
         }
     });
 });
+
