@@ -51,6 +51,8 @@ namespace Domain.Entities.Banks
         [StringLength(100)]
         public string LegalAddress { get; set; }
 
+        public string BankLogoPath { get; set; }
+
         //Child elements
         public ICollection<CardTariffsEntity> Cards { get; set; }
 

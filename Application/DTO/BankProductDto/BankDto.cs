@@ -68,5 +68,7 @@ namespace Application.DTO.BankProductDto
         [StringLength(100)]
         [Display(Name = "Legal address")]
         public string LegalAddress { get; set; }
+
+        public string? BankLogoPath { get; set; }
     }
 }
