@@ -17,5 +17,6 @@ namespace Domain.RepositoryContracts
         public void UpdateObject(T entity);
         public Task SaveAsync();
         public Task<int> CountAsync(Expression<Func<T, bool>>? searchFilter, List<Expression<Func<T, bool>>?> filters);
+        public Task<bool> IsUnique(Expression<Func<T, bool>> searchParametr);
     }
 }
