@@ -7,7 +7,7 @@
     static searchInput = document.getElementById("search-input");
     static oneColumn = document.getElementById("one-column");
     static twoColumns = document.getElementById("two-columns");
-
+    static lastSearch;
     //checkers
     static EmptyListTitleChecker() {
         if (this.GetElementsCount() === 0) { this.emptyListTitle.style.display = "block" }
@@ -41,7 +41,6 @@
 
     //Getters
     static GetElementsCount() {
-        let x = document.querySelectorAll(".element-table").length;
         return  document.querySelectorAll(".element-table").length;
     }
 
@@ -53,7 +52,13 @@
         return document.querySelector('input[name="sort"]:checked').value;
     }
     static GetSearchUrl() {
-        return (this.searchInput.value !== "" && this.searchInput.value !== null) ? this.searchInput.value : "0";
+        this.lastSearch = (this.searchInput.value !== "" && this.searchInput.value !== null) ? this.searchInput.value : "0"
+        localStorage.setItem("lastSearch", this.lastSearch);
+        return this.lastSearch;
+    }
+
+    static GetLastSearch() {
+        return localStorage.getItem("lastSearch");
     }
 
     static ToBoolean(value) {

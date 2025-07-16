@@ -190,8 +190,8 @@ function setHiddenBankFiltersInputValues(countHiddenInput, searchHiddenInput, or
     ratingHiddenInput, clientsCountHiddenInput, capitalizationHiddenInput) {
 
     countHiddenInput.value = GeneralListMethods.GetElementsCount();
-    searchHiddenInput.value = GeneralListMethods.GetSearchUrl();
-    orderHiddenInput.value = GeneralListMethods.GetSearchUrl();
+    searchHiddenInput.value = GeneralListMethods.GetLastSearch() !== undefined? GeneralListMethods.GetLastSearch(): "0";
+    orderHiddenInput.value = GeneralListMethods.GetSortUrl();
 
     const filters = GeneralListMethods.filterList.querySelectorAll(`input[type="checkbox"][name="filter"]`);
 

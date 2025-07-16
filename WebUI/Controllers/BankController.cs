@@ -107,6 +107,7 @@ namespace WebUI.Controllers
             [FromRoute] string? orderMethod, [FromRoute] bool? licenseFilter, [FromRoute] bool? siteFilter, [FromRoute] double? ratingFilter,
             [FromRoute] int? clientsCountFilter, [FromRoute] int? capitalizationFilter)
         {
+            ViewBag.SearchFilter = (searchValue==null || searchValue.Trim()=="0")? null: searchValue.Trim();
             ViewBag.ElementsCount =await _bankReadService.GetBanksCountAsync(searchValue, licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter);
             return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement, elementsToLoad, searchValue, orderMethod,
                 licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter));
