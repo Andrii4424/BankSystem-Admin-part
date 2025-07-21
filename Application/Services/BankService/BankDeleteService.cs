@@ -27,9 +27,8 @@ namespace Application.Services.BankService
         {
             BankEntity? bank = await _bankRepository.GetValueByIdAsync(bankId);
             if (bank != null) { 
-                if(bank.BankLogoPath!= "/uploads/no-image-icon.svg")
+                if(bank.BankLogoPath!= "uploads/no-image-icon.svg")
                 {
-                    string hui = _env.WebRootPath;
                     string path = Path.Combine(_env.WebRootPath, bank.BankLogoPath);
                     if (File.Exists(path)) { 
                         File.Delete(path);

@@ -94,11 +94,20 @@ namespace WebUI.Controllers
         [TypeFilter(typeof(LoadPageFilter))]
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/update-bank/{bankId:Guid}")]
-        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromRoute] Guid bankId, [FromForm] int? elementsToLoad, 
-            [FromForm] string? orderMethod, [FromForm] string? searchValue, [FromForm] bool? licenseFilter, [FromForm] bool? siteFilter,
-            [FromForm] double? ratingFilter, [FromForm] int? clientsCountFilter, [FromForm] int? capitalizationFilter)
+        public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromForm] IFormFile? bankLogo, [FromRoute] Guid bankId, 
+            [FromForm] int? elementsToLoad, [FromForm] string? orderMethod, [FromForm] string? searchValue, [FromForm] bool? licenseFilter, 
+            [FromForm] bool? siteFilter, [FromForm] double? ratingFilter, [FromForm] int? clientsCountFilter, [FromForm] int? capitalizationFilter)
         {
-            if (ModelState.IsValid) await _bankUpdateService.UpdateBankAsync(bankId, bankDto);
+            if (ModelState.IsValid)
+            {
+                OperationResult result = await _bankUpdateService.UpdateBankAsync(bankId, bankDto, bankLogo);
+                if (!result.Success)
+                {
+                    ViewBag.Message = "Error!";
+                    List<string> errors = new List<string>() { result.ErrorMessage };
+                    ViewBag.Errors = errors;
+                }
+            }
             return View(bankDto);
         }
 
