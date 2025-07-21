@@ -8,16 +8,18 @@
 @foreach (BankDto bank in Model)
 {
 	<div class="element-block partial-view-element-block" data-search-value="@ViewBag.SearchFilter">
-		<a href="" class="text-reset text-decoration-none">
+		<a href="" class="text-reset text-decoration-none info-card">
+			<img src="@bank.BankLogoPath" alt="Bank logo" class="logo" />
 			<table class="element-table">
 				<tr>
-					<th>
-						Bank name: @bank.BankName
+					<th class="bank-name-text">
+						@bank.BankName
 					</th>
 				</tr>
 				<tr>
-					<th>
-						Our rating is @bank.Rating
+					<th class="d-flex flex-row gap-2">
+						<img src="~/images/main-page/star.svg" alt="rating" class="rating-icon" />
+						@bank.Rating
 					</th>
 				</tr>
 				<tr>
