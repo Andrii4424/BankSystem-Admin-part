@@ -1,4 +1,6 @@
-﻿using Application.DTO.BankProductDto;
+﻿using Application.DTO;
+using Application.DTO.BankProductDto;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,6 @@ namespace Application.ServiceContracts.BankServiceContracts
 {
     public interface IBankAddService
     {
-        public Task AddBankAsync(BankDto bankDto);
+        public Task<OperationResult> AddBankAsync(BankDto bankDto, IFormFile? bankLogo);
     }
 }

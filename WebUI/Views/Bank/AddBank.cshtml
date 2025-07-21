@@ -3,7 +3,8 @@
 
 <div class="main-content-block">
     <div class="add-entity-block">
-        <form asp-controller="Bank" asp-action="AddBank" method="post" class="add-form">
+        <form asp-controller="Bank" asp-action="AddBank" method="post" class="add-form" enctype="multipart/form-data">
+            <input name="bankLogo" type="file">
             <input asp-for="BankName" placeholder="Bank Name:">
             <input asp-for="Rating" step="0.1" placeholder="Rating:" maxlength="3" required oninput="this.value = this.value.replace('.', ',')">
             <div class="radio-elements">
@@ -43,7 +44,6 @@
                         </ul>
                     </div>
                 }
-
             }
             <input name="elementsToLoad" type="hidden" value="@ViewBag.StartCount">
             <input name="orderMethod" type="hidden" value="@ViewBag.OrderMethod">

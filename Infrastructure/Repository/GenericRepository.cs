@@ -72,7 +72,7 @@ namespace Infrastructure.Repository
 
         public async Task<bool> IsUnique(Expression<Func<T, bool>> searchParametr)
         {
-            return await _dbSet.Where(searchParametr).AnyAsync(searchParametr);
+            return await _dbSet.AnyAsync(searchParametr);
         }
     }
 }

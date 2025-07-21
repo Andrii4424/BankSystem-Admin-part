@@ -69,6 +69,7 @@ namespace Application.DTO.BankProductDto
         [Display(Name = "Legal address")]
         public string LegalAddress { get; set; }
 
+        //Not required, if user doesnt add the logo it will contain the default path
         public string? BankLogoPath { get; set; }
     }
 }

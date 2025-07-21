@@ -1,5 +1,7 @@
-﻿using Application.DTO.BankProductDto;
+﻿using Application.DTO;
+using Application.DTO.BankProductDto;
 using Application.ServiceContracts.BankServiceContracts;
+using Azure;
 using Microsoft.AspNetCore.Mvc;
 using System.Buffers;
 using System.Threading.Tasks;
@@ -61,11 +63,20 @@ namespace WebUI.Controllers
         [TypeFilter(typeof(LoadPageFilter))]
         [TypeFilter(typeof(ModelBindingFilter))]
         [HttpPost("/add-bank")]
-        public IActionResult AddBank([FromForm] BankDto bankDto, [FromForm] int? elementsToLoad, [FromForm] string? orderMethod, 
-            [FromForm] string? searchValue,[FromForm] bool? licenseFilter, [FromForm] bool? siteFilter, 
+        public async Task<IActionResult> AddBank([FromForm] BankDto bankDto, [FromForm] IFormFile? bankLogo, [FromForm] int? elementsToLoad, 
+            [FromForm] string? orderMethod, [FromForm] string? searchValue,[FromForm] bool? licenseFilter, [FromForm] bool? siteFilter, 
             [FromForm] double? ratingFilter, [FromForm] int? clientsCountFilter, [FromForm] int? capitalizationFilter)
         {
-            if(ModelState.IsValid) _bankAddService.AddBankAsync(bankDto);
+            if (ModelState.IsValid)
+            {
+                OperationResult result = await _bankAddService.AddBankAsync(bankDto, bankLogo);
+                if (!result.Success)
+                {
+                    ViewBag.Message = "Error!";
+                    List<string> errors = new List<string>() { result.ErrorMessage };
+                    ViewBag.Errors=errors;
+                }
+            }
             ViewBag.StartCount = ((elementsToLoad%6!=0 || elementsToLoad==0) && _bankReadService.IsObjectMatchesFilters(bankDto, searchValue, 
                 licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter))? elementsToLoad+1: elementsToLoad; 
             return View(bankDto);
