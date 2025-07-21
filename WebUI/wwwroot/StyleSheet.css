@@ -342,7 +342,7 @@ aside {
 
     .logo {
         width: 100px;
-        height: 100px;
+        height: auto;
         margin: 0 24px 0 24px;
         border-radius: 14px;
     }

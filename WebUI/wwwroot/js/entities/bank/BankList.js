@@ -1,8 +1,4 @@
-﻿import { GeneralListMethods } from "../GeneralListMethods.js";
-//Menu bar
-const bankMenuButton = document.getElementById("banks-menu-buttton");
-bankMenuButton.style.backgroundColor = "#20a96b";
-bankMenuButton.style.color = "white";
+﻿import { GeneralListMethods } from "../../GeneralListMethods.js";
 
 //General elements
 let deletedElementsCount=0;

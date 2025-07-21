@@ -29,7 +29,8 @@ namespace Application.Services.BankService
         {
             BankEntity? bank = await _bankRepository.GetValueByIdAsync(bankId);
             if(bank == null) throw new NullReferenceException("This bank doesnt exist");
-            if(bank.BankName != bankDto.BankName && await _bankRepository.IsUnique(b => b.BankName == bankDto.BankName))
+            bankDto.EstablishedDate = bank.EstablishedDate;
+            if (bank.BankName != bankDto.BankName && await _bankRepository.IsUnique(b => b.BankName == bankDto.BankName))
             {
                 return OperationResult.Error("Bank with this name is already exist!");
             }

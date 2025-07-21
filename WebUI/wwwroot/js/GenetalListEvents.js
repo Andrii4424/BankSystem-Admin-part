@@ -48,4 +48,3 @@ filterSettings.forEach(button => {
         }
     });
 });
-
