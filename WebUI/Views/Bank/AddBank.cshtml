@@ -4,27 +4,56 @@
 <div class="main-content-block">
     <div class="add-entity-block">
         <form asp-controller="Bank" asp-action="AddBank" method="post" class="add-form" enctype="multipart/form-data">
-            <input name="bankLogo" type="file">
-            <input asp-for="BankName" placeholder="Bank Name:">
-            <input asp-for="Rating" step="0.1" placeholder="Rating:" maxlength="3" required oninput="this.value = this.value.replace('.', ',')">
-            <div class="radio-elements">
-                <span>Bank has a license?</span>
-                <div class="radio-buttons">
-                    <label>
-                        <input asp-for="HasLicense" type="radio" value="true" /> Yes
-                    </label>
-                    <label>
-                        <input asp-for="HasLicense" type="radio" value="false" /> No
-                    </label>
+            <h2>Create New Bank</h2>
+            <label>
+                Bank Logo:
+                <div class="file-wrapper">
+                    <input name="bankLogo" type="file">
                 </div>
+            </label>
+            <label>
+                Bank Name:
+                <input asp-for="BankName">
+            </label>
+            <label>
+                Rating:
+                <input asp-for="Rating" step="0.1" maxlength="3" required oninput="this.value = this.value.replace('.', ',')">
+            </label>
+            <div class="radio-elements">
+                <label>Bank has a license?</label>
+                <label>
+                    <input asp-for="HasLicense" type="radio" value="true" /> Yes
+                </label>
+                <label>
+                    <input asp-for="HasLicense" type="radio" value="false" /> No
+                </label>
             </div>
-            <input asp-for="BankFounderFullName" placeholder="Founder Name:">
-            <input asp-for="BankDirectorFullName" placeholder="Director Name:">
-            <input asp-for="Capitalization" placeholder="Capitalization:">
-            <input asp-for="WebsiteUrl" placeholder="Website Url(optional):">
-            <input asp-for="ContactPhone" type="number" placeholder="Contact Phone:">
+            <label>
+                Founder Name:
+                <input asp-for="BankFounderFullName">
+            </label>
+            <label>
+                Director Name:
+                <input asp-for="BankDirectorFullName">
+            </label>
+            <label>
+                Capitalization:
+                <input asp-for="Capitalization">
+            </label>
+            <label>
+                Website Url (optional):
+                <input asp-for="WebsiteUrl">
+            </label>
+            <label>
+                Contact Phone:
+                <input asp-for="ContactPhone" type="number">
+            </label>
             <input asp-for="EstablishedDate" type="hidden" value="@DateTime.UtcNow">
-            <input asp-for="LegalAddress" placeholder="Legal Address:">
+            <label>
+                Legal Address:
+                <input asp-for="LegalAddress" placeholder="">
+            </label>
+
 
             @if (ViewBag.Message != null)
             {
@@ -58,7 +87,6 @@
             <button type="submit" class="create-element">Create Bank</button>
         </form>
     </div>
-
 </div>
 
 @section backButton {
