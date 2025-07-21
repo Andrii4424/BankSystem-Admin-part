@@ -139,11 +139,12 @@ aside {
         font-size: 18px;
         font-weight: 500;
         display: flex;
-        width: 100%;
-        padding: 0 20px 0 20px;
+        width: 96%;
+        height: 100%;
         align-items: center;
         justify-content: center;
         transition: background-color 1s ease-out;
+        border-radius:14px;
     }
 
         #menu li:first-child {
@@ -155,7 +156,7 @@ aside {
         }
 
         #menu li:hover {
-            background-color: var(--dark-green-color);
+            background-color: #34b57a;
             color: white;
         }
 
@@ -163,7 +164,7 @@ aside {
             width: 100%;
             height: 100%;
             text-align: center;
-            padding: 10px 0 10px 0;
+            padding: 20px;
         }
 
 #back-icon {
