@@ -36,7 +36,7 @@ namespace Application.Services.BankService
             {
                 return OperationResult.Error("Bank with this name is already exist!");
             }
-            if (bankLogo == null) bankDto.BankLogoPath = "/uploads/no-image-icon.svg";
+            if (bankLogo == null) bankDto.BankLogoPath = "uploads/no-image-icon.svg";
             else if (!allowedExtensions.Contains(Path.GetExtension(bankLogo.FileName.ToLower())))
             {
                 return OperationResult.Error("Invalid image format. Please add an image in .jpg, .jpeg, .png or .svg format.");
@@ -49,7 +49,7 @@ namespace Application.Services.BankService
                 {
                     await bankLogo.CopyToAsync(stream);
                 }
-                bankDto.BankLogoPath = $"/uploads/bank-logo/{fileName}";
+                bankDto.BankLogoPath = $"uploads/bank-logo/{fileName}";
             }
 
             await _bankRepository.AddAsync(_mapper.Map<BankEntity>(bankDto));
