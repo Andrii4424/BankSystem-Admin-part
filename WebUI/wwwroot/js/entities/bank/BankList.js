@@ -17,6 +17,9 @@ let oldFilters = JSON.parse(GeneralListMethods.elementsListBlock.dataset.filters
 //Filter elements
 const inputRating = document.querySelector('.rating');
 
+//Delete elements
+let button; //Last clicked delete button
+
 //Input settings
 inputRating.addEventListener('input', () => {
     if (inputRating.value > 5) inputRating.value = 5;
@@ -223,7 +226,15 @@ function setHiddenBankFiltersInputValues(countHiddenInput, searchHiddenInput, or
 //Decraese when element is deleting
 GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => {
     if (event.target.matches(".delete-element")) {
-        const button = event.target;
+        button = event.target;
+        console.log(GeneralListMethods);
+
+        GeneralListMethods.OpenConfirmDeleteWindow(button.dataset.elementName);
+    }
+});
+
+GeneralListMethods.deleteWindow.addEventListener("click", async (event) => {
+    if (event.target.matches(".confirm-delete-button")) {
         const id = button.dataset.elementId;
 
         deletedElementsCount++;
@@ -234,8 +245,18 @@ GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => 
         LoadButtonChecker();
         GeneralListMethods.EmptyListTitleChecker("Bank");
         GeneralListMethods.checkAndApplyColumns();
+
+        GeneralListMethods.CloseConfirmDeleteWindow();
     }
 });
+
+GeneralListMethods.deleteWindow.addEventListener("click", async (event) => {
+    if (event.target.matches(".cancel-delete-button")) {
+        GeneralListMethods.CloseConfirmDeleteWindow();
+        button = null;
+    }
+});
+
 
 async function DeleteItem(url) {
     const replacedElement = await fetch(url, {

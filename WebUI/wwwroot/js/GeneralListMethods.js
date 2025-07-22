@@ -7,6 +7,8 @@
     static searchInput = document.getElementById("search-input");
     static oneColumn = document.getElementById("one-column");
     static twoColumns = document.getElementById("two-columns");
+    static deleteWindow = document.getElementById("confirm-delete-window");
+    static deleteConfirmText = document.getElementById("confirm-delete-text");
     static lastSearch;
 
     //Checkers
@@ -97,6 +99,15 @@
     //Action methods
     static async AddElementsToEnd(response) {
         this.elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
+    }
+
+    static OpenConfirmDeleteWindow(deleteName) {
+        this.deleteWindow.style.display = "flex";
+        this.deleteConfirmText.innerText =`Are you sure you want to delete ${deleteName}? This action cannot be undone.`;
+    }
+
+    static CloseConfirmDeleteWindow() {
+        this.deleteWindow.style.display = "none";
     }
 }
 

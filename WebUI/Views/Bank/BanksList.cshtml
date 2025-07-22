@@ -15,7 +15,7 @@
 					<img src="/@bank.BankLogoPath" alt="Bank logo" class="logo" />
 					<table class="element-table">
 						<tr>
-							<th class="bank-name-text">
+							<th>
 								@bank.BankName
 							</th>
 						</tr>
@@ -45,7 +45,7 @@
 						<input name="capitalizationFilter" class="update-bank-input-capitalization-filter" type="hidden">
 						<button class="update-element" type="submit">Update Bank</button>
 					</form>
-					<button class="delete-element" data-element-id="@bank.Id">Delete Bank</button>
+					<button class="delete-element" data-element-name="@bank.BankName" data-element-id="@bank.Id">Delete Bank</button>
 				</div>
 			</div>
 		}
