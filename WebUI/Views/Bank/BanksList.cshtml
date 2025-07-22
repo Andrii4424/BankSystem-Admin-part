@@ -11,7 +11,7 @@
 		@foreach(BankDto bank in Model)
 		{
 			<div class="element-block">
-				<a href="" class="text-reset text-decoration-none info-card">
+				<a asp-controller="Bank" asp-action="BankInfo" asp-route-bankId="@bank.Id" class="text-reset text-decoration-none info-card">
 					<img src="/@bank.BankLogoPath" alt="Bank logo" class="logo" />
 					<table class="element-table">
 						<tr>

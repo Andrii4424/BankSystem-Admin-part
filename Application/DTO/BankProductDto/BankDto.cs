@@ -71,5 +71,8 @@ namespace Application.DTO.BankProductDto
 
         //Not required, if user doesnt add the logo it will contain the default path
         public string? BankLogoPath { get; set; }
+
+        [BindNever]
+        public List<CardTariffsDto>? BankCards { get; set; }
     }
 }

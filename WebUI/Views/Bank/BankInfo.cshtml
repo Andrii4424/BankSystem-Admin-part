@@ -1,0 +1,73 @@
+﻿@model BankDto
+
+<div class="main-content-block">
+    <div id="item-info-container">
+        <div id="item-header">
+            <img src="/@Model.BankLogoPath" alt="bank-logo" />
+            <h2>@Model.BankName</h2>
+        </div>
+
+        <table id="item-info-table">
+            <tr><th>Rating</th><td>@Model.Rating</td></tr>
+            <tr><th>Has License</th><td>@Model.HasLicense</td></tr>
+            <tr><th>Founder</th><td>@Model.BankFounderFullName</td></tr>
+            <tr><th>Director</th><td>@Model.BankDirectorFullName</td></tr>
+            <tr><th>Capitalization</th><td>@Model.Capitalization</td></tr>
+            <tr><th>Clients Count</th><td>@Model.ClientsCount</td></tr>
+            <tr><th>Active clients Count</th><td>@Model.ActiveClientsCount</td></tr>
+            <tr><th>Blocked clients Count</th><td>@Model.BlockedClientsCount</td></tr>
+            <tr><th>Employee Count</th><td>@Model.EmployeesCount</td></tr>
+            <tr><th>Contact Phone</th><td>@Model.ContactPhone</td></tr>
+            <tr>
+                <th>Website</th>
+                <td>
+                    @if (Model.WebsiteUrl == null)
+                    {
+                        <span>Unfotunately bank hasnt website yet</span>
+                    }
+                    else
+                    {
+                        <a href="@Model.WebsiteUrl" target="_blank">@Model.WebsiteUrl</a>
+                    }
+                </td>
+            </tr>
+            <tr><th>Established Date</th><td>@Model.EstablishedDate</td></tr>
+            <tr><th>Legal Address</th><td>@Model.LegalAddress</td></tr>
+        </table>
+
+        <div id="item-info-action-buttons">
+            <a asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId="@Model.Id" class="update">✏️ Update Bank</a>
+            <a href="#" class="delete">🗑️ Delete Bank</a>
+            <a href="#">👥 View Users</a>
+            <a href="#">🧑‍💼 View Employees</a>
+            <a href="#">➕ Add Card</a>
+        </div>
+
+        <div id="bank-cards">
+            <h4>Bank Cards</h4>
+            @if (Model.BankCards==null || Model.BankCards.Count == 0)
+            {
+                <h5>Unforunately @Model.BankName has not cards yet. You can add card by button Add Card</h5>
+            }
+            else
+            {
+                @foreach (CardTariffsDto card in Model.BankCards)
+                {
+
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+@section backButton {
+     <a asp-controller="Bank" asp-action="BanksList" class="text-reset text-decoration-none back-link d-flex align-items-center">
+                <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+     </a>
+}
+
+@section additionalScripts {
+    <script type="module" src="~/js/entities/bank/BankMenu.js" defer></script>
+}
+

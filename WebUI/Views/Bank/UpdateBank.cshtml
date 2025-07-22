@@ -73,15 +73,19 @@
                 }
 
             }
+            @if (ViewBag.StartCount != null)
+            {
 
-            <input name="elementsToLoad" type="hidden" value="@ViewBag.StartCount">
-            <input name="orderMethod" type="hidden" value="@ViewBag.OrderMethod">
-            <input name="searchValue" type="hidden" value="@ViewBag.SearchFilter">
-            <input name="licenseFilter" type="hidden" value="@ViewBag.FiltersValue["LicenseFilter"]">
-            <input name="siteFilter" type="hidden" value="@ViewBag.FiltersValue["SiteFilter"]">
-            <input name="ratingFilter" type="hidden" value="@ViewBag.FiltersValue["RatingFilter"]">
-            <input name="clientsCountFilter" type="hidden" value="@ViewBag.FiltersValue["ClientsCountFilter"]">
-            <input name="capitalizationFilter" type="hidden" value="@ViewBag.FiltersValue["CapitalizationFilter"]">
+                <input name="elementsToLoad" type="hidden" value="@ViewBag.StartCount">
+                <input name="orderMethod" type="hidden" value="@ViewBag.OrderMethod">
+                <input name="searchValue" type="hidden" value="@ViewBag.SearchFilter">
+                <input name="licenseFilter" type="hidden" value="@ViewBag.FiltersValue["LicenseFilter"]">
+                <input name="siteFilter" type="hidden" value="@ViewBag.FiltersValue["SiteFilter"]">
+                <input name="ratingFilter" type="hidden" value="@ViewBag.FiltersValue["RatingFilter"]">
+                <input name="clientsCountFilter" type="hidden" value="@ViewBag.FiltersValue["ClientsCountFilter"]">
+                <input name="capitalizationFilter" type="hidden" value="@ViewBag.FiltersValue["CapitalizationFilter"]">
+            }
+
 
             <button type="submit" class="create-element">Update Bank</button>
         </form>

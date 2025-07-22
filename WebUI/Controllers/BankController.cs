@@ -46,7 +46,7 @@ namespace WebUI.Controllers
         }
 
         [Route("/bank/{bankId:Guid}")]
-        public async Task<IActionResult> Bank(Guid bankId)
+        public async Task<IActionResult> BankInfo(Guid bankId)
         {
             return View(await _bankReadService.GetBankByIdAsync(bankId));
         }
