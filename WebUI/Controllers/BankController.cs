@@ -86,8 +86,9 @@ namespace WebUI.Controllers
         [HttpGet("/update-bank/{bankId:Guid}")]
         public async Task<IActionResult> UpdateBank([FromRoute] Guid bankId, [FromQuery] int? elementsToLoad, [FromQuery] string? orderMethod, 
             [FromQuery] string? searchValue,[FromQuery] bool? licenseFilter, [FromQuery] bool? siteFilter, [FromQuery] double? ratingFilter,
-            [FromQuery] int? clientsCountFilter, [FromQuery] int? capitalizationFilter)
+            [FromQuery] int? clientsCountFilter, [FromQuery] int? capitalizationFilter, [FromQuery] bool? fromBankInfo)
         {
+            ViewBag.FromBankInfo = fromBankInfo;
             return View(await _bankReadService.GetBankByIdAsync(bankId));
         }
 
@@ -96,8 +97,10 @@ namespace WebUI.Controllers
         [HttpPost("/update-bank/{bankId:Guid}")]
         public async Task<IActionResult> UpdateBank([FromForm] BankDto bankDto, [FromForm] IFormFile? bankLogo, [FromRoute] Guid bankId, 
             [FromForm] int? elementsToLoad, [FromForm] string? orderMethod, [FromForm] string? searchValue, [FromForm] bool? licenseFilter, 
-            [FromForm] bool? siteFilter, [FromForm] double? ratingFilter, [FromForm] int? clientsCountFilter, [FromForm] int? capitalizationFilter)
+            [FromForm] bool? siteFilter, [FromForm] double? ratingFilter, [FromForm] int? clientsCountFilter, [FromForm] int? capitalizationFilter,
+            [FromQuery] bool? fromBankInfo)
         {
+            ViewBag.FromBankInfo = fromBankInfo;
             if (ModelState.IsValid)
             {
                 OperationResult result = await _bankUpdateService.UpdateBankAsync(bankId, bankDto, bankLogo);
@@ -107,6 +110,7 @@ namespace WebUI.Controllers
                     List<string> errors = new List<string>() { result.ErrorMessage };
                     ViewBag.Errors = errors;
                 }
+                bankDto.Id=bankId;
             }
             return View(bankDto);
         }

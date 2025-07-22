@@ -3,7 +3,7 @@
 
 <div class="main-content-block">
     <div class="add-entity-block">
-        <form asp-controller="Bank" asp-action="UpdateBank" method="post" class="add-form" enctype="multipart/form-data">
+        <form asp-controller="Bank" asp-action="UpdateBank" asp-route-fromBankInfo="true" method="post" class="add-form" enctype="multipart/form-data">
             <h2>Update Bank</h2>
             <label>
                 Bank Logo:
@@ -102,6 +102,12 @@
            asp-route-ratingFilter="@ViewBag.FiltersValue["RatingFilter"]" asp-route-clientsCountFilter="@ViewBag.FiltersValue["ClientsCountFilter"]"
            asp-route-capitalizationFilter="@ViewBag.FiltersValue["CapitalizationFilter"]"
            class="text-reset text-decoration-none back-link d-flex align-items-center">
+            <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+        </a>
+    }
+    else if (ViewBag.FromBankInfo==true)
+    {
+        <a asp-controller="Bank" asp-action="BankInfo" asp-route-bankId="@Model.Id" class="text-reset text-decoration-none back-link d-flex align-items-center">
             <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
         </a>
     }
