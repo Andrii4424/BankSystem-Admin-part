@@ -9,5 +9,13 @@ namespace WebUI.Controllers
         {
             return View();
         }
+
+        [Route("/error")]
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+
     }
 }
