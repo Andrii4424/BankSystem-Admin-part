@@ -28,7 +28,6 @@ namespace WebUI.Controllers
         [Route("/banks")]
         public async Task<IActionResult> BanksList()
         {
-            throw new ArgumentException();
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync(null, null, null, null, null, null);
             return View(await _bankReadService.GetLimitedBanksListAsync(0, 6, null, null, null, null, null, null, null));
         }
