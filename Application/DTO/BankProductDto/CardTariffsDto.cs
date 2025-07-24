@@ -41,13 +41,13 @@ namespace Application.DTO.BankProductDto
 
         [Required(ErrorMessage = "{0} has to be provided")]
         [Display(Name = "Payment system")]
-        public PaymentSystem[] EnabledPaymentSystem { get; set; }
+        public List<PaymentSystem> EnabledPaymentSystems { get; set; }
 
         public double? InterestRate { get; set; }
 
         [Required(ErrorMessage = "{0} has to be provided")]
         [Display(Name = "Curency")]
-        public string[] Curency { get; set; }
+        public List<CardCurrency> EnableCurency { get; set; }
 
         [Required(ErrorMessage = "{0} has to be provided")]
         [Display(Name = "Annual maintenance cost")]

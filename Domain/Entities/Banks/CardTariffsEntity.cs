@@ -32,11 +32,11 @@ namespace Domain.Entities.Banks
 
         public int MaxCreditLimit { get; set; }
 
-        public PaymentSystem[] EnabledPaymentSystem { get; set; }
+        public List<PaymentSystem> EnabledPaymentSystems { get; set; }
 
         public double? InterestRate { get; set; }
 
-        public string[] Curency { get; set; }
+        public List<CardCurrency> EnableCurency { get; set; }
 
         public int AnnualMaintenanceCost { get; set; }
 
@@ -52,7 +52,7 @@ namespace Domain.Entities.Banks
         public CardTariffsEntity() { }
 
         public CardTariffsEntity(Guid bankId, string cardName, CardType type, CardLevel level, double validityPeriod, int maxCreditLimit, 
-            PaymentSystem[] enabledPaymentSystem, double? interestRate, string[] curency, int annualMaintenanceCost, string cardNumberMasked,
+            List<PaymentSystem> enabledPaymentSystems, double? interestRate, List<CardCurrency> enableCurency, int annualMaintenanceCost, string cardNumberMasked,
             double p2pInternalCommission, double p2pToAnotherBankCommission)
         {
             BankId = bankId;
@@ -61,9 +61,9 @@ namespace Domain.Entities.Banks
             Level = level;
             ValidityPeriod = validityPeriod;
             MaxCreditLimit = maxCreditLimit;
-            EnabledPaymentSystem = enabledPaymentSystem;
+            EnabledPaymentSystems = enabledPaymentSystems;
             InterestRate = interestRate;
-            Curency = curency;
+            EnableCurency = enableCurency;
             AnnualMaintenanceCost = annualMaintenanceCost;
             CardNumberMasked = cardNumberMasked;
             UserCards = new List<UserCardEntity>();
