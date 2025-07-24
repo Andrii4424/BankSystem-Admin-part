@@ -34,14 +34,14 @@ namespace WebUI.Controllers
 
         [TypeFilter(typeof(LoadPageFilter))]
         [Route("/banks/{elementsToLoad:int?}/{searchValue?}/{orderMethod:?}/{licenseFilter:bool?}/{siteFilter:bool?}/{ratingFilter:double?}/{clientsCountFilter:int?}/{capitalizationFilter:int?}")]
-        public async Task<IActionResult> BanksList( [FromRoute] int? elementsToLoad, [FromRoute] string? searchValue,
+        public async Task<IActionResult> BanksListFiltered( [FromRoute] int? elementsToLoad, [FromRoute] string? searchValue,
             [FromRoute] string? orderMethod, [FromRoute] bool? licenseFilter, [FromRoute] bool? siteFilter, [FromRoute] double? ratingFilter,
             [FromRoute] int? clientsCountFilter, [FromRoute] int? capitalizationFilter)
         {
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync(searchValue, licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter);
             int loadCount = elementsToLoad.HasValue? elementsToLoad.Value: 0;
             ViewBag.OrderMethod = orderMethod;
-            return View(await _bankReadService.GetLimitedBanksListAsync(0, loadCount, searchValue, orderMethod, licenseFilter, 
+            return View("BanksList", await _bankReadService.GetLimitedBanksListAsync(0, loadCount, searchValue, orderMethod, licenseFilter, 
                 siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter));
         }
 
@@ -113,6 +113,13 @@ namespace WebUI.Controllers
                 bankDto.Id=bankId;
             }
             return View(bankDto);
+        }
+
+        [HttpPost("/delete-bank/bank-id/{bankId:guid}")]
+        public async Task<IActionResult> DeleteBank([FromRoute] Guid bankId)
+        {
+            await _bankDeleteService.DeleteBankAsync(bankId);
+            return RedirectToAction("BanksList");
         }
 
         [HttpPost("/delete-bank/bank-id/{bankId:guid}/first-element/{firstElement:int}/{searchValue?}/{orderMethod:?}/{licenseFilter:bool?}/{siteFilter:bool?}/{ratingFilter:double?}/{clientsCountFilter:int?}/{capitalizationFilter:int?}")]

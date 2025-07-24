@@ -9,7 +9,7 @@
     static twoColumns = document.getElementById("two-columns");
     static deleteWindow = document.getElementById("confirm-delete-window");
     static deleteConfirmText = document.getElementById("confirm-delete-text");
-    static lastSearch;
+    static lastSearch = this.searchInput.value;
 
     //Checkers
     //Checks whether to display a message about an empty list
@@ -76,12 +76,11 @@
     }
     static GetSearchUrl() {
         this.lastSearch = (this.searchInput.value !== "" && this.searchInput.value !== null) ? this.searchInput.value : "0"
-        localStorage.setItem("lastSearch", this.lastSearch);
         return this.lastSearch;
     }
 
     static GetLastSearch() {
-        return localStorage.getItem("lastSearch");
+        return this.lastSearch;
     }
 
     static ToBoolean(value) {

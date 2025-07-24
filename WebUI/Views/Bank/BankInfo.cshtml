@@ -37,7 +37,7 @@
 
         <div id="item-info-action-buttons">
             <a asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId="@Model.Id" asp-route-fromBankInfo="true" class="update">✏️ Update Bank</a>
-            <a href="#" class="delete">🗑️ Delete Bank</a>
+            <a class="delete" data-element-name="@Model.BankName" data-element-id="@Model.Id">🗑️ Delete Bank</a>
             <a href="#">👥 View Users</a>
             <a href="#">🧑‍💼 View Employees</a>
             <a href="#">➕ Add Card</a>
@@ -69,5 +69,6 @@
 
 @section additionalScripts {
     <script type="module" src="~/js/entities/bank/BankMenu.js" defer></script>
+    <script type="module" src="~/js/entities/bank/BankDeleteIcon.js" ></script>
 }
 

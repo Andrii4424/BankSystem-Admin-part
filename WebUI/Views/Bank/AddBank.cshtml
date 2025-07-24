@@ -92,7 +92,7 @@
 @section backButton {
     @if (ViewBag.StartCount!=null)
     {
-        <a asp-controller="Bank" asp-action="BanksList" asp-route-elementsToLoad="@ViewBag.StartCount"
+        <a asp-controller="Bank" asp-action="BanksListFiltered" asp-route-elementsToLoad="@ViewBag.StartCount"
            asp-route-searchValue="@ViewBag.SearchFilter" asp-route-orderMethod="@ViewBag.OrderMethod"
            asp-route-licenseFilter="@ViewBag.FiltersValue["LicenseFilter"]" asp-route-siteFilter="@ViewBag.FiltersValue["SiteFilter"]"
            asp-route-ratingFilter="@ViewBag.FiltersValue["RatingFilter"]" asp-route-clientsCountFilter="@ViewBag.FiltersValue["ClientsCountFilter"]"

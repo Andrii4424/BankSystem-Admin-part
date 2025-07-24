@@ -31,7 +31,6 @@ inputRating.addEventListener('input', () => {
 
 //General methods
 LoadButtonChecker();
-GeneralListMethods.EmptyListTitleChecker("Bank");
 
 async function LoadItems(firstElement, itemsToLoad) {
     const url = `/load-banks/${firstElement}/${itemsToLoad}/${GeneralListMethods.GetSearchUrl()}/${GeneralListMethods.GetSortUrl()}${getBankFiltersUrl()}`
@@ -128,6 +127,7 @@ if (oldOrderMethod !== null && oldOrderMethod !== undefined && oldOrderMethod !=
 }
 if (oldSearchValue !== null && oldSearchValue != "" && oldSearchValue!="0") {
     GeneralListMethods.searchInput.value = oldSearchValue;
+    GeneralListMethods.lastSearch = oldSearchValue;
     LoadButtonChecker();
 }
 
@@ -193,8 +193,8 @@ GeneralListMethods.elementsListBlock.addEventListener("click", (event) => {
 function setHiddenBankFiltersInputValues(countHiddenInput, searchHiddenInput, orderHiddenInput, licenseHiddenInput, siteHiddenInput,
     ratingHiddenInput, clientsCountHiddenInput, capitalizationHiddenInput) {
 
-    countHiddenInput.value = GeneralListMethods.GetElementsCount();
-    searchHiddenInput.value = GeneralListMethods.GetLastSearch() !== undefined? GeneralListMethods.GetLastSearch(): "0";
+    countHiddenInput.value = GeneralListMethods.GetElementsCount() >= 6 ? GeneralListMethods.GetElementsCount(): 6;
+    searchHiddenInput.value = GeneralListMethods.lastSearch !== ""? GeneralListMethods.GetLastSearch(): "0";
     orderHiddenInput.value = GeneralListMethods.GetSortUrl();
 
     const filters = GeneralListMethods.filterList.querySelectorAll(`input[type="checkbox"][name="filter"]`);
@@ -248,15 +248,14 @@ GeneralListMethods.deleteWindow.addEventListener("click", async (event) => {
 
         GeneralListMethods.CloseConfirmDeleteWindow();
     }
-});
-
-GeneralListMethods.deleteWindow.addEventListener("click", async (event) => {
-    if (event.target.matches(".cancel-delete-button")) {
+    else if (!event.target.closest("#delete-window")) {         //Close delete confitmation window when user click on another part of the screen
+        GeneralListMethods.CloseConfirmDeleteWindow();
+    }
+    else if (event.target.matches(".cancel-delete-button")) {
         GeneralListMethods.CloseConfirmDeleteWindow();
         button = null;
     }
 });
-
 
 async function DeleteItem(url) {
     const replacedElement = await fetch(url, {
@@ -265,3 +264,5 @@ async function DeleteItem(url) {
 
     await GeneralListMethods.AddElementsToEnd(replacedElement);
 }
+
+GeneralListMethods.EmptyListTitleChecker("Bank");
