@@ -17,23 +17,30 @@ namespace Application.Services.BankServices
     {
         private readonly IBankRepository _bankRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<BankReadService> _logger;
         
-        public BankReadService(IBankRepository bankRepository, IMapper mapper)
+        public BankReadService(IBankRepository bankRepository, IMapper mapper, ILogger<BankReadService> logger)
         {
             _bankRepository = bankRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<List<BankDto>?> GetBanksListAsync()
         {
             List<BankEntity>? bankEntities = await _bankRepository.GetAllValuesAsync() as List<BankEntity>;
+            _logger.LogInformation("Getting full bank list");
             return _mapper.Map<List<BankDto>>(bankEntities);
         }
 
-        public async Task<BankDto> GetBankByIdAsync(Guid bankdId)
+        public async Task<BankDto> GetBankByIdAsync(Guid bankId)
         {
-            BankEntity? bankEntity = await _bankRepository.GetValueByIdAsync(bankdId);
-            if (bankEntity == null) { throw new NullReferenceException("Bank with this id doesnt exist"); }
+            BankEntity? bankEntity = await _bankRepository.GetValueByIdAsync(bankId);
+            if (bankEntity == null) {
+                _logger.LogError("Bank with ID {BankId} was not found", bankId);
+                throw new ArgumentException($"Bank with id {bankId} doesnt exist"); 
+            }
+            _logger.LogInformation("Bank with ID {BankId} successfully received", bankId);
             return _mapper.Map<BankDto>(bankEntity);
         }
 
@@ -48,6 +55,7 @@ namespace Application.Services.BankServices
             List<Expression<Func<BankEntity, bool>>?> filters= GetFilters(licenseFilter, siteFilter, ratingFilter, 
                 clientsCountFilter, capitalizationFilter);
 
+            _logger.LogInformation("Limited bank list successfully received");
             return _mapper.Map<List<BankDto>>(await _bankRepository.GetLimitedBankList(firstElement, itemsToLoad, searchFilter, selector, 
                 asceding,  filters));
         }
@@ -59,6 +67,7 @@ namespace Application.Services.BankServices
             List<Expression<Func<BankEntity, bool>>?> filters = GetFilters(licenseFilter, siteFilter, ratingFilter,
                 clientsCountFilter, capitalizationFilter);
 
+            _logger.LogInformation("Banks list count with filters successfully received");
             return await _bankRepository.CountAsync(searchFilter, filters);
         }
 
@@ -100,13 +109,18 @@ namespace Application.Services.BankServices
             else if((ratingFilter.HasValue && bank.Rating<ratingFilter) || (clientsCountFilter.HasValue && bank.ClientsCount < clientsCountFilter) 
                 || (capitalizationFilter.HasValue && bank.Capitalization < capitalizationFilter))
             {
+                _logger.LogDebug("Bank {BankName} excluded due to missing filters", bank.BankName);
                 return false;
             }
 
             if(searchValue!=null){
-                if(bank.BankName.Contains(searchValue)) return false;
+                if (bank.BankName.Contains(searchValue))
+                {
+                    _logger.LogDebug("Bank {BankName} excluded due to missing search filter", bank.BankName);
+                    return false;
+                }
             }
-
+            _logger.LogDebug("Bank {BankName} successfully checked for filters", bank.BankName);
             return true;
         } 
 

@@ -13,13 +13,13 @@ namespace Application.Services.BankService
     public class BankDeleteService: IBankDeleteService
     {
         private readonly IBankRepository _bankRepository;
-        private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
+        private readonly ILogger<BankDeleteService> _logger;
 
-        public BankDeleteService(IBankRepository bankRepository, IMapper mapper, IWebHostEnvironment env)
+        public BankDeleteService(IBankRepository bankRepository, IWebHostEnvironment env, ILogger<BankDeleteService> logger)
         {
             _bankRepository = bankRepository;
-            _mapper = mapper;
+            _logger = logger;
             _env = env;
         }
 
@@ -35,7 +35,8 @@ namespace Application.Services.BankService
                     }
                 }
                 _bankRepository.DeleteElement(bank);
-            } 
+                _logger.LogInformation("Bank with id {BankId} has been successfully deleted", bankId);
+            }
             await _bankRepository.SaveAsync();
         }
     }
