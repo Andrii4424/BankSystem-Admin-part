@@ -16,17 +16,26 @@ let oldFilters = JSON.parse(GeneralListMethods.elementsListBlock.dataset.filters
 
 //Filter elements
 const inputRating = document.querySelector('.rating');
+const clientsCount = document.querySelector('.clients-count');
+const capitalization = document.querySelector('.capitalization');
+
 
 //Delete elements
 let button; //Last clicked delete button
 
 //Input settings
-inputRating.addEventListener('input', () => {
+inputRating.addEventListener("input", () => {
     if (inputRating.value > 5) inputRating.value = 5;
     if (inputRating.value < 1) inputRating.value = null;
     if (inputRating.value.length > 3) {
         inputRating.value = inputRating.value.slice(0, 3);
     }
+});
+clientsCount.addEventListener("input", () => {
+    if (clientsCount.value < 0) clientsCount.value = null;
+});
+capitalization.addEventListener("input", () => {
+    if (capitalization.value < 0) capitalization.value = null;
 });
 
 //General methods
