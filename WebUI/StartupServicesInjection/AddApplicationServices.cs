@@ -28,6 +28,7 @@ namespace WebUI.StartupServicesInjection
             //Repositories
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IBankRepository), typeof(BankRepository));
+            services.AddScoped(typeof(ICardTarrifsRepository), typeof(CardTarrifsRepository));
 
             //Services
             services.AddScoped<IBankReadService, BankReadService>();

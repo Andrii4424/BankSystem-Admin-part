@@ -8,7 +8,7 @@ namespace Domain.Enums.CardEnums
 {
     public enum PaymentSystem
     {
-        Visa,
-        Mastercard
+        Visa =1,
+        Mastercard=2
     }
 }

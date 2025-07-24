@@ -12,9 +12,15 @@ namespace Application.DTO
     public class MappingProfile : Profile
     {
         public MappingProfile() {
+            //Banks
             CreateMap<BankEntity, BankDto>();
             CreateMap<BankDto, BankEntity>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore()); 
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+
+            //CardTariffs
+            CreateMap<CardTariffsEntity, CardTariffsDto>();
+            CreateMap<CardTariffsDto, CardTariffsEntity>()
+                .ForMember(dest => dest.Id, opt=> opt.Ignore());
         }
     }
 }
