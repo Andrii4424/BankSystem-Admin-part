@@ -74,5 +74,17 @@ namespace Infrastructure.Repository
         {
             return await _dbSet.AnyAsync(searchParametr);
         }
+
+        public async Task<List<T>> GetLimitedAsync(int firstElement, int elementsToLoad, Expression<Func<T, bool>>? searchFilter, bool ascending, Expression<Func<T, object>> selector,
+            List<Expression<Func<CardTariffsEntity, bool>>?> filters)
+        {
+            var query = _dbSet.AsQueryable();
+            if(searchFilter!=null) query = query.Where(searchFilter);
+            filters = filters.Where(v => v != null).ToList();
+            foreach(var filter in filters)
+            {
+                query = query.Where(filter);
+            }
+        }
     }
 }

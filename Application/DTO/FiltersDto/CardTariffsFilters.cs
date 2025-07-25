@@ -50,7 +50,7 @@ namespace Application.DTO.FiltersDto
                     break;
             }
 
-            List<Expression<Func<CardTariffsEntity, bool>>>? filters = new();
+            List<Expression<Func<CardTariffsEntity, bool>>?> filters = new();
 
             if (ChosenBankName != null) filters.Add(c => c.Bank.BankName == ChosenBankName);
             if (ChosenPaymentSystem != null) filters.Add(c => c.EnabledPaymentSystems.Contains(ChosenPaymentSystem.Value));
