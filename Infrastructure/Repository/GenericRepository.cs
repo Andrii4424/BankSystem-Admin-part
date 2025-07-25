@@ -1,5 +1,4 @@
 ﻿using Domain.Abstractions;
-using Domain.Entities.Banks;
 using Domain.RepositoryContracts;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -75,8 +74,8 @@ namespace Infrastructure.Repository
             return await _dbSet.AnyAsync(searchParametr);
         }
 
-        public async Task<List<T>> GetLimitedAsync(int firstElement, int elementsToLoad, Expression<Func<T, bool>>? searchFilter, bool ascending, Expression<Func<T, object>> selector,
-            List<Expression<Func<CardTariffsEntity, bool>>?> filters)
+        public async Task<List<T>> GetLimitedAsync(int firstElement, int elementsToLoad, Expression<Func<T, bool>>? searchFilter, bool ascending, 
+            Expression<Func<T, object>> sortValue, List<Expression<Func<T, bool>>?> filters)
         {
             var query = _dbSet.AsQueryable();
             if(searchFilter!=null) query = query.Where(searchFilter);
@@ -85,6 +84,12 @@ namespace Infrastructure.Repository
             {
                 query = query.Where(filter);
             }
+            query= ascending? query.OrderBy(sortValue): query.OrderByDescending(sortValue);
+
+            return await query
+                .Skip(firstElement)
+                .Take(elementsToLoad)
+                .ToListAsync();
         }
     }
 }

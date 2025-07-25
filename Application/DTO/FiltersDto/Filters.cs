@@ -10,18 +10,18 @@ namespace Application.DTO.FiltersDto
 
         Expression<Func<T, bool>>? SearchFilter { get; set; }
 
-        Expression<Func<T, object>> Selector { get; set; }
+        Expression<Func<T, object>> SortValue { get; set; }
         bool Ascending { get; set; }
 
         List<Expression<Func<CardTariffsEntity, bool>>?> EntityFilters { get; set; }
 
-        public Filters(int firstItem, int elementsToLoad, Expression<Func<T, bool>>? searchFilter, Expression<Func<T, object>> selector,
+        public Filters(int firstItem, int elementsToLoad, Expression<Func<T, bool>>? searchFilter, Expression<Func<T, object>> sortValue,
             bool ascending, List<Expression<Func<CardTariffsEntity, bool>>?> entityFilters)
         {
             FirstItem = firstItem;
             ElementsToLoad = elementsToLoad;
             SearchFilter = searchFilter;
-            Selector = selector;
+            SortValue = sortValue;
             Ascending = ascending;
             EntityFilters = entityFilters;
         }
