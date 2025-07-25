@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\CardTarrifs\" />
     <Folder Include="wwwroot\uploads\bank-logo\" />
   </ItemGroup>
 

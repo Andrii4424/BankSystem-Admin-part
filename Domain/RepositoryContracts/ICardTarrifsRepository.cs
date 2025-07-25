@@ -1,6 +1,8 @@
-﻿namespace Domain.RepositoryContracts
+﻿using Domain.Entities.Banks;
+
+namespace Domain.RepositoryContracts
 {
-    public interface ICardTarrifsRepository
+    public interface ICardTarrifsRepository :IGenericRepository<CardTariffsEntity>
     {
 
     }

@@ -1,6 +1,10 @@
-﻿namespace Application.ServiceContracts.ICardTarrifsService
+﻿using Application.DTO.BankProductDto;
+using Application.DTO.FiltersDto;
+
+namespace Application.ServiceContracts.ICardTarrifsService
 {
     public interface ICardTarrifsReadService
     {
+        public Task<List<CardTariffsDto>?> GetCardsAsync(CardTariffsFilters filters);
     }
 }

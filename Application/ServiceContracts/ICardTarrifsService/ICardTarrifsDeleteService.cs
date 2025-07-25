@@ -2,5 +2,6 @@
 {
     public interface ICardTarrifsDeleteService
     {
+        public Task DeleteCardAsync(Guid cardId);
     }
 }

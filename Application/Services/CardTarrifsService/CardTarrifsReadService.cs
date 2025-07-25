@@ -1,11 +1,13 @@
 ﻿using Application.DTO.BankProductDto;
 using Application.DTO.FiltersDto;
+using Application.ServiceContracts.ICardTarrifsService;
 using AutoMapper;
+using Domain.Entities.Banks;
 using Domain.RepositoryContracts;
 
 namespace Application.Services.CardTarrifsService
 {
-    public class CardTarrifsReadService
+    public class CardTarrifsReadService: ICardTarrifsReadService
     {
         private readonly ICardTarrifsRepository _cardRepository;
         private readonly ILogger<CardTarrifsReadService> _logger;
@@ -18,10 +20,12 @@ namespace Application.Services.CardTarrifsService
             _mapper = mapper;
         }
 
-        /*public async Task<List<CardTariffsDto>?> GetCards(CardTariffsFilters filters)
+        public async Task<List<CardTariffsDto>?> GetCardsAsync(CardTariffsFilters filters)
         {
-
-        }*/
-
+            Filters<CardTariffsEntity> processedFilters = filters.ToGeneralFilters();
+            List<CardTariffsEntity> cards = await _cardRepository.GetLimitedAsync(processedFilters.FirstItem, processedFilters.ElementsToLoad, processedFilters.SearchFilter,
+                processedFilters.Ascending, processedFilters.SortValue, processedFilters.EntityFilters);
+            return _mapper.Map<List<CardTariffsDto>>(cards);
+        }
     }
 }
