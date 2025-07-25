@@ -20,6 +20,12 @@ namespace Application.DTO.FiltersDto
         public CardLevel? ChosenLevel { get; set; }
         public CardType? ChosenType { get; set; }
 
+        public CardTariffsFilters()
+        {
+            FirstElement = 0;
+            ElementsToLoad = 12;
+        }
+
         public Filters<CardTariffsEntity> ToGeneralFilters()
         {
             Expression<Func<CardTariffsEntity, bool>>? searchFilter = SearchValue != null ? c => c.CardName.Contains(SearchValue.Trim()) : null;

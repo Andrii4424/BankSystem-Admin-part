@@ -8,15 +8,15 @@ namespace Application.DTO.FiltersDto
         public int FirstItem { get; set; }
         public int ElementsToLoad { get; set; }
 
-        Expression<Func<T, bool>>? SearchFilter { get; set; }
+        public Expression<Func<T, bool>>? SearchFilter { get; set; }
 
-        Expression<Func<T, object>> SortValue { get; set; }
-        bool Ascending { get; set; }
+        public Expression<Func<T, object>> SortValue { get; set; }
+        public bool Ascending { get; set; }
 
-        List<Expression<Func<CardTariffsEntity, bool>>?> EntityFilters { get; set; }
+        public List<Expression<Func<T, bool>>?> EntityFilters { get; set; }
 
         public Filters(int firstItem, int elementsToLoad, Expression<Func<T, bool>>? searchFilter, Expression<Func<T, object>> sortValue,
-            bool ascending, List<Expression<Func<CardTariffsEntity, bool>>?> entityFilters)
+            bool ascending, List<Expression<Func<T, bool>>?> entityFilters)
         {
             FirstItem = firstItem;
             ElementsToLoad = elementsToLoad;
