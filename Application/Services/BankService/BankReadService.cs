@@ -1,4 +1,5 @@
 ﻿using Application.DTO.BankProductDto;
+using Application.DTO.FiltersDto;
 using Application.ServiceContracts.BankServiceContracts;
 using AutoMapper;
 using Domain.Entities.Banks;
@@ -24,6 +25,15 @@ namespace Application.Services.BankServices
             _bankRepository = bankRepository;
             _mapper = mapper;
             _logger = logger;
+        }
+
+        public async Task<List<BankDto>?> GetLimitedAsyncByDtoFilter(BankFilters filters)
+        {
+            Filters<BankEntity> GeneralFilters = filters.ToGeneralFilters();
+            List<BankEntity>? banks = await _bankRepository.GetLimitedAsync(GeneralFilters.FirstItem, GeneralFilters.ElementsToLoad, GeneralFilters.SearchFilter,
+                GeneralFilters.Ascending, GeneralFilters.SortValue, GeneralFilters.EntityFilters);
+            _logger.LogInformation("User get banks to add another entity");
+            return _mapper.Map<List<BankDto>>(banks);
         }
 
         public async Task<List<BankDto>?> GetBanksListAsync()
