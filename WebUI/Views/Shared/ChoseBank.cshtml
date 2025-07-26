@@ -1,50 +1,37 @@
-﻿@model List<CardTariffsDto>
+﻿@model List<BankDto>
 
 <div class="main-content-block">
-
-	<h4 class="empty-list " id="empty-list-title">
-		Card list is empty, you can create card by button bellow
-	</h4>
-
-	<div id="elements-block">
-		@foreach (CardTariffsDto card in Model)
+	<h4 id="chose-bank">Please select the bank you want to add the card to and click on bank</h4>
+	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount">
+		@foreach (BankDto bank in Model)
 		{
 			<div class="element-block">
-				<a class="text-reset text-decoration-none info-card">
+				<a asp-controller="CardTariffs" asp-action="AddCard" asp-route-bankId="@bank.Id" class="text-reset text-decoration-none info-card">
+					<img src="/@bank.BankLogoPath" alt="Bank logo" class="logo" />
 					<table class="element-table">
 						<tr>
 							<th>
-								@card.CardName
+								@bank.BankName
+							</th>
+						</tr>
+						<tr>
+							<th class="d-flex flex-row gap-2">
+								<img src="~/images/main-page/star.svg" alt="rating" class="rating-icon" />
+								@bank.Rating
 							</th>
 						</tr>
 						<tr>
 							<th>
-								@card.Type
-							</th>
-						</tr>
-						<tr>
-							<th>
-								@card.Level
+								We have @bank.ActiveClientsCount active clients
 							</th>
 						</tr>
 					</table>
 				</a>
-
-				<div class="action-buttons">
-					<form id="add-form" method="get">
-						<button class="update-element" type="submit">Update Bank</button>
-					</form>
-					<button class="delete-element">Card Bank</button>
-				</div>
 			</div>
 		}
 	</div>
-
 	<div class="d-flex flex-row align-items-center action-panel gap-4">
-		<button class="load-more">Load More</button>
-		<form asp-controller="CardTariffs" asp-action="ChoseBankAddCard" id="add-form" method="get">
-			<button class="add-element" type="submit">Add Card</button>
-		</form>
+		<button class="load-more" id="load-banks">Load More</button>
 	</div>
 </div>
 

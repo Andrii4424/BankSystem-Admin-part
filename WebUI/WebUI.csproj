@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\js\entities\card-tariffs\" />
     <Folder Include="wwwroot\uploads\bank-logo\" />
   </ItemGroup>
 
