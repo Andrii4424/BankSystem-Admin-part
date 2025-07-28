@@ -11,7 +11,8 @@ namespace Application.ServiceContracts.BankServiceContracts
 {
     public interface IBankReadService
     {
-        public Task<List<BankDto>?> GetLimitedAsyncByDtoFilter(BankFilters filters);
+        public Task<List<BankDto>?> GetLimitedByDtoFilterAsync(BankFilters filters);
+        public Task<int> GetCountByDtoFilter(BankFilters filters);
         public Task<List<BankDto>?> GetBanksListAsync();
         public Task<BankDto> GetBankByIdAsync(Guid bankId);
         public Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad, string? searchValue, string? orderMethod,

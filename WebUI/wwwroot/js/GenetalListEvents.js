@@ -2,7 +2,7 @@
 
 const sortIcon = document.getElementById("sort-icon");
 const filterIcon = document.getElementById("filter-icon");
-const sortList = document.getElementById("banks-sort-list");
+const sortList = document.getElementById("sort-list");
 const filterSettings = GeneralListMethods.filterList.querySelectorAll('input[type="checkbox"][name="filter"]');
 
 //Default chekings when DOM update

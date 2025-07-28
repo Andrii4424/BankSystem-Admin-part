@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.DTO.BankProductDto;
+using Application.DTO.FiltersDto;
 using Application.ServiceContracts.BankServiceContracts;
 using Azure;
 using Microsoft.AspNetCore.Mvc;
@@ -142,6 +143,23 @@ namespace WebUI.Controllers
             ViewBag.ElementsCount =await _bankReadService.GetBanksCountAsync(searchValue, licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter);
             return PartialView("_LoadBanks", await _bankReadService.GetLimitedBanksListAsync(firstElement, elementsToLoad, searchValue, orderMethod,
                 licenseFilter, siteFilter, ratingFilter, clientsCountFilter, capitalizationFilter));
+        }
+
+        //Method to load banks when user want to add another entity
+        [HttpGet("/get-banks/for/{entity}")]
+        public async Task<IActionResult> GetBanksForChose([FromRoute] string entity)
+        {
+            ViewBag.Entity = entity;
+            ViewBag.Count = await _bankReadService.GetCountByDtoFilter(new BankFilters());
+            return PartialView("ChoseBank", await _bankReadService.GetLimitedByDtoFilterAsync(new BankFilters()));
+        }
+
+        [HttpPost("/load-banks/for/{entity}")]
+        public async Task<IActionResult> LoadBanksForChose([FromForm] BankFilters bankFilters, [FromRoute] string entity)
+        {
+            ViewBag.Entity = entity;
+            ViewBag.Count = await _bankReadService.GetCountByDtoFilter(bankFilters);
+            return PartialView("_GetBanksToChose", await _bankReadService.GetLimitedByDtoFilterAsync(bankFilters));
         }
     }
 }

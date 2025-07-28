@@ -1,0 +1,32 @@
+﻿@{
+	Layout = "";
+}
+
+@model List<BankDto>
+<span class="elements-count" data-elements-list-count="@ViewBag.Count" style="display: none"></span>
+@foreach (BankDto bank in Model)
+{
+	<div href="/add-@ViewBag.Entity/bank-id/@bank.Id" class="element-block partial-view-element-block">
+		<a class="text-reset text-decoration-none info-card">
+			<img src="/@bank.BankLogoPath" alt="Bank logo" class="logo" />
+			<table class="element-table">
+				<tr>
+					<th class="bank-name-text">
+						@bank.BankName
+					</th>
+				</tr>
+				<tr>
+					<th class="d-flex flex-row gap-2">
+						<img src="~/images/main-page/star.svg" alt="rating" class="rating-icon" />
+						@bank.Rating
+					</th>
+				</tr>
+				<tr>
+					<th>
+						We have @bank.ActiveClientsCount active clients
+					</th>
+				</tr>
+			</table>
+		</a>
+	</div>
+}

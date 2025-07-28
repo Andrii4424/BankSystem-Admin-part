@@ -5,8 +5,8 @@ namespace Application.DTO.FiltersDto
 {
     public class BankFilters
     {
-        public int FirstElement { get; set; }
-        public int ElementsToLoad { get; set; }
+        public int? FirstElement { get; set; }
+        public int? ElementsToLoad { get; set; }
 
         //Filters, search and sort settings
         public string? SearchValue { get; set; }
@@ -20,14 +20,11 @@ namespace Application.DTO.FiltersDto
         public int? clientsCountFilter { get; set; }
         public int? capitalizationFilter { get; set; }
 
-        public BankFilters()
-        {
-            FirstElement = 0;
-            ElementsToLoad = 6;
-        }
-
         public Filters<BankEntity> ToGeneralFilters()
         {
+            FirstElement = FirstElement.HasValue? FirstElement.Value: 0;
+            ElementsToLoad = ElementsToLoad.HasValue ? ElementsToLoad.Value : 6;
+
             Expression<Func<BankEntity, bool>>? searchFilter = SearchValue != null ? c => c.BankName.Contains(SearchValue.Trim()) : null;
             Expression<Func<BankEntity, object>>? sortExpression;
 
@@ -62,7 +59,7 @@ namespace Application.DTO.FiltersDto
             filters.Add((clientsCountFilter.HasValue && clientsCountFilter != 0) ? b => b.ActiveClientsCount >= clientsCountFilter : null);
             filters.Add((capitalizationFilter.HasValue && capitalizationFilter != 0) ? b => b.Capitalization >= capitalizationFilter : null);
 
-            return new Filters<BankEntity>(FirstElement, ElementsToLoad, searchFilter, sortExpression, ascending, filters);
+            return new Filters<BankEntity>(FirstElement.Value, ElementsToLoad.Value, searchFilter, sortExpression, ascending, filters);
         }
 
     }

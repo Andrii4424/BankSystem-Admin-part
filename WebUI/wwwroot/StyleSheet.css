@@ -122,7 +122,8 @@ aside {
     align-items: center;
     position: absolute;
     top: 70px;
-    min-width: 18%;
+    min-width: 280px;
+    width: 18%;
     background-color: var(--menu-green-color);
     transform-origin: left center;
     transform: scaleX(0);
@@ -223,7 +224,7 @@ aside {
         height: auto;
     }
 
-#banks-sort-list {
+#sort-list {
     position: absolute;
     top: 64px;
     width: 168px;
@@ -232,14 +233,14 @@ aside {
     border-radius: 14px;
 }
 
-    #banks-sort-list.opened {
+    #sort-list.opened {
         display: flex;
         flex-direction: column;
         background-color: white;
         border: 1px solid lightgrey;
     }
 
-    #banks-sort-list label, #banks-sort-list input {
+    #sort-list label, #sort-list input {
         display: inline-block;
         vertical-align: middle;
     }

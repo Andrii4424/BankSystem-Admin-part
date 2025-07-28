@@ -31,13 +31,7 @@ namespace WebUI.Controllers
             return View(await _cardTarrifsReadService.GetCardsAsync(new CardTariffsFilters()));
         }
         //Add Actions
-        [Route("/add-card")]
-        public async Task<IActionResult> ChoseBankAddCard()
-        {
-            return View("ChoseBank" ,await _bankReadService.GetLimitedAsyncByDtoFilter(new BankFilters()));
-        }
-
-        [HttpGet("/add-card/bank-id/{bankId:guid}")]
+        [HttpGet("/add-card-tariffs/bank-id/{bankId:guid}")]
         public async Task<IActionResult> AddCard([FromRoute] Guid bankId)
         {
             return View(new CardTariffsDto());

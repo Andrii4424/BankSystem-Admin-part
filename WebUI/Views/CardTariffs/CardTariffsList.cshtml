@@ -42,7 +42,7 @@
 
 	<div class="d-flex flex-row align-items-center action-panel gap-4">
 		<button class="load-more">Load More</button>
-		<form asp-controller="CardTariffs" asp-action="ChoseBankAddCard" id="add-form" method="get">
+		<form asp-controller="Bank" asp-action="GetBanksForChose" asp-route-entity="card-tariffs" id="add-form" method="get">
 			<button class="add-element" type="submit">Add Card</button>
 		</form>
 	</div>
@@ -68,7 +68,7 @@
 
 		<div id="filters" class="d-flex flex-row align-items-center">
 			<img src="~/images/main-page/sort-icon.svg" alt="Sort" id="sort-icon" />
-			<div id="banks-sort-list">
+			<div id="sort-list">
 				<label>
 					<input type="radio" name="sort" value="oldest" checked>
 					The oldest banks

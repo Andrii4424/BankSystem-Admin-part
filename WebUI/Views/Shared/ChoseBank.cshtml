@@ -1,12 +1,20 @@
-﻿@model List<BankDto>
+﻿@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model List<BankDto>
 
 <div class="main-content-block">
 	<h4 id="chose-bank">Please select the bank you want to add the card to and click on bank</h4>
-	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount">
+	<span id="span-info" data-entity="@ViewBag.Entity" style="display:none"></span>
+	<span class="elements-count" data-elements-list-count="@ViewBag.Count" style="display: none"></span>
+
+	<div id="elements-block">
 		@foreach (BankDto bank in Model)
 		{
 			<div class="element-block">
-				<a asp-controller="CardTariffs" asp-action="AddCard" asp-route-bankId="@bank.Id" class="text-reset text-decoration-none info-card">
+				<a href="/add-@ViewBag.Entity/bank-id/@bank.Id" class="text-reset text-decoration-none info-card">
 					<img src="/@bank.BankLogoPath" alt="Bank logo" class="logo" />
 					<table class="element-table">
 						<tr>
@@ -47,74 +55,79 @@
 	</div>
 }
 @section Search {
-	<div id="search" class="d-flex flex-row align-items-center">
-		<div id="find-element" class="d-flex flex-row align-items-center">
-			<input type="text" name="SearchBankName" id="search-input" placeholder="Enter the bank name" />
-			<button id="search-button">Search</button>
+	<form asp-controller="Bank" asp-action="LoadBanksForChose" asp-route-entity="@ViewBag.Entity" id="search" class="d-flex flex-row align-items-center" method="post">
+		<div  id="find-element" class="d-flex flex-row align-items-center">
+			<input type="text" name="SearchValue" id="search-input" placeholder="Enter the bank name" />
+			<button type="button" class="filter-submit-button" id="search-button">Search</button>
 		</div>
-
+		<input type="hidden" name="FirstElement"/>
+		<input type="hidden" name="ElementsToLoad"/>
+		<!--Sorting-->
 		<div id="filters" class="d-flex flex-row align-items-center">
 			<img src="~/images/main-page/sort-icon.svg" alt="Sort" id="sort-icon" />
-			<div id="banks-sort-list">
+			<div id="sort-list">
 				<label>
-					<input type="radio" name="sort" value="oldest" checked>
+					<input type="radio" name="SortValue" value="oldest" checked>
 					The oldest banks
 				</label>
 
 				<label>
-					<input type="radio" name="sort" value="newest">
+					<input type="radio" name="SortValue" value="newest">
 					The newest banks
 				</label>
 
 				<label>
-					<input type="radio" name="sort" value="rating-descending">
+					<input type="radio" name="SortValue" value="rating-descending">
 					By rating
 				</label>
 
 				<label>
-					<input type="radio" name="sort" value="popularity-descending">
+					<input type="radio" name="SortValue" value="popularity-descending">
 					By popularity
 				</label>
 
 			</div>
 			<img src="~/images/main-page/filter-icon.svg" alt="Filter" id="filter-icon" />
 
+			<!--Filters-->
 			<div id="filter-list">
 				<label>
-					<input type="checkbox" name="filter" value="license-required" />
+					<input type="checkbox" name="licenseFilter" class="bool-filters" value="false" />
 					Only bank with licenses
 				</label>
 
 				<label>
-					<input type="checkbox" name="filter" value="site-required" />
+					<input type="checkbox" name="siteFilter" class="bool-filters" value="false" />
 					Only bank with sites
 				</label>
 
 				<label>
 					<input type="checkbox" name="filter" value="rating" class="value-filter" />
 					Minimal rating
-					<input type="number" name="filter" class="rating" min="1" max="5" step="0.1" disabled />
+					<input type="number" name="ratingFilter" class="rating" min="1" max="5" step="0.1" disabled />
 				</label>
 
 				<label>
 					<input type="checkbox" name="filter" value="clients-count" class="value-filter" />
 					Minimal clients count
-					<input type="number" name="filter" class="clients-count" min="0" disabled />
+					<input type="number" name="clientsCountFilter" class="clients-count" min="0" disabled />
 				</label>
 
 				<label>
 					<input type="checkbox" name="filter" value="capitalization" class="value-filter" />
 					Minimal capitalization
-					<input type="number" name="filter" class="capitalization" min="0" disabled />
+					<input type="number" name="capitalizationFilter" class="capitalization" min="0" disabled />
 				</label>
 
-				<button id="submit-filters">Use Filters</button>
+				<button type="button" class="filter-submit-button" id="submit-filters">Use Filters</button>
 			</div>
 
 		</div>
-	</div>
+	</form>
 }
 
 @section additionalScripts {
 	<script type="module" src="~/js/GenetalListEvents.js" defer></script>
+	<script type="module" src="~/js/entities/bank/ChoseBank.js" defer></script>
+
 }
