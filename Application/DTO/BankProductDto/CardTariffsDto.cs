@@ -54,17 +54,17 @@ namespace Application.DTO.BankProductDto
         public int AnnualMaintenanceCost { get; set; }
 
         [Range(0, 25.00, ErrorMessage = "{0} must be between {1} and {2}")]
-        [Display(Name = "Max credit limit")]
+        [Display(Name = "P2P To Another Bank Commission")]
         public double P2PToAnotherBankCommission { get; set; }
 
         [Range(0, 10.00, ErrorMessage = "{0} must be between {1} and {2}")]
-        [Display(Name = "Max credit limit")]
+        [Display(Name = "P2P Internal Commission")]
         public double P2PInternalCommission { get; set; }
 
         [Required(ErrorMessage = "{0} has to be provided")]
-        [StringLength(4)]
-        [Display(Name = "Card number masked")]
-        public string CardNumberMasked { get; set; }
+        [StringLength(6)]
+        [Display(Name = "BIN")]
+        public string BIN { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -74,7 +74,6 @@ namespace Application.DTO.BankProductDto
             if(Type == CardType.Debit && InterestRate!=null) yield return new ValidationResult("Debit card cant have interest rate");
             if (ValidityPeriod % 0.5 != 0) yield return new ValidationResult("The card validity period must be a multiple of 1 year " +
                 "or half a year (0.5)");
-            throw new NotImplementedException();
         }
     }
 }

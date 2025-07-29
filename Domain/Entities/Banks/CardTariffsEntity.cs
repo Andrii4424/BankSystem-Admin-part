@@ -44,15 +44,15 @@ namespace Domain.Entities.Banks
 
         public double P2PInternalCommission { get; set; }
 
-        [StringLength(4)]
-        public string CardNumberMasked { get; set; }
+        [StringLength(6)]
+        public string BIN { get; set; }
 
         public ICollection<UserCardEntity> UserCards { get; set; }
 
         public CardTariffsEntity() { }
 
         public CardTariffsEntity(Guid bankId, string cardName, CardType type, CardLevel level, double validityPeriod, int maxCreditLimit, 
-            List<PaymentSystem> enabledPaymentSystems, double? interestRate, List<CardCurrency> enableCurency, int annualMaintenanceCost, string cardNumberMasked,
+            List<PaymentSystem> enabledPaymentSystems, double? interestRate, List<CardCurrency> enableCurency, int annualMaintenanceCost, string bin,
             double p2pInternalCommission, double p2pToAnotherBankCommission)
         {
             BankId = bankId;
@@ -65,7 +65,7 @@ namespace Domain.Entities.Banks
             InterestRate = interestRate;
             EnableCurency = enableCurency;
             AnnualMaintenanceCost = annualMaintenanceCost;
-            CardNumberMasked = cardNumberMasked;
+            BIN = bin;
             UserCards = new List<UserCardEntity>();
             P2PInternalCommission = p2pInternalCommission;
             P2PToAnotherBankCommission = p2pToAnotherBankCommission;
