@@ -35,7 +35,7 @@ namespace Application.Services.BankService
             _logger.LogInformation("Attempting to update bank with name {BankName}", bankDto.BankName);
             bankDto.BankName =bankDto.BankName.Trim();
             string[] allowedExtensions = [".jpg", ".jpeg", ".png", ".svg"];
-            if (await _bankRepository.IsUnique(b => b.BankName == bankDto.BankName))
+            if (await _bankRepository.IsExists(b => b.BankName == bankDto.BankName))
             {
                 _logger.LogWarning("Bank with name {BankName} is already exist!", bankDto.BankName);
                 return OperationResult.Error("Bank with this name is already exist!");

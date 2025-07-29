@@ -162,6 +162,11 @@ namespace Infrastructure.Migrations
                     b.Property<int>("AnnualMaintenanceCost")
                         .HasColumnType("int");
 
+                    b.Property<string>("BIN")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
                     b.Property<Guid>("BankId")
                         .HasColumnType("uniqueidentifier");
 
@@ -169,11 +174,6 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("CardNumberMasked")
-                        .IsRequired()
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("EnableCurency")
                         .IsRequired()

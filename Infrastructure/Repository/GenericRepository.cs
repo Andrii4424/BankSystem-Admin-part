@@ -69,7 +69,7 @@ namespace Infrastructure.Repository
             return await query.CountAsync();
         }
 
-        public async Task<bool> IsUnique(Expression<Func<T, bool>> searchParametr)
+        public async Task<bool> IsExists(Expression<Func<T, bool>> searchParametr)
         {
             return await _dbSet.AnyAsync(searchParametr);
         }

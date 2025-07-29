@@ -13,6 +13,7 @@ namespace Application.ServiceContracts.BankServiceContracts
     {
         public Task<List<BankDto>?> GetLimitedByDtoFilterAsync(BankFilters filters);
         public Task<int> GetCountByDtoFilter(BankFilters filters);
+        public Task<string> GetBankNameById(Guid id);
         public Task<List<BankDto>?> GetBanksListAsync();
         public Task<BankDto> GetBankByIdAsync(Guid bankId);
         public Task<List<BankDto>> GetLimitedBanksListAsync(int firstElement, int itemsToLoad, string? searchValue, string? orderMethod,

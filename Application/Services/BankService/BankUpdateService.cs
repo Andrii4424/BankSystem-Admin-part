@@ -37,7 +37,7 @@ namespace Application.Services.BankService
                 throw new NullReferenceException("This bank doesnt exist");
             }
             bankDto.EstablishedDate = bank.EstablishedDate;
-            if (bank.BankName != bankDto.BankName && await _bankRepository.IsUnique(b => b.BankName == bankDto.BankName))
+            if (bank.BankName != bankDto.BankName && await _bankRepository.IsExists(b => b.BankName == bankDto.BankName))
             {
                 _logger.LogWarning("Bank with name {BankName} is already exist!", bankDto.BankName);
                 return OperationResult.Error("Bank with this name is already exist!");

@@ -450,12 +450,17 @@ input[type="file"] {
 .radio-elements{
     display: flex;
     flex-direction: column;
-
 }
+.radio-elements input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+}
+
+
 
 .create-element {
     margin-top: 20px;
-    margin-bottom:4px;
+    margin-bottom: 4px;
     background-color: var(--dark-green-color);
     border-radius: 8px;
     border: 0px;

@@ -1,4 +1,5 @@
-﻿using Application.DTO.BankProductDto;
+﻿using Application.DTO;
+using Application.DTO.BankProductDto;
 using Application.DTO.FiltersDto;
 using Application.ServiceContracts.BankServiceContracts;
 using Application.ServiceContracts.ICardTarrifsService;
@@ -34,16 +35,29 @@ namespace WebUI.Controllers
         [HttpGet("/add-card-tariffs/bank-id/{bankId:guid}")]
         public async Task<IActionResult> AddCard([FromRoute] Guid bankId)
         {
+            ViewBag.BankId = bankId;
+            ViewBag.BankName = await _bankReadService.GetBankNameById(bankId);
             return View(new CardTariffsDto());
         }
 
         [TypeFilter(typeof(ModelBindingFilter))]
-        [HttpPost("/add-card/bank-id/{bankId:guid}")]
+        [HttpPost("/add-card-tariffs/bank-id/{bankId:guid}")]
         public async Task<IActionResult> AddCard([FromRoute] Guid bankId, [FromForm] CardTariffsDto cardDto)
         {
-            cardDto.BankId = bankId;
-            await _cardTarrifsAddService.AddCardAsync(cardDto);
-            return View();
+            ViewBag.BankId = bankId;
+            ViewBag.BankName = await _bankReadService.GetBankNameById(bankId);
+            if (ModelState.IsValid)
+            {
+                OperationResult result = await _cardTarrifsAddService.AddCardAsync(cardDto);
+                ViewBag.Message = "Success!";
+                if (!result.Success) {
+                    ViewBag.Message = "Error!";
+                    List<string> errors = new List<string>();
+                    errors.Add(result.ErrorMessage);
+                    ViewBag.Errors = errors;
+                }
+            }
+            return View(cardDto);
         }
     }
 }

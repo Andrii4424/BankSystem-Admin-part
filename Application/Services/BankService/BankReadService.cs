@@ -140,6 +140,10 @@ namespace Application.Services.BankServices
             _logger.LogDebug("Bank {BankName} successfully checked for filters", bank.BankName);
             return true;
         } 
+        public async Task<string> GetBankNameById(Guid id)
+        {
+            return (await GetBankByIdAsync(id)).BankName;
+        }
 
         private List<Expression<Func<BankEntity, bool>>?> GetFilters(bool? licenseFilter, bool? siteFilter, double? ratingFilter, 
             int? clientsCountFilter, int? capitalizationFilter) {

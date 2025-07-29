@@ -1,1 +1,116 @@
-﻿HUI
+﻿@model CardTariffsDto
+
+<div class="main-content-block">
+    <div class="add-entity-block">
+        <form asp-controller="Card" asp-action="AddCard" asp-route-bankId="@ViewBag.BankId" method="post" class="add-form" >
+            <h2>Create New Card for @ViewBag.BankName</h2>
+            <input asp-for="BankId" value="@ViewBag.BankId" type="hidden">
+            <label>
+                Card Name:
+                <input asp-for="CardName">
+            </label>
+            <div class="radio-elements">
+                <label>Card Type:</label>
+                <label>
+                    <input type="radio" name="Type" value="@CardType.Credit" checked /> Credit
+                </label>
+                <label>
+                    <input type="radio" name="Type" value="@CardType.Debit" /> Debit
+                </label>
+            </div>
+            <div class="radio-elements">
+                <label>CardLevel</label>
+                <label>
+                    <input asp-for="Level" type="radio" value="@CardLevel.Normal" checked/> Classic
+                </label>
+                <label>
+                    <input asp-for="Level" type="radio" value="@CardLevel.Premium" /> Premium
+                </label>
+            </div>
+            <label>
+                Validity Period (in years):
+                <input asp-for="ValidityPeriod" step="0.5" maxlength="4"  required oninput="this.value = this.value.replace('.', ',')">
+            </label>
+            <label id ="credit-limit">
+                Max Credit Limit:
+                <input asp-for="MaxCreditLimit">
+            </label>
+            <label id="interest-rate">
+                Interest Rate:
+                <input asp-for="InterestRate" step="0.1" maxlength="4" oninput="this.value = this.value.replace('.', ',')">
+            </label>
+
+            <div class="radio-elements">
+                <label>Enabled Payment Systems:</label>
+                <label>
+                    <input name="EnabledPaymentSystems" type="checkbox" value="@PaymentSystem.Visa" /> Visa
+                </label>
+                <label>
+                    <input name="EnabledPaymentSystems" type="checkbox" value="@PaymentSystem.Mastercard" /> Mastercard
+                </label>
+            </div>
+
+            <div class="radio-elements">
+                <label>Enable Curency:</label>
+                <label>
+                    <input name="EnableCurency" type="checkbox" value="@CardCurrency.UAH" /> UAH
+                </label>
+                <label>
+                    <input name="EnableCurency" type="checkbox" value="@CardCurrency.USD" /> USD
+                </label>
+                <label>
+                    <input name="EnableCurency" type="checkbox" value="@CardCurrency.EUR" /> EUR
+                </label>
+            </div>
+
+            <label>
+                Annual Maintenance Cost:
+                <input asp-for="AnnualMaintenanceCost" type="number">
+            </label>
+            <label>
+                P2P To Another Bank Commission:
+                <input asp-for="P2PToAnotherBankCommission">
+            </label>
+            <label>
+                P2P Internal Commission:
+                <input asp-for="P2PInternalCommission">
+            </label>
+            <label>
+                First 6 digits of the card number (BIN):
+                <input asp-for="BIN">
+            </label>
+
+            @if (ViewBag.Message != null)
+            {
+                @if (ViewBag.Message == "Success!")
+                {
+                    <span class="success-message">@Model.CardName has been successfully created</span>
+                }
+                @if (ViewBag.Message != "Success!")
+                {
+                    <div class="error-validation-message">
+                        <span>@ViewBag.Message</span>
+                        <ul>
+                            @foreach (var error in ViewBag.Errors)
+                            {
+                                <li>@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            }
+            <button type="submit" class="create-element">Create Card</button>
+        </form>
+    </div>
+</div>
+
+@section backButton {
+    <a asp-controller="CardTariffs" asp-action="CardTariffsList" class="text-reset text-decoration-none back-link d-flex align-items-center">
+        <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+    </a>
+}
+
+@section additionalScripts {
+    <script type="module" src="~/js/entities/card-tariffs/AddCardInputsHandler.js" defer></script>
+}
+
