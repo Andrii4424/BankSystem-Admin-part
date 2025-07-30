@@ -44,6 +44,9 @@ namespace Domain.Entities.Banks
 
         public double P2PInternalCommission { get; set; }
 
+        [StringLength(7)]
+        public string CardColor { get; set; }
+
         [StringLength(6)]
         public string BIN { get; set; }
 
@@ -53,7 +56,7 @@ namespace Domain.Entities.Banks
 
         public CardTariffsEntity(Guid bankId, string cardName, CardType type, CardLevel level, double validityPeriod, int maxCreditLimit, 
             List<PaymentSystem> enabledPaymentSystems, double? interestRate, List<CardCurrency> enableCurency, int annualMaintenanceCost, string bin,
-            double p2pInternalCommission, double p2pToAnotherBankCommission)
+            double p2pInternalCommission, double p2pToAnotherBankCommission, string cardColor)
         {
             BankId = bankId;
             CardName = cardName;
@@ -69,6 +72,7 @@ namespace Domain.Entities.Banks
             UserCards = new List<UserCardEntity>();
             P2PInternalCommission = p2pInternalCommission;
             P2PToAnotherBankCommission = p2pToAnotherBankCommission;
+            CardColor = cardColor;
         }
     }
 }

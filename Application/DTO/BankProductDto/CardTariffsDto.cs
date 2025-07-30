@@ -1,5 +1,7 @@
-﻿using Domain.Entities.Banks;
+﻿using Domain.Abstractions;
+using Domain.Entities.Banks;
 using Domain.Enums.CardEnums;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,9 +12,12 @@ using System.Threading.Tasks;
 
 namespace Application.DTO.BankProductDto
 {
-    public class CardTariffsDto :IValidatableObject
+    public class CardTariffsDto :IValidatableObject, IHasBankName
     {
         public Guid Id { get; set; }
+
+        [BindNever]
+        public string? BankName { get; set; }
 
         [Required(ErrorMessage = "{0} has to be provided")]
         [Display(Name = "Bank Id")]
@@ -66,6 +71,11 @@ namespace Application.DTO.BankProductDto
         [Display(Name = "BIN")]
         public string BIN { get; set; }
 
+        [Required(ErrorMessage = "{0} has to be provided")]
+        [StringLength(7)]
+        [Display(Name = "Card Color")]
+        public string CardColor { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (P2PInternalCommission > P2PToAnotherBankCommission) yield return new ValidationResult("P2P commision to " +
@@ -74,6 +84,7 @@ namespace Application.DTO.BankProductDto
             if(Type == CardType.Debit && InterestRate!=null) yield return new ValidationResult("Debit card cant have interest rate");
             if (ValidityPeriod % 0.5 != 0) yield return new ValidationResult("The card validity period must be a multiple of 1 year " +
                 "or half a year (0.5)");
+            if (BIN.Length != 6) yield return new ValidationResult("BIN must contain 6 digits");
         }
     }
 }

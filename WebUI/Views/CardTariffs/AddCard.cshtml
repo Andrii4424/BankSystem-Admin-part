@@ -79,6 +79,13 @@
                 First 6 digits of the card number (BIN):
                 <input asp-for="BIN">
             </label>
+            <label class="color-picker-wrapper">
+                Card Color:
+                <div class="color-preview">
+                    <input type="color" id="card-color" asp-for="CardColor" value="#29cf85">
+                </div>
+            </label>
+
 
             @if (ViewBag.Message != null)
             {

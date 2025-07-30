@@ -21,10 +21,12 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
+.border-none{
+    border: none !important;
+}
 img, svg {
     user-select: none;
-    -webkit-user-drag: none; 
+    -webkit-user-drag: none;
     outline: none;
 }
 
@@ -446,14 +448,18 @@ input[type="file"] {
         border: 1px solid lightgray;
         border-radius: 8px;
     }
+.add-form input[type="radio"] {
+    cursor: pointer;
+}
 
-.radio-elements{
+.radio-elements {
     display: flex;
     flex-direction: column;
 }
 .radio-elements input[type="checkbox"] {
     width: 14px;
     height: 14px;
+    cursor: pointer;
 }
 
 
@@ -695,11 +701,80 @@ input[type="file"] {
     }
 
 /*Chose bank*/
-#chose-bank {
-    margin-top: -12px;
-    margin-bottom: 24px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--heavy-dark-green-color);
+.color-picker-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    min-width: 100px;
+    max-width: 120px;
+    align-items: center;
+    cursor: pointer;
+}
+
+#card-color {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.color-preview {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: #29cf85;
+    pointer-events: none;
+}
+.payment-system-image{
+    width:70px;
+    height: auto;
+}
+
+#card-tariffs-element {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 14px 32px 0px 32px;
+    justify-content: space-between;
+}
+    #card-tariffs-element h2{
+        font-size: 26px;
+    }
+    #card-tariffs-element h4 {
+        font-size: 20px;
+    }
+    #card-tariffs-element h5 {
+        font-size: 18px;
+    }
+
+    #payment-systems {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+#card-and-bank-names {
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}
+
+.right-card-side {
+    display: flex;
+    flex-direction: column;
+    min-height: 190px;
+    justify-content: space-between;
+}
+.card-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+}
+#card-action-buttons{
+    margin-top: -10px;
+}
+#card-action-buttons button {
+    padding: 8px 22px !important;
 }

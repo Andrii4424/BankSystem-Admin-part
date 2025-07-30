@@ -6,35 +6,53 @@
 		Card list is empty, you can create card by button bellow
 	</h4>
 
-	<div id="elements-block">
+	<div id="elements-block" class="card-element-block">
 		@foreach (CardTariffsDto card in Model)
 		{
-			<div class="element-block">
+			<div class="element-block border-none" style="@($"background-color:{card.CardColor}; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);")">
 				<a class="text-reset text-decoration-none info-card">
-					<table class="element-table">
-						<tr>
-							<th>
-								@card.CardName
-							</th>
-						</tr>
-						<tr>
-							<th>
-								@card.Type
-							</th>
-						</tr>
-						<tr>
-							<th>
-								@card.Level
-							</th>
-						</tr>
-					</table>
+
+					<div class="element-table" id="card-tariffs-element">
+						<div id="card-and-bank-names">
+							<h2>@card.BankName</h2>
+							<h4>@card.CardName</h4>
+						</div>
+						<div class="right-card-side">
+							<div id="payment-systems">
+								@if (card.EnabledPaymentSystems.Contains(PaymentSystem.Visa))
+								{
+									<div class="payment-system-block">
+										<img src="~/images/cards/visa.svg" alt="Visa" class="payment-system-image" />
+									</div>
+								}
+								@if (card.EnabledPaymentSystems.Contains(PaymentSystem.Mastercard))
+								{
+									<div class="payment-system-block">
+										<img src="~/images/cards/mastercard.svg" alt="Mastercard" class="payment-system-image" />
+									</div>
+								}
+							</div>
+							<div class="card-details">
+								<h4>@card.Type</h4>
+								@if (card.Level == CardLevel.Normal)
+								{
+									<h5>Classic</h5>
+								}
+								@if (card.Level == CardLevel.Premium)
+								{
+									<h5>@card.Level</h5>
+								}
+
+							</div>
+						</div>
+					</div>
 				</a>
 
-				<div class="action-buttons">
+				<div class="action-buttons" id="card-action-buttons">
 					<form id="add-form" method="get">
-						<button class="update-element" type="submit">Update Bank</button>
+						<button class="update-element" type="submit">Update Card</button>
 					</form>
-					<button class="delete-element">Card Bank</button>
+					<button class="delete-element">Delete Card</button>
 				</div>
 			</div>
 		}
@@ -130,4 +148,5 @@
 
 @section additionalScripts {
 	<script type="module" src="~/js/GenetalListEvents.js" defer></script>
+	<script type="module" src="~/js/entities/card-tariffs/CardList.js" defer></script>
 }
