@@ -84,7 +84,7 @@ namespace Infrastructure.Repository
             {
                 query = query.Where(filter);
             }
-            query= ascending? query.OrderBy(sortValue): query.OrderByDescending(sortValue);
+            query= ascending? query.OrderBy(sortValue).ThenBy(obj=> obj.Id): query.OrderByDescending(sortValue).ThenBy(obj => obj.Id);
 
             return await query
                 .Skip(firstElement)
