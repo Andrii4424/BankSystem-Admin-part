@@ -1,6 +1,9 @@
-﻿
+﻿import { GeneralListMethods } from "../../GeneralListMethods.js";
+
+
 CheckAndChangeTextColor() 
 
+GeneralListMethods.EmptyListTitleChecker("Card");
 
 
 function CheckAndChangeTextColor() {
@@ -23,8 +26,6 @@ function CheckAndChangeTextColor() {
         }
     });
 }
-
-
 
 //For changing text color when background is dark
 function isDarkColor(hexColor) {

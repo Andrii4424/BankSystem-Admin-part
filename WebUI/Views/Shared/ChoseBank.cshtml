@@ -71,17 +71,17 @@
 					The oldest banks
 				</label>
 
-				<label>
+				<label class="header-label mt-1">
 					<input type="radio" name="SortValue" value="newest">
 					The newest banks
 				</label>
 
-				<label>
+				<label class="header-label mt-1">
 					<input type="radio" name="SortValue" value="rating-descending">
 					By rating
 				</label>
 
-				<label>
+				<label class="header-label mt-1">
 					<input type="radio" name="SortValue" value="popularity-descending">
 					By popularity
 				</label>
@@ -91,29 +91,29 @@
 
 			<!--Filters-->
 			<div id="filter-list">
-				<label>
+				<label class="header-label">
 					<input type="checkbox" name="licenseFilter" class="bool-filters" value="false" />
 					Only bank with licenses
 				</label>
 
-				<label>
+				<label class="header-label mt-1">
 					<input type="checkbox" name="siteFilter" class="bool-filters" value="false" />
 					Only bank with sites
 				</label>
 
-				<label>
+				<label class="header-label mt-1">
 					<input type="checkbox" name="filter" value="rating" class="value-filter" />
 					Minimal rating
 					<input type="number" name="ratingFilter" class="rating" min="1" max="5" step="0.1" disabled />
 				</label>
 
-				<label>
+				<label class="header-label mt-1">
 					<input type="checkbox" name="filter" value="clients-count" class="value-filter" />
 					Minimal clients count
 					<input type="number" name="clientsCountFilter" class="clients-count" min="0" disabled />
 				</label>
 
-				<label>
+				<label class="header-label mt-1">
 					<input type="checkbox" name="filter" value="capitalization" class="value-filter" />
 					Minimal capitalization
 					<input type="number" name="capitalizationFilter" class="capitalization" min="0" disabled />
