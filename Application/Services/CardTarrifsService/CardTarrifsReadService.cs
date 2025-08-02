@@ -34,5 +34,11 @@ namespace Application.Services.CardTarrifsService
             //Returns DTOs with bank name
             return GeneralServiceMethods<CardTariffsDto>.ToListWithBankName(cardDtos, banks);
         }
+
+        public async Task<int> GetCardsCount(CardTariffsFilters filters)
+        {
+            Filters<CardTariffsEntity> processedFilters = filters.ToGeneralFilters();
+            return await _cardRepository.CountAsync(processedFilters.SearchFilter, processedFilters.EntityFilters);
+        }
     }
 }

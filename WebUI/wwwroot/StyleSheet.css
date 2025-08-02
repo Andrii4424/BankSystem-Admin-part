@@ -239,6 +239,9 @@ aside {
     #sort-list.card-tarrifs-sort-list {
         width: 194px;
     }
+    #sort-list label{
+        cursor: pointer;
+    }
 
     #sort-list.opened {
         display: flex;
@@ -260,10 +263,13 @@ aside {
     padding: 10px;
     border-radius: 14px;
 }
-.header-label {
-    font-weight: 500;
-    font-size: 16px;
-}
+    #filter-list label{
+        cursor: pointer;
+    }
+    .header-label {
+        font-weight: 500;
+        font-size: 16px;
+    }
 
     #filter-list.opened {
         display: flex;

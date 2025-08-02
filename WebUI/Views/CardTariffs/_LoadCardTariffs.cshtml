@@ -1,0 +1,56 @@
+﻿@{
+	Layout = "";
+}
+
+@model List<CardTariffsDto>
+
+<span class="elements-count" data-elements-list-count="@ViewBag.Count" style="display: none"></span>
+@foreach (CardTariffsDto card in Model)
+{
+	<div class="element-block border-none" style="@($"background-color:{card.CardColor}; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);")">
+		<a class="text-reset text-decoration-none info-card">
+
+			<div class="element-table" id="card-tariffs-element">
+				<div id="card-and-bank-names">
+					<h2>@card.BankName</h2>
+					<h4>@card.CardName</h4>
+				</div>
+				<div class="right-card-side">
+					<div id="payment-systems">
+						@if (card.EnabledPaymentSystems.Contains(PaymentSystem.Visa))
+						{
+							<div class="payment-system-block">
+								<img src="~/images/cards/visa.svg" alt="Visa" class="payment-system-image" />
+							</div>
+						}
+						@if (card.EnabledPaymentSystems.Contains(PaymentSystem.Mastercard))
+						{
+							<div class="payment-system-block">
+								<img src="~/images/cards/mastercard.svg" alt="Mastercard" class="payment-system-image" />
+							</div>
+						}
+					</div>
+					<div class="card-details">
+						<h4>@card.Type</h4>
+						@if (card.Level == CardLevel.Normal)
+						{
+							<h5>Classic</h5>
+						}
+						@if (card.Level == CardLevel.Premium)
+						{
+							<h5>@card.Level</h5>
+						}
+
+					</div>
+				</div>
+			</div>
+		</a>
+
+		<div class="action-buttons" id="card-action-buttons">
+			<form id="add-form" method="get">
+				<button class="update-element" type="submit">Update Card</button>
+			</form>
+			<button class="delete-element">Delete Card</button>
+		</div>
+	</div>
+}

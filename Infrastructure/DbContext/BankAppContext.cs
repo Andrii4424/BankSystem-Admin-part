@@ -43,45 +43,6 @@ namespace Infrastructure.Context
             modelBuilder.Entity<DepositTariffsEntity>().ToTable("DepositTariffs");
 
             //Enum converter
-            //Cards
-            //Payment system
-            var paymentSystemConverter = new ValueConverter<List<PaymentSystem>, string>(
-                v => string.Join(",", v.Select(p => p.ToString())),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                      .Select(s => Enum.Parse<PaymentSystem>(s))
-                      .ToList()
-            );
-
-            var paymentSystemComparer = new ValueComparer<List<PaymentSystem>>(
-                (c1, c2) => c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
-                c => c.ToList()
-            );
-
-            //Currency 
-            var currencyConverter = new ValueConverter<List<CardCurrency>, string>(
-                v => string.Join(",", v.Select(p => p.ToString())),
-                v => v.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                      .Select(s => Enum.Parse<CardCurrency>(s))
-                      .ToList()
-            );
-
-            var currencyComparer = new ValueComparer<List<CardCurrency>>(
-                (c1, c2) => c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
-                c => c.ToList()
-            );
-
-            modelBuilder.Entity<CardTariffsEntity>()
-                .Property(c => c.EnabledPaymentSystems)
-                .HasConversion(paymentSystemConverter)
-                .Metadata.SetValueComparer(paymentSystemComparer);
-
-            modelBuilder.Entity<CardTariffsEntity>()
-                .Property(c => c.EnableCurency)
-                .HasConversion(currencyConverter)
-                .Metadata.SetValueComparer(currencyComparer);
-
             modelBuilder
                 .Entity<EmployeeEntity>()
                 .Property(c => c.JobTitle)

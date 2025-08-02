@@ -29,6 +29,7 @@ namespace WebUI.Controllers
         [Route("/cards")]
         public async Task<IActionResult> CardTariffsList()
         {
+            ViewBag.Count = await _cardTarrifsReadService.GetCardsCount(new CardTariffsFilters());
             return View(await _cardTarrifsReadService.GetCardsAsync(new CardTariffsFilters()));
         }
         //Add Actions
@@ -58,6 +59,13 @@ namespace WebUI.Controllers
                 }
             }
             return View(cardDto);
+        }
+
+        [HttpPost("/get-card-tariffs")]
+        public async Task<IActionResult> LoadCards(CardTariffsFilters filters)
+        {
+            ViewBag.Count = await _cardTarrifsReadService.GetCardsCount(filters);
+            return PartialView("_LoadCardTariffs" ,await _cardTarrifsReadService.GetCardsAsync(filters));
         }
     }
 }

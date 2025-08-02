@@ -6,5 +6,6 @@ namespace Application.ServiceContracts.ICardTarrifsService
     public interface ICardTarrifsReadService
     {
         public Task<List<CardTariffsDto>?> GetCardsAsync(CardTariffsFilters filters);
+        public Task<int> GetCardsCount(CardTariffsFilters filters);
     }
 }

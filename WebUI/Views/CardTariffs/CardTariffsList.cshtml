@@ -6,6 +6,8 @@
 		Card list is empty, you can create card by button bellow
 	</h4>
 
+	<span class="elements-count" data-elements-list-count="@ViewBag.Count" style="display: none"></span>
+
 	<div id="elements-block" class="card-element-block">
 		@foreach (CardTariffsDto card in Model)
 		{
@@ -115,20 +117,20 @@
 			<!--Filters-->
 			<div id="filter-list">
 				<label class="header-label">
-					<input type="checkbox" name="BankNameCheckbox" class="bool-filters" value="false" placeholder="Enter the bank name" gap-1 />
+					<input type="checkbox" name="BankNameCheckbox" class="filter bool-filters search-by-bank" value="false" placeholder="Enter the bank name" gap-1 />
 					Search by bank name
-					<input type="text" name="ChosenBankName" disabled/>
+					<input type="text" class="search-by-bank-input" name="ChosenBankName" disabled/>
 				</label>
 				
 				<label class="mt-1">
 					<div class="header-label">Card with payment system</div>
 					<div class="d-flex flex-direction-row gap-2">
 						<label>
-							<input type="checkbox" name="ChosenPaymentSystem" value="@PaymentSystem.Visa" />
+							<input type="checkbox" name="ChosenPaymentSystems" class="filter" value="@PaymentSystem.Visa" />
 							Visa
 						</label>
 						<label>
-							<input type="checkbox" name="ChosenPaymentSystem" value="@PaymentSystem.Mastercard" />
+							<input type="checkbox" name="ChosenPaymentSystems" class="filter" value="@PaymentSystem.Mastercard" />
 							Mastercard
 						</label>
 					</div>
@@ -138,15 +140,15 @@
 					<div class="header-label">Card with currency</div>
 					<div class="d-flex flex-direction-row gap-2">
 						<label>
-							<input type="checkbox" name="ChosenPaymentSystem" value="@CardCurrency.UAH" />
+							<input type="checkbox" name="ChosenCurrency" class="filter" value="@CardCurrency.UAH" />
 							UAH
 						</label>
 						<label>
-							<input type="checkbox" name="ChosenPaymentSystem" value="@CardCurrency.USD" />
+							<input type="checkbox" name="ChosenCurrency" class="filter" value="@CardCurrency.USD" />
 							USD
 						</label>
 						<label>
-							<input type="checkbox" name="ChosenPaymentSystem" value="@CardCurrency.EUR" />
+							<input type="checkbox" name="ChosenCurrency" class="filter" value="@CardCurrency.EUR" />
 							EUR
 						</label>
 					</div>
@@ -156,11 +158,11 @@
 					<div class="header-label">Card Level</div>
 					<div class="d-flex flex-direction-row gap-2">
 						<label>
-							<input type="checkbox" name="ChosenLevel" value="@CardLevel.Normal" />
+							<input type="checkbox" name="ChosenLevels" class="filter" value="@CardLevel.Normal" />
 							Classic
 						</label>
 						<label>
-							<input type="checkbox" name="ChosenLevel" value="@CardLevel.Premium" />
+							<input type="checkbox" name="ChosenLevels" class="filter" value="@CardLevel.Premium" />
 							Premium
 						</label>
 					</div>
@@ -170,11 +172,11 @@
 					<div class="header-label">Card Type</div>
 					<div class="d-flex flex-direction-row gap-2">
 						<label>
-							<input type="checkbox" name="ChosenType" value="@CardType.Credit" />
+							<input type="checkbox" name="ChosenTypes" class="filter" value="@CardType.Credit" />
 							Credit
 						</label>
 						<label>
-							<input type="checkbox" name="ChosenType" value="@CardType.Debit" />
+							<input type="checkbox" name="ChosenTypes" class="filter" value="@CardType.Debit" />
 							Debit
 						</label>
 					</div>

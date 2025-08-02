@@ -15,10 +15,10 @@ namespace Application.DTO.FiltersDto
         public string? SortValue { get; set; }
 
         public string? ChosenBankName { get; set; }
-        public PaymentSystem? ChosenPaymentSystem { get; set; }
+        public List<PaymentSystem>? ChosenPaymentSystems { get; set; }
         public List<CardCurrency>? ChosenCurrency { get; set; }
-        public CardLevel? ChosenLevel { get; set; }
-        public CardType? ChosenType { get; set; }
+        public List<CardLevel>? ChosenLevels { get; set; }
+        public List<CardType>? ChosenTypes { get; set; }
 
         public CardTariffsFilters()
         {
@@ -35,11 +35,11 @@ namespace Application.DTO.FiltersDto
 
             switch (SortValue) {
                 case "name-descending":
-                    ascending = false;
+                    ascending = true;
                     sortExpression = c => c.CardName;
                     break;
                 case "name-ascending":
-                    ascending = true;
+                    ascending = false;
                     sortExpression = c => c.CardName;
                     break;
                 case "annual-maintenance-cost":
@@ -58,15 +58,27 @@ namespace Application.DTO.FiltersDto
 
             List<Expression<Func<CardTariffsEntity, bool>>?> filters = new();
 
-            if (ChosenBankName != null) filters.Add(c => c.Bank.BankName == ChosenBankName);
-            if (ChosenPaymentSystem != null) filters.Add(c => c.EnabledPaymentSystems.Contains(ChosenPaymentSystem.Value));
-            if (ChosenLevel != null) filters.Add(c => c.Level == ChosenLevel);
-            if(ChosenType != null) filters.Add(c=>  c.Type == ChosenType);
-            if (ChosenCurrency != null)
+            if (ChosenBankName != null) filters.Add(c => c.Bank.BankName.Contains(ChosenBankName));
+            if (ChosenPaymentSystems != null)
             {
-                foreach(var item in ChosenCurrency)
+                filters.Add(c => c.EnabledPaymentSystems.Any(paymentsystem => ChosenPaymentSystems.Contains(paymentsystem)));
+            }
+            if (ChosenCurrency != null)  // Попробуй через элемент коллекции [0]
+            {
+                filters.Add(c => c.EnableCurency.Any(currency => ChosenCurrency.Contains(currency)));
+            }
+            if (ChosenLevels != null)
+            {
+                foreach (var item in ChosenLevels)
                 {
-                    filters.Add(c => c.EnableCurency.Contains(item));
+                    filters.Add(c => ChosenLevels.Contains(c.Level));
+                }
+            }
+            if (ChosenTypes != null)
+            {
+                foreach (var item in ChosenTypes)
+                {
+                    filters.Add(c => ChosenTypes.Contains(c.Type));
                 }
             }
             return new Filters<CardTariffsEntity>(FirstElement, ElementsToLoad, searchFilter, sortExpression, ascending, filters);

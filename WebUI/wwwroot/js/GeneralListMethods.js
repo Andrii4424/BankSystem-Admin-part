@@ -57,7 +57,9 @@
     //Returns true if chosen some filter otherwise false 
     static CheckForFilters() {
         const filters = this.filterList.querySelectorAll('input[type="checkbox"][name="filter"]')
+        const filtersClass = document.querySelectorAll(".filter");
         if (Array.from(filters).some(filter => filter.checked)) return true;
+        if (Array.from(filtersClass).some(filter => filter.checked)) return true;
         if (this.searchInput.value !== "" && this.searchInput.value !== null) return true;
         return false;
     }

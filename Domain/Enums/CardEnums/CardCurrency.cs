@@ -2,8 +2,8 @@
 {
     public enum CardCurrency
     {
-        UAH,
-        EUR,
-        USD
+        UAH =0,
+        EUR =1,
+        USD=2
     }
 }
