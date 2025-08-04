@@ -23,10 +23,12 @@ namespace Application.Services.CardTarrifsService
             _mapper = mapper;
         }
 
-        public async Task<OperationResult> UpdateCardAsync(CardTariffsDto cardDto)
+        public async Task<OperationResult> UpdateCardAsync(Guid cardId, CardTariffsDto cardDto)
         {
             _logger.LogInformation("Attempting to add update card tariffs with name {CardName}", cardDto.CardName);
-            if(!await _cardRepository.IsObjectIdExists(cardDto.Id))
+            CardTariffsEntity? card = await _cardRepository.GetValueByIdAsync(cardId);
+
+            if (card == null)
             {
                 _logger.LogError("Trying update non-existent card with id {cardId}", cardDto.Id);
                 throw new ArgumentException($"Trying update non-existent card with id {cardDto.Id}");
@@ -37,7 +39,8 @@ namespace Application.Services.CardTarrifsService
                 throw new ArgumentException($"Trying update card to non-existent bank, bank with Id {cardDto.BankId} doesnt exist");
             }
 
-            _cardRepository.UpdateObject(_mapper.Map<CardTariffsEntity>(cardDto));
+            card = _mapper.Map(cardDto, card);
+            _cardRepository.UpdateObject(card);
             await _cardRepository.SaveAsync();
             _logger.LogInformation("Card with name {CardName} has been successfully updated", cardDto.CardName);
 

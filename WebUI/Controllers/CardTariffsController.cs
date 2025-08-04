@@ -26,12 +26,21 @@ namespace WebUI.Controllers
             _bankReadService = bankReadService;
         }
 
+        //Read
         [Route("/cards")]
         public async Task<IActionResult> CardTariffsList()
         {
             ViewBag.Count = await _cardTarrifsReadService.GetCardsCount(new CardTariffsFilters());
             return View(await _cardTarrifsReadService.GetCardsAsync(new CardTariffsFilters()));
         }
+
+        [HttpPost("/get-card-tariffs")]
+        public async Task<IActionResult> LoadCards(CardTariffsFilters filters)
+        {
+            ViewBag.Count = await _cardTarrifsReadService.GetCardsCount(filters);
+            return PartialView("_LoadCardTariffs", await _cardTarrifsReadService.GetCardsAsync(filters));
+        }
+
         //Add Actions
         [HttpGet("/add-card-tariffs/bank-id/{bankId:guid}")]
         public async Task<IActionResult> AddCard([FromRoute] Guid bankId)
@@ -61,11 +70,34 @@ namespace WebUI.Controllers
             return View(cardDto);
         }
 
-        [HttpPost("/get-card-tariffs")]
-        public async Task<IActionResult> LoadCards(CardTariffsFilters filters)
+        //Update 
+        [HttpGet("/update-card-tariffs/bank-id/{cardId:guid}")]
+        public async Task<IActionResult> UpdateCard ([FromRoute] Guid cardId)
         {
-            ViewBag.Count = await _cardTarrifsReadService.GetCardsCount(filters);
-            return PartialView("_LoadCardTariffs" ,await _cardTarrifsReadService.GetCardsAsync(filters));
+            CardTariffsDto? card = await _cardTarrifsReadService.GetCardById(cardId);
+            ViewBag.BankName = await _bankReadService.GetBankNameById(card.BankId);
+            return View(card);
         }
+
+        [TypeFilter(typeof(ModelBindingFilter))]
+        [HttpPost("/update-card-tariffs/bank-id/{cardId:guid}")]
+        public async Task<IActionResult> UpdateCard([FromRoute] Guid cardId, [FromForm] CardTariffsDto cardDto)
+        {
+            ViewBag.BankName = await _bankReadService.GetBankNameById(cardDto.BankId);
+            if (ModelState.IsValid)
+            {
+                OperationResult result = await _cardTarrifsUpdateService.UpdateCardAsync(cardId, cardDto);
+                ViewBag.Message = "Success!";
+                if (!result.Success)
+                {
+                    ViewBag.Message = "Error!";
+                    List<string> errors = new List<string>();
+                    errors.Add(result.ErrorMessage);
+                    ViewBag.Errors = errors;
+                }
+            }
+            return View(cardDto);
+        }
+
     }
 }

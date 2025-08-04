@@ -25,6 +25,7 @@ namespace Application.Services.CardTarrifsService
 
         public async Task<List<CardTariffsDto>?> GetCardsAsync(CardTariffsFilters filters)
         {
+            _logger.LogInformation("Getting card tariffs list by id");
             Filters<CardTariffsEntity> processedFilters = filters.ToGeneralFilters();
             List<CardTariffsEntity> cards = await _cardRepository.GetLimitedAsync(processedFilters.FirstItem, processedFilters.ElementsToLoad, processedFilters.SearchFilter,
                 processedFilters.Ascending, processedFilters.SortValue, processedFilters.EntityFilters);
@@ -33,6 +34,19 @@ namespace Application.Services.CardTarrifsService
 
             //Returns DTOs with bank name
             return GeneralServiceMethods<CardTariffsDto>.ToListWithBankName(cardDtos, banks);
+        }
+
+        public async Task<CardTariffsDto?> GetCardById(Guid cardId)
+        {
+            _logger.LogInformation("Trying get card tariffs by id {cardId}", cardId);
+            CardTariffsEntity ? card = await _cardRepository.GetValueByIdAsync(cardId);
+            if(card==null)
+            {
+                _logger.LogError("Card with id {cardId} doesnt exist", cardId);
+                throw new ArgumentException($"Card with id {cardId} doesnt exist");
+            }
+            _logger.LogInformation("Successfull getting card by id {cardId}", cardId);
+            return _mapper.Map<CardTariffsDto>(card);
         }
 
         public async Task<int> GetCardsCount(CardTariffsFilters filters)

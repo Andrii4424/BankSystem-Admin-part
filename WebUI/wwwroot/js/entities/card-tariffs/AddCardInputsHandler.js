@@ -7,6 +7,8 @@ const interestRateInput = interestRate.querySelector("input");
 const colorInput = document.getElementById("card-color");
 const preview = document.querySelector(".color-preview");
 
+preview.style.backgroundColor = colorInput.value;
+
 colorInput.addEventListener("change", () => {
     preview.style.backgroundColor = colorInput.value;
 });
