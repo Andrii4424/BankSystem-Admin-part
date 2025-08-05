@@ -10,7 +10,7 @@ const searchByBankCheckbox = document.querySelector(".search-by-bank");
 const searchByBankInput = document.querySelector(".search-by-bank-input");
 const deleteButtons = document.querySelectorAll(".delete-element");
 let listCount = document.querySelectorAll(".elements-count")[document.querySelectorAll(".elements-count").length - 1].dataset.elementsListCount;
-
+let chosenDeleteButton;
 
 elementsToLoadFilter.value = 12;
 
@@ -46,9 +46,10 @@ async function GetCards() {
     })
     await GeneralListMethods.AddElementsToEnd(response);
     GeneralListMethods.EmptyListTitleChecker("Card");
-    loadButtonChecker();
     CheckAndChangeTextColor();
     listCount = document.querySelectorAll(".elements-count")[document.querySelectorAll(".elements-count").length - 1].dataset.elementsListCount;
+    loadButtonChecker();
+    GeneralListMethods.checkAndApplyColumns();
 }
 
 loadMoreButton.addEventListener("click", async () => {
@@ -104,14 +105,21 @@ function CheckAndChangeTextColor() {
         }
     });
 }
-//Когда элемент удаляется, новая кнопка удаления не появляется в списке, надо решить проблему и доделать удаление
 
 //Deleting
+//Open confirmation window
 GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => {
     if (event.target.matches(".delete-element")) {
-        const id = event.target.dataset.elementId;
+        chosenDeleteButton = event.target;
+        GeneralListMethods.OpenConfirmDeleteWindow(`${chosenDeleteButton.dataset.elementName} card`);
+    }
+});
+
+GeneralListMethods.deleteWindow.addEventListener("click", async (event) => {
+    if (event.target.matches(".confirm-delete-button")) {
+        const id = chosenDeleteButton.dataset.elementId;
         await deleteItem(id);
-        event.target.closest(".element-block").remove();
+        chosenDeleteButton.closest(".element-block").remove();
 
         //Replace deleting item
         firstElementFilter.value = GeneralListMethods.GetElementsCount();
@@ -125,6 +133,15 @@ GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => 
         loadButtonChecker();
         GeneralListMethods.EmptyListTitleChecker("Card");
         GeneralListMethods.checkAndApplyColumns();
+
+        GeneralListMethods.CloseConfirmDeleteWindow();
+    }
+    else if (!event.target.closest("#delete-window")) {         //Close delete confitmation window when user click on another part of the screen
+        GeneralListMethods.CloseConfirmDeleteWindow();
+    }
+    else if (event.target.matches(".cancel-delete-button")) {
+        GeneralListMethods.CloseConfirmDeleteWindow();
+        chosenDeleteButton = null;
     }
 });
 
