@@ -30,6 +30,8 @@ namespace WebUI.Controllers
         [Route("/cards")]
         public async Task<IActionResult> CardTariffsList()
         {
+            Response.Cookies.Append("returnUrl", "cardTariffs");
+            Response.Cookies.Append("returnActionUrl", "cardTariffsList");
             ViewBag.Count = await _cardTarrifsReadService.GetCardsCount(new CardTariffsFilters());
             return View(await _cardTarrifsReadService.GetCardsAsync(new CardTariffsFilters()));
         }
@@ -44,6 +46,8 @@ namespace WebUI.Controllers
         [Route("card-tariffs-info/{cardId:guid}")]
         public async Task<IActionResult> CardTariffsInfo(Guid cardId)
         {
+            Response.Cookies.Append("returnActionUrl", "cardTariffsInfo");
+            ViewBag.ReturnUrl = Request.Cookies["returnUrl"];
             return View(await _cardTarrifsReadService.GetCardById(cardId));
         }
 
@@ -51,6 +55,7 @@ namespace WebUI.Controllers
         [HttpGet("/add-card-tariffs/bank-id/{bankId:guid}")]
         public async Task<IActionResult> AddCard([FromRoute] Guid bankId)
         {
+            ViewBag.ReturnUrl = Request.Cookies["returnUrl"];
             ViewBag.BankId = bankId;
             ViewBag.BankName = await _bankReadService.GetBankNameById(bankId);
             return View(new CardTariffsDto());
@@ -60,6 +65,7 @@ namespace WebUI.Controllers
         [HttpPost("/add-card-tariffs/bank-id/{bankId:guid}")]
         public async Task<IActionResult> AddCard([FromRoute] Guid bankId, [FromForm] CardTariffsDto cardDto)
         {
+            ViewBag.ReturnUrl = Request.Cookies["returnUrl"];
             ViewBag.BankId = bankId;
             ViewBag.BankName = await _bankReadService.GetBankNameById(bankId);
             if (ModelState.IsValid)
@@ -80,6 +86,7 @@ namespace WebUI.Controllers
         [HttpGet("/update-card-tariffs/card-id/{cardId:guid}")]
         public async Task<IActionResult> UpdateCard ([FromRoute] Guid cardId)
         {
+            ViewBag.ReturnActionUrl = Request.Cookies["returnActionUrl"];
             CardTariffsDto? card = await _cardTarrifsReadService.GetCardById(cardId);
             ViewBag.BankName = await _bankReadService.GetBankNameById(card.BankId);
             return View(card);
@@ -89,6 +96,7 @@ namespace WebUI.Controllers
         [HttpPost("/update-card-tariffs/card-id/{cardId:guid}")]
         public async Task<IActionResult> UpdateCard([FromRoute] Guid cardId, [FromForm] CardTariffsDto cardDto)
         {
+            ViewBag.ReturnActionUrl = Request.Cookies["returnActionUrl"];
             ViewBag.BankName = await _bankReadService.GetBankNameById(cardDto.BankId);
             if (ModelState.IsValid)
             {

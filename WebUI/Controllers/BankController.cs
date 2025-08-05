@@ -29,6 +29,7 @@ namespace WebUI.Controllers
         [Route("/banks")]
         public async Task<IActionResult> BanksList()
         {
+            Response.Cookies.Append("returnActionUrl", "bankList");
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync(null, null, null, null, null, null);
             return View(await _bankReadService.GetLimitedBanksListAsync(0, 6, null, null, null, null, null, null, null));
         }
@@ -49,6 +50,8 @@ namespace WebUI.Controllers
         [Route("/bank/{bankId:Guid}")]
         public async Task<IActionResult> BankInfo(Guid bankId)
         {
+            ViewBag.ReturnUrl = Request.Cookies["returnActionUrl"];
+            Response.Cookies.Append("returnUrl", "Bank");
             return View(await _bankReadService.GetBankByIdAsync(bankId));
         }
 
@@ -149,6 +152,7 @@ namespace WebUI.Controllers
         [HttpGet("/get-banks/for/{entity}")]
         public async Task<IActionResult> GetBanksForChose([FromRoute] string entity)
         {
+            ViewBag.ReturnActionUrl = Request.Cookies["returnActionUrl"];
             ViewBag.Entity = entity;
             ViewBag.Count = await _bankReadService.GetCountByDtoFilter(new BankFilters());
             return PartialView("ChoseBank", await _bankReadService.GetLimitedByDtoFilterAsync(new BankFilters()));

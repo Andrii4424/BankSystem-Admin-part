@@ -44,9 +44,20 @@
 </div>
 
 @section backButton {
-	<a asp-controller="Home" asp-action="Index" class="text-reset text-decoration-none back-link d-flex align-items-center">
-		<img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
-	</a>
+	@switch (ViewBag.ReturnActionUrl)
+	{
+		case "cardTariffsList":
+			<a asp-controller="CardTariffs" asp-action="CardTariffsList" class="text-reset text-decoration-none back-link d-flex align-items-center">
+				<img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+			</a>
+			break;
+		default:
+			<a asp-controller="Home" asp-action="Index" class="text-reset text-decoration-none back-link d-flex align-items-center">
+				<img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+			</a>
+			break;
+	}
+
 }
 @section ColumsHandler {
 	<div id="colums" class="d-flex flex-row gap-1">

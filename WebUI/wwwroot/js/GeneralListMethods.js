@@ -9,7 +9,7 @@
     static twoColumns = document.getElementById("two-columns");
     static deleteWindow = document.getElementById("confirm-delete-window");
     static deleteConfirmText = document.getElementById("confirm-delete-text");
-    static lastSearch = this.searchInput.value;
+    static lastSearch = (this.searchInput !== null && this.searchInput !== undefined) ? this.searchInput.value: null;
 
     //Checkers
     //Checks whether to display a message about an empty list

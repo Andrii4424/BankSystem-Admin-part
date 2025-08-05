@@ -112,9 +112,18 @@
 </div>
 
 @section backButton {
-    <a asp-controller="CardTariffs" asp-action="CardTariffsList" class="text-reset text-decoration-none back-link d-flex align-items-center">
-        <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
-    </a>
+    @if (ViewBag.ReturnUrl == "Bank")
+    {
+        <a asp-controller="Bank" asp-action="BankInfo" asp-route-bankId="@ViewBag.BankId" class="text-reset text-decoration-none back-link d-flex align-items-center">
+            <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+        </a>
+    }
+    else
+    {
+        <a asp-controller="CardTariffs" asp-action="CardTariffsList" class="text-reset text-decoration-none back-link d-flex align-items-center">
+            <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+        </a>
+    }
 }
 
 @section additionalScripts {

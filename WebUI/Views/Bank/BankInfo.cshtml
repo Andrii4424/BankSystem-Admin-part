@@ -40,7 +40,7 @@
             <a class="delete" data-element-name="@Model.BankName" data-element-id="@Model.Id">🗑️ Delete Bank</a>
             <a href="#">👥 View Users</a>
             <a href="#">🧑‍💼 View Employees</a>
-            <a href="#">➕ Add Card</a>
+            <a asp-controller="CardTariffs" asp-action="AddCard" asp-route-bankId="@Model.Id">➕ Add Card</a>
         </div>
 
         <div id="bank-cards">
@@ -62,9 +62,18 @@
 
 
 @section backButton {
-     <a asp-controller="Bank" asp-action="BanksList" class="text-reset text-decoration-none back-link d-flex align-items-center">
-        <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
-     </a>
+    @if (ViewBag.ReturnUrl == "cardTariffsInfo")
+    {
+        <a asp-controller="CardTariffs" asp-action="CardTariffsList" class="text-reset text-decoration-none back-link d-flex align-items-center">
+            <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+        </a>
+    }
+    else{
+        <a asp-controller="Bank" asp-action="BanksList" class="text-reset text-decoration-none back-link d-flex align-items-center">
+            <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+        </a>
+    }
+
 }
 
 @section additionalScripts {
