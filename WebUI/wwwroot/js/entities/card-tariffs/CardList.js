@@ -8,13 +8,16 @@ const firstElementFilter = document.querySelector('input[name="FirstElement"]');
 const elementsToLoadFilter = document.querySelector('input[name="ElementsToLoad"]');
 const searchByBankCheckbox = document.querySelector(".search-by-bank");
 const searchByBankInput = document.querySelector(".search-by-bank-input");
+const deleteButtons = document.querySelectorAll(".delete-element");
+let listCount = document.querySelectorAll(".elements-count")[document.querySelectorAll(".elements-count").length - 1].dataset.elementsListCount;
+
 
 elementsToLoadFilter.value = 12;
 
 loadButtonChecker();
 CheckAndChangeTextColor();
 GeneralListMethods.EmptyListTitleChecker("Card");
-
+//Filtration and pagination
 searchByBankCheckbox.addEventListener("change", () => {
     searchByBankInput.disabled = !searchByBankCheckbox.checked;
     if (!searchByBankCheckbox.checked) {
@@ -45,26 +48,33 @@ async function GetCards() {
     GeneralListMethods.EmptyListTitleChecker("Card");
     loadButtonChecker();
     CheckAndChangeTextColor();
+    listCount = document.querySelectorAll(".elements-count")[document.querySelectorAll(".elements-count").length - 1].dataset.elementsListCount;
 }
 
 loadMoreButton.addEventListener("click", async () => {
     firstElementFilter.value = GeneralListMethods.GetElementsCount();
     elementsToLoadFilter.value = 12;
-    const formData = new FormData(form)
-    const response = await fetch(`/get-card-tariffs`, {
-        method: "POST",
-        body: formData
-    });
+    listCount = document.querySelectorAll(".elements-count")[document.querySelectorAll(".elements-count").length - 1].dataset.elementsListCount;
+    const response = await loadItems();
 
     await GeneralListMethods.AddElementsToEnd(response);
     elementsToLoadFilter.value = GeneralListMethods.GetElementsCount();
     loadButtonChecker();
     CheckAndChangeTextColor();
 })
+async function loadItems() {
+    const formData = new FormData(form)
+    const response = await fetch(`/get-card-tariffs`, {
+        method: "POST",
+        body: formData
+    });
+
+    return response;
+}
+
 
 
 function loadButtonChecker() {
-    const listCount = document.querySelectorAll(".elements-count")[document.querySelectorAll(".elements-count").length - 1].dataset.elementsListCount;
     if (GeneralListMethods.GetElementsCount() >= listCount) {
         loadMoreButton.style.display = "none";
     }
@@ -94,6 +104,39 @@ function CheckAndChangeTextColor() {
         }
     });
 }
+//Когда элемент удаляется, новая кнопка удаления не появляется в списке, надо решить проблему и доделать удаление
+
+//Deleting
+GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => {
+    if (event.target.matches(".delete-element")) {
+        const id = event.target.dataset.elementId;
+        await deleteItem(id);
+        event.target.closest(".element-block").remove();
+
+        //Replace deleting item
+        firstElementFilter.value = GeneralListMethods.GetElementsCount();
+        elementsToLoadFilter.value = 1;
+        listCount--;
+        const itemToReplace = await loadItems();
+        await GeneralListMethods.AddElementsToEnd(itemToReplace);
+
+        //Checkers after delete
+        elementsToLoadFilter.value = GeneralListMethods.GetElementsCount();
+        loadButtonChecker();
+        GeneralListMethods.EmptyListTitleChecker("Card");
+        GeneralListMethods.checkAndApplyColumns();
+    }
+});
+
+
+async function deleteItem(id) {
+    const result = await fetch(`/DeleteCard/${id}`, {
+        method: "DELETE"
+    });
+
+    return result.ok;
+}
+
 
 //For changing text color when background is dark
 function isDarkColor(hexColor) {

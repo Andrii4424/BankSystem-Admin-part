@@ -54,7 +54,7 @@
 					<form asp-controller="CardTariffs" asp-action="UpdateCard" asp-route-cardId="@card.Id" id="add-form" method="get">
 						<button class="update-element" type="submit">Update Card</button>
 					</form>
-					<button class="delete-element">Delete Card</button>
+					<button class="delete-element" data-element-id="@card.Id">Delete Card</button>
 				</div>
 			</div>
 		}

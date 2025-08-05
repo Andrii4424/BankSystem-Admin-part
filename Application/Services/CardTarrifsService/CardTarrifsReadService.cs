@@ -34,6 +34,7 @@ namespace Application.Services.CardTarrifsService
 
             //Returns DTOs with bank name
             return GeneralServiceMethods<CardTariffsDto>.ToListWithBankName(cardDtos, banks);
+
         }
 
         public async Task<CardTariffsDto?> GetCardById(Guid cardId)

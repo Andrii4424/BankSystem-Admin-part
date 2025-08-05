@@ -71,7 +71,7 @@ namespace WebUI.Controllers
         }
 
         //Update 
-        [HttpGet("/update-card-tariffs/bank-id/{cardId:guid}")]
+        [HttpGet("/update-card-tariffs/card-id/{cardId:guid}")]
         public async Task<IActionResult> UpdateCard ([FromRoute] Guid cardId)
         {
             CardTariffsDto? card = await _cardTarrifsReadService.GetCardById(cardId);
@@ -80,7 +80,7 @@ namespace WebUI.Controllers
         }
 
         [TypeFilter(typeof(ModelBindingFilter))]
-        [HttpPost("/update-card-tariffs/bank-id/{cardId:guid}")]
+        [HttpPost("/update-card-tariffs/card-id/{cardId:guid}")]
         public async Task<IActionResult> UpdateCard([FromRoute] Guid cardId, [FromForm] CardTariffsDto cardDto)
         {
             ViewBag.BankName = await _bankReadService.GetBankNameById(cardDto.BankId);
@@ -99,5 +99,13 @@ namespace WebUI.Controllers
             return View(cardDto);
         }
 
+        [HttpDelete("DeleteCard/{cardId}")]
+        public async Task<IActionResult> DeleteCard(Guid cardId)
+        {
+            Console.WriteLine("DELETE вызван");
+
+            await _cardTarrifsDeleteService.DeleteCardAsync(cardId);
+            return Ok();
+        }
     }
 }

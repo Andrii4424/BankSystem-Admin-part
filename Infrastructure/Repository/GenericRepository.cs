@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Infrastructure.Repository
 {
@@ -29,7 +30,9 @@ namespace Infrastructure.Repository
 
         public async Task<IEnumerable<T>?> GetAllValuesAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<T?> GetValueByIdAsync(Guid id)
@@ -87,6 +90,7 @@ namespace Infrastructure.Repository
             query= ascending? query.OrderBy(sortValue).ThenBy(obj=> obj.Id): query.OrderByDescending(sortValue).ThenBy(obj => obj.Id);
 
             return await query
+                .AsNoTracking()
                 .Skip(firstElement)
                 .Take(elementsToLoad)
                 .ToListAsync();
