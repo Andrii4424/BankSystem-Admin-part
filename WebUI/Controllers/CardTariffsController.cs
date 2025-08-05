@@ -41,6 +41,12 @@ namespace WebUI.Controllers
             return PartialView("_LoadCardTariffs", await _cardTarrifsReadService.GetCardsAsync(filters));
         }
 
+        [Route("card-tariffs-info/{cardId:guid}")]
+        public async Task<IActionResult> CardTariffsInfo(Guid cardId)
+        {
+            return View(await _cardTarrifsReadService.GetCardById(cardId));
+        }
+
         //Add Actions
         [HttpGet("/add-card-tariffs/bank-id/{bankId:guid}")]
         public async Task<IActionResult> AddCard([FromRoute] Guid bankId)

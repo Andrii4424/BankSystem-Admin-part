@@ -349,6 +349,7 @@ aside {
     flex-direction: row;
     align-items: center;
     padding-bottom: 14px;
+    cursor: pointer;
 }
 .name-text {
     font-size: 20px;
@@ -792,4 +793,12 @@ input[type="file"] {
 }
 #card-action-buttons button {
     padding: 8px 22px !important;
+}
+
+#card-info-color {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 30px;
 }

@@ -12,8 +12,7 @@
 		@foreach (CardTariffsDto card in Model)
 		{
 			<div class="element-block border-none" style="@($"background-color:{card.CardColor}; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);")">
-				<a class="text-reset text-decoration-none info-card">
-
+				<a asp-controller="CardTariffs" asp-action="CardTariffsInfo" asp-route-cardId="@card.Id" class="text-reset text-decoration-none info-card">
 					<div class="element-table" id="card-tariffs-element">
 						<div id="card-and-bank-names">
 							<h2>@card.BankName</h2>

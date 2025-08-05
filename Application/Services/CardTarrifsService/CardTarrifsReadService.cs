@@ -46,8 +46,10 @@ namespace Application.Services.CardTarrifsService
                 _logger.LogError("Card with id {cardId} doesnt exist", cardId);
                 throw new ArgumentException($"Card with id {cardId} doesnt exist");
             }
+            CardTariffsDto cardDto = _mapper.Map<CardTariffsDto>(card);
+            cardDto.BankName =  (await _bankRepository.GetValueByIdAsync(card.BankId)).BankName;
             _logger.LogInformation("Successfull getting card by id {cardId}", cardId);
-            return _mapper.Map<CardTariffsDto>(card);
+            return cardDto;
         }
 
         public async Task<int> GetCardsCount(CardTariffsFilters filters)

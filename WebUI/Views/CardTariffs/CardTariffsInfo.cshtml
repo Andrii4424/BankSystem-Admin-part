@@ -1,0 +1,96 @@
+﻿@model CardTariffsDto
+
+<div class="main-content-block">
+    <div id="item-info-container" class="pt-3">
+        <table id="item-info-table">
+            <tr><th>Bank</th><td><a asp-controller="Bank" asp-action="BankInfo" asp-route-bankId="@Model.BankId">@Model.BankName</a> </td></tr>
+            <tr><th>Card Name</th><td>@Model.CardName</td></tr>
+            <tr><th>Card Type</th><td>@Model.Type</td></tr>
+            <tr><th>Card Level</th>
+                <td>@if (Model.Level == CardLevel.Normal)
+                    {
+                        <span>Classic</span>
+                    }
+                    else
+                    {
+                        <span>Premium</span>
+                    }
+                </td>
+            </tr>
+            <tr><th>Validity Period</th><td>@Model.ValidityPeriod</td></tr>
+            <tr><th>MaxCredit Limit</th><td>@Model.MaxCreditLimit</td></tr>
+            <tr><th>Enabled Payment Systems</th>
+                <td>
+                    @if (Model.EnabledPaymentSystems.Contains(PaymentSystem.Visa) && Model.EnabledPaymentSystems.Contains(PaymentSystem.Mastercard))
+                    {
+                        <span>Visa, Mastercard</span>
+                    }
+                    else if (Model.EnabledPaymentSystems.Contains(PaymentSystem.Visa))
+                    {
+                        <span>Visa</span>
+                    }
+                    else if (Model.EnabledPaymentSystems.Contains(PaymentSystem.Mastercard))
+                    {
+                        <span>Mastercard</span>
+                    }
+                </td>
+            </tr>
+            <tr><th>Interest Rate (mounthly)</th><td>@Model.InterestRate</td></tr>
+            <tr><th>Enable Curency</th>
+                <td>
+                    @for (int i = 0; i < Model.EnableCurency.Count; i++)
+                    {
+                        switch (Model.EnableCurency[i])
+                        {
+                            case CardCurrency.UAH:
+                                <span>UAH</span>
+                                break;
+                            case CardCurrency.USD:
+                                <span>USD</span>
+                                break;
+                            case CardCurrency.EUR:
+                                <span>EUR</span>
+                                break;
+                            default:
+                                break;
+                        }
+                        if (i + 1 <Model.EnableCurency.Count)
+                        {
+                            <span>,</span>
+                        }
+                    }
+                </td>
+            </tr>
+            <tr><th>Annual Maintenance Cost</th><td>@Model.AnnualMaintenanceCost</td></tr>
+            <tr><th>P2P To Another Bank Commission (in %)</th><td>@Model.P2PToAnotherBankCommission</td></tr>
+            <tr><th>P2P Internal Commission (in %)</th><td>@Model.P2PInternalCommission</td></tr>
+            <tr><th>BIN (first 6 card digits)</th><td>@Model.BIN</td></tr>
+            <tr>
+                <th>Card Color</th>
+                <td class="d-flex align-items-center"> 
+                    <span id="card-info-color" style="background-color: @Model.CardColor;"></span>
+                </td>
+            </tr>
+
+        </table>
+
+        <div id="item-info-action-buttons">
+            <a asp-controller="CardTariffs" asp-action="UpdateCard" asp-route-cardId="@Model.Id" asp-route-fromBankInfo="true" class="update">✏️ Update Card</a>
+            <a class="delete" data-element-name="@Model.BankName" data-element-id="@Model.Id">🗑️ Delete Card</a>
+        </div>
+
+    </div>
+</div>
+
+
+@section backButton {
+    <a asp-controller="Bank" asp-action="BanksList" class="text-reset text-decoration-none back-link d-flex align-items-center">
+        <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />
+    </a>
+}
+
+@section additionalScripts {
+
+}
+
+
