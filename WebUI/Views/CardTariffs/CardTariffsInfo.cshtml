@@ -1,7 +1,7 @@
 ﻿@model CardTariffsDto
 
 <div class="main-content-block">
-    <div id="item-info-container" class="pt-3">
+    <div id="item-info-container" class="pt-3 mt-2 mb-5">
         <table id="item-info-table">
             <tr><th>Bank</th><td><a asp-controller="Bank" asp-action="BankInfo" asp-route-bankId="@Model.BankId">@Model.BankName</a> </td></tr>
             <tr><th>Card Name</th><td>@Model.CardName</td></tr>

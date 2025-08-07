@@ -32,11 +32,11 @@
                 <input asp-for="ValidityPeriod" step="0.5" maxlength="4"  required oninput="this.value = this.value.replace('.', ',')">
             </label>
             <label id ="credit-limit">
-                Max Credit Limit (mounthly):
+                Max Credit Limit:
                 <input asp-for="MaxCreditLimit">
             </label>
             <label id="interest-rate">
-                Interest Rate:
+                Interest Rate (mounthly):
                 <input asp-for="InterestRate" step="0.1" maxlength="4" oninput="this.value = this.value.replace('.', ',')">
             </label>
 
@@ -69,11 +69,11 @@
             </label>
             <label>
                 P2P To Another Bank Commission (in %):
-                <input asp-for="P2PToAnotherBankCommission">
+                <input asp-for="P2PToAnotherBankCommission" oninput="this.value = this.value.replace('.', ',')">
             </label>
             <label>
                 P2P Internal Commission (in %):
-                <input asp-for="P2PInternalCommission">
+                <input asp-for="P2PInternalCommission" oninput="this.value = this.value.replace('.', ',')">
             </label>
             <label>
                 First 6 digits of the card number (BIN):
