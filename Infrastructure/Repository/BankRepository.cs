@@ -35,5 +35,12 @@ namespace Infrastructure.Repository
             .ToListAsync();
         }
 
+        public async Task<BankEntity?> GetBankWithCardsAsync(Guid bankId)
+        {
+            return await _dbSet
+                .Include(b => b.Cards)
+                .FirstOrDefaultAsync(b => b.Id == bankId);
+        }
+
     }
 }

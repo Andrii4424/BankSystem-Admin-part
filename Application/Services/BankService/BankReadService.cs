@@ -52,7 +52,7 @@ namespace Application.Services.BankServices
 
         public async Task<BankDto> GetBankByIdAsync(Guid bankId)
         {
-            BankEntity? bankEntity = await _bankRepository.GetValueByIdAsync(bankId);
+            BankEntity? bankEntity = await _bankRepository.GetBankWithCardsAsync(bankId);
             if (bankEntity == null) {
                 _logger.LogError("Bank with ID {BankId} was not found", bankId);
                 throw new ArgumentException($"Bank with id {bankId} doesnt exist"); 

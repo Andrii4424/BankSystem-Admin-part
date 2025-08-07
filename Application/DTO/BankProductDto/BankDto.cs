@@ -73,6 +73,6 @@ namespace Application.DTO.BankProductDto
         public string? BankLogoPath { get; set; }
 
         [BindNever]
-        public List<CardTariffsDto>? BankCards { get; set; }
+        public List<CardTariffsDto>? Cards { get; set; }
     }
 }

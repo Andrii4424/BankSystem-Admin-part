@@ -1,7 +1,7 @@
 ﻿@model BankDto
 
 <div class="main-content-block">
-    <div id="item-info-container">
+    <div id="item-info-container" class="mt-2 mb-5">
         <div id="item-header">
             <img src="/@Model.BankLogoPath" alt="bank-logo" />
             <h2>@Model.BankName</h2>
@@ -44,17 +44,58 @@
         </div>
 
         <div id="bank-cards">
-            <h4>Bank Cards</h4>
-            @if (Model.BankCards==null || Model.BankCards.Count == 0)
+            @if (Model.Cards == null || Model.Cards.Count == 0)
             {
-                <h5>Unforunately @Model.BankName has not cards yet. You can add card by button Add Card</h5>
+                <div class="text-center text-muted mt-3">
+                    <i class="bi bi-credit-card fs-3"></i>
+                    <p class="mt-2">No cards yet. Click <strong>Add Card</strong> to create one</p>
+                </div>
             }
             else
             {
-                @foreach (CardTariffsDto card in Model.BankCards)
-                {
+                <h4 class="ms-4">Bank Cards:</h4>
+                <div id="card-tariffs-icons">
+                    @foreach (CardTariffsDto card in Model.Cards)
+                    {
+                        <div class="element-block bank-info border-none" style="@($"background-color:{card.CardColor}; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);")">
+                            <a asp-controller="CardTariffs" asp-action="CardTariffsInfo" asp-route-cardId="@card.Id" class="text-reset text-decoration-none info-card-bank-info">
+                                <div class="element-table" id="card-tariffs-element-bank-info">
+                                    <div id="card-and-bank-names-bank-info">
+                                        <h4>@card.CardName</h4>
+                                    </div>
+                                    <div class="right-card-side bank-info">
+                                        <div id="payment-systems" class="bank-info">
+                                            @if (card.EnabledPaymentSystems.Contains(PaymentSystem.Visa))
+                                            {
+                                                <div class="payment-system-block">
+                                                    <img src="~/images/cards/visa.svg" alt="Visa" class="payment-system-image bank-info" />
+                                                </div>
+                                            }
+                                            @if (card.EnabledPaymentSystems.Contains(PaymentSystem.Mastercard))
+                                            {
+                                                <div class="payment-system-block">
+                                                    <img src="~/images/cards/mastercard.svg" alt="Mastercard" class="payment-system-image bank-info" />
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="card-details">
+                                            <h4>@card.Type</h4>
+                                            @if (card.Level == CardLevel.Normal)
+                                            {
+                                                <h5>Classic</h5>
+                                            }
+                                            @if (card.Level == CardLevel.Premium)
+                                            {
+                                                <h5>@card.Level</h5>
+                                            }
 
-                }
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
             }
         </div>
     </div>
@@ -62,7 +103,7 @@
 
 
 @section backButton {
-    @if (ViewBag.ReturnUrl == "cardTariffsInfo")
+    @if (ViewBag.ReturnUrl == "cardTariffs")
     {
         <a asp-controller="CardTariffs" asp-action="CardTariffsList" class="text-reset text-decoration-none back-link d-flex align-items-center">
             <img src="~/images/main-page/arrow-to-left-icon.svg" alt="Back" />

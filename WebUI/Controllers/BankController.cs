@@ -29,6 +29,7 @@ namespace WebUI.Controllers
         [Route("/banks")]
         public async Task<IActionResult> BanksList()
         {
+            Response.Cookies.Append("returnUrl", "Bank");
             Response.Cookies.Append("returnActionUrl", "bankList");
             ViewBag.ModelCount = await _bankReadService.GetBanksCountAsync(null, null, null, null, null, null);
             return View(await _bankReadService.GetLimitedBanksListAsync(0, 6, null, null, null, null, null, null, null));
@@ -50,8 +51,7 @@ namespace WebUI.Controllers
         [Route("/bank/{bankId:Guid}")]
         public async Task<IActionResult> BankInfo(Guid bankId)
         {
-            ViewBag.ReturnUrl = Request.Cookies["returnActionUrl"];
-            Response.Cookies.Append("returnUrl", "Bank");
+            ViewBag.ReturnUrl = Request.Cookies["returnUrl"];
             return View(await _bankReadService.GetBankByIdAsync(bankId));
         }
 
