@@ -32,7 +32,7 @@
                 <input asp-for="ValidityPeriod" step="0.5" maxlength="4"  required oninput="this.value = this.value.replace('.', ',')">
             </label>
             <label id ="credit-limit">
-                Max Credit Limit:
+                Max Credit Limit (mounthly):
                 <input asp-for="MaxCreditLimit">
             </label>
             <label id="interest-rate">
@@ -68,11 +68,11 @@
                 <input asp-for="AnnualMaintenanceCost" type="number">
             </label>
             <label>
-                P2P To Another Bank Commission:
+                P2P To Another Bank Commission (in %):
                 <input asp-for="P2PToAnotherBankCommission">
             </label>
             <label>
-                P2P Internal Commission:
+                P2P Internal Commission (in %):
                 <input asp-for="P2PInternalCommission">
             </label>
             <label>

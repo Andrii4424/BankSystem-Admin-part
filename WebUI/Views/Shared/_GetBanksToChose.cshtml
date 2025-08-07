@@ -6,8 +6,8 @@
 <span class="elements-count" data-elements-list-count="@ViewBag.Count" style="display: none"></span>
 @foreach (BankDto bank in Model)
 {
-	<div href="/add-@ViewBag.Entity/bank-id/@bank.Id" class="element-block partial-view-element-block">
-		<a class="text-reset text-decoration-none info-card">
+	<div class="element-block partial-view-element-block">
+		<a href="/add-@ViewBag.Entity/bank-id/@bank.Id" class="text-reset text-decoration-none info-card">
 			<img src="/@bank.BankLogoPath" alt="Bank logo" class="logo" />
 			<table class="element-table">
 				<tr>

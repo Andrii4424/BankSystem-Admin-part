@@ -113,13 +113,27 @@ namespace WebUI.Controllers
             return View(cardDto);
         }
 
+        //Delete
         [HttpDelete("DeleteCard/{cardId}")]
         public async Task<IActionResult> DeleteCard(Guid cardId)
         {
-            Console.WriteLine("DELETE вызван");
-
             await _cardTarrifsDeleteService.DeleteCardAsync(cardId);
             return Ok();
+        }
+
+        [HttpPost("/delete-card-with-redirect/{cardId}")]
+        public async Task<IActionResult> DeleteCardWithRedirect(Guid cardId)
+        {
+            Guid banksId= (await _cardTarrifsReadService.GetCardById(cardId)).BankId; 
+            await _cardTarrifsDeleteService.DeleteCardAsync(cardId);
+            if(Request.Cookies["returnUrl"]== "cardTariffs")
+            {
+                return RedirectToAction("CardTariffsList");
+            }
+            else
+            {
+                return RedirectToAction("Bank", "BankInfo", new {bankId= banksId });
+            }
         }
     }
 }

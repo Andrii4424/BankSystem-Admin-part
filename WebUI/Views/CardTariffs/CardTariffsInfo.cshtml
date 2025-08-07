@@ -18,7 +18,16 @@
                 </td>
             </tr>
             <tr><th>Validity Period</th><td>@Model.ValidityPeriod</td></tr>
-            <tr><th>MaxCredit Limit</th><td>@Model.MaxCreditLimit</td></tr>
+            @if (Model.Type!=CardType.Debit)
+            {
+                <tr><th>MaxCredit Limit</th><td>@Model.MaxCreditLimit</td></tr>
+                <tr><th>Interest Rate (mounthly)</th><td>@Model.InterestRate</td></tr>
+            }
+            else
+            {
+                <tr><th>MaxCredit Limit</th><td>0</td></tr>
+                <tr><th>Interest Rate (mounthly)</th><td>0</td></tr>
+            }
             <tr><th>Enabled Payment Systems</th>
                 <td>
                     @if (Model.EnabledPaymentSystems.Contains(PaymentSystem.Visa) && Model.EnabledPaymentSystems.Contains(PaymentSystem.Mastercard))
@@ -35,7 +44,6 @@
                     }
                 </td>
             </tr>
-            <tr><th>Interest Rate (mounthly)</th><td>@Model.InterestRate</td></tr>
             <tr><th>Enable Curency</th>
                 <td>
                     @for (int i = 0; i < Model.EnableCurency.Count; i++)
@@ -74,9 +82,9 @@
 
         </table>
 
-        <div id="item-info-action-buttons">
+        <div id="item-info-action-buttons" class="two-buttons">
             <a asp-controller="CardTariffs" asp-action="UpdateCard" asp-route-cardId="@Model.Id" asp-route-fromBankInfo="true" class="update">✏️ Update Card</a>
-            <a class="delete" data-element-name="@Model.BankName" data-element-id="@Model.Id">🗑️ Delete Card</a>
+            <a class="delete" data-element-name="@Model.CardName" data-element-id="@Model.Id">🗑️ Delete Card</a>
         </div>
 
     </div>
@@ -99,7 +107,9 @@
 }
 
 @section additionalScripts {
+    <script type="module" src="~/js/entities/card-tariffs/CardTariffsDeleteWindow.js" defer></script>
 
+        
 }
 
 
