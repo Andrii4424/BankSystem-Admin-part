@@ -799,8 +799,7 @@ input[type="file"] {
 #payment-systems {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
+    align-items: center;
 }
 
 #card-and-bank-names {

@@ -8,7 +8,7 @@
 @foreach (CardTariffsDto card in Model)
 {
 	<div class="element-block border-none" style="@($"background-color:{card.CardColor}; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);")">
-		<a class="text-reset text-decoration-none info-card">
+		<a asp-controller="CardTariffs" asp-action="CardTariffsInfo" asp-route-cardId="@card.Id" class="text-reset text-decoration-none info-card">
 
 			<div class="element-table" id="card-tariffs-element">
 				<div id="card-and-bank-names">
@@ -47,7 +47,7 @@
 		</a>
 
 		<div class="action-buttons" id="card-action-buttons">
-			<form id="add-form" method="get">
+			<form asp-controller="CardTariffs" asp-action="UpdateCard" asp-route-cardId="@card.Id"  id="add-form" method="get">
 				<button class="update-element" type="submit">Update Card</button>
 			</form>
 			<button class="delete-element" data-element-id="@card.Id" data-element-name="@card.CardName">Delete Card</button>
