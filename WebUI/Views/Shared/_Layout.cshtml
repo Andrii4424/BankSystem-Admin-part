@@ -17,15 +17,16 @@
         </div>
         <div id="language">
             <span id="language-name">EN&#9662;</span>
-
-            <div id="chose-language">
+            <form asp-controller="Language" asp-action="SetLanguage" id="chose-language">
                 <label>
-                    <input type="radio" name="language" value="en" /> EN
+                    <input type="radio" name="language" value="en-GB" /> EN
                 </label>
                 <label>
-                    <input type="radio" name="language" value="ua" /> UA
+                    <input type="radio" name="language" value="uk-UA" /> UA
                 </label>
-            </div>
+                <input type="hidden" name="culture"/>
+                <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+            </form>
         </div>
         <div id="auth">Auth</div>
     </header>

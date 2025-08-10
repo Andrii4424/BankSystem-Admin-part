@@ -7,6 +7,7 @@ using Application.Services.CardTarrifsService;
 using Domain.RepositoryContracts;
 using Infrastructure.Context;
 using Infrastructure.Repository;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebUI.StartupServicesInjection
@@ -15,8 +16,10 @@ namespace WebUI.StartupServicesInjection
     {
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
+            //Db context
             services.AddDbContext<BankAppContext>(
                 options =>
                 {
