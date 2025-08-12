@@ -1,6 +1,9 @@
-﻿namespace Domain.RepositoryContracts
+﻿using Domain.Entities.Persons;
+
+namespace Domain.RepositoryContracts
 {
-    public interface IUserRepository
+    public interface IUserRepository : IGenericRepository<UserEntity>
     {
+
     }
 }

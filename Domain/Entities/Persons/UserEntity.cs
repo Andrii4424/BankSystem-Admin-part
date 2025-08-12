@@ -47,8 +47,6 @@ namespace Domain.Entities.Persons
 
         public string? ProfilePicturePath { get; set; }
 
-        public string DocumentPhotoPath { get; set; }
-
         public DateTime Birthday { get; set; }
 
         public Nationality UserNationality { get; set; }
@@ -56,14 +54,17 @@ namespace Domain.Entities.Persons
         public Gender UserGender { get; set; }
 
         public ICollection<UserCardEntity> UserCards { get; set; }
+        public ICollection<UserPhotosEntity> UserPhotos { get; set; }
+
+        public bool IsEmployeed { get; set; }
 
         public EmployeeEntity employee { get; set; }
 
         public UserEntity() { }
 
         public UserEntity(Guid bankId, string financalNumber, string email, string firstName, string surname, string patronymic,
-            string taxId, string passportNumber, string bankPassword, string? profilePicturePath, string documentPhotoPath, DateTime birthday, 
-            Nationality userNationality, Gender userGender)
+            string taxId, string passportNumber, string bankPassword, string? profilePicturePath, DateTime birthday, 
+            Nationality userNationality, Gender userGender, bool isEmployeed)
         {
             BankId = bankId;
             FinancalNumber = financalNumber;
@@ -75,11 +76,12 @@ namespace Domain.Entities.Persons
             PassportNumber = passportNumber;
             BankPassword = bankPassword;
             ProfilePicturePath = profilePicturePath;
-            DocumentPhotoPath = documentPhotoPath;
             Birthday = birthday;
             UserNationality = userNationality;
             UserGender = userGender;
             UserCards = new List<UserCardEntity>();
+            UserPhotos = new List<UserPhotosEntity>();
+            IsEmployeed = isEmployeed;
         }
     }
 }

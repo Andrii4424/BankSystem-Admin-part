@@ -60,7 +60,7 @@ namespace Domain.Entities.Banks
 
         public ICollection<CreditTariffsEntity> Credits { get; set; }
 
-        public ICollection<DepositTariffsEntity> Depoosits { get; set; }
+        public ICollection<DepositTariffsEntity> Deposits { get; set; }
 
         public BankEntity()
         {
@@ -84,7 +84,7 @@ namespace Domain.Entities.Banks
             Users = new List<UserEntity>();
             Cards = new List<CardTariffsEntity>();
             Credits = new List<CreditTariffsEntity>();
-            Depoosits = new List<DepositTariffsEntity>();
+            Deposits = new List<DepositTariffsEntity>();
         }
     }
 }

@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BankAppContext))]
-    partial class BankAppContextModelSnapshot : ModelSnapshot
+    [Migration("20250812132009_UpdateUser")]
+    partial class UpdateUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -359,37 +362,19 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<int>("UserGender")
-                        .HasColumnType("int");
+                    b.Property<string>("UserGender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserNationality")
-                        .HasColumnType("int");
+                    b.Property<string>("UserNationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BankId");
 
                     b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Persons.UserPhotosEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("photoPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserPhotos", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Banks.BankProducts.CreditTariffsEntity", b =>
@@ -406,7 +391,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Banks.BankProducts.DepositTariffsEntity", b =>
                 {
                     b.HasOne("Domain.Entities.Banks.BankEntity", "Bank")
-                        .WithMany("Deposits")
+                        .WithMany("Depoosits")
                         .HasForeignKey("BankId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -466,24 +451,13 @@ namespace Infrastructure.Migrations
                     b.Navigation("Bank");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Persons.UserPhotosEntity", b =>
-                {
-                    b.HasOne("Domain.Entities.Persons.UserEntity", "User")
-                        .WithMany("UserPhotos")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Domain.Entities.Banks.BankEntity", b =>
                 {
                     b.Navigation("Cards");
 
                     b.Navigation("Credits");
 
-                    b.Navigation("Deposits");
+                    b.Navigation("Depoosits");
 
                     b.Navigation("Users");
                 });
@@ -496,8 +470,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Persons.UserEntity", b =>
                 {
                     b.Navigation("UserCards");
-
-                    b.Navigation("UserPhotos");
 
                     b.Navigation("employee")
                         .IsRequired();

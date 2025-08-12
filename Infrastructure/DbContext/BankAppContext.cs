@@ -29,6 +29,7 @@ namespace Infrastructure.Context
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<CreditTariffsEntity> CreditTariffs { get; set; }
         public DbSet<DepositTariffsEntity> DepositTariffs { get; set; }
+        public DbSet<UserPhotosEntity> UserPhotos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,19 +42,13 @@ namespace Infrastructure.Context
             modelBuilder.Entity<UserEntity>().ToTable("Users");
             modelBuilder.Entity<CreditTariffsEntity>().ToTable("CreditTariffs");
             modelBuilder.Entity<DepositTariffsEntity>().ToTable("DepositTariffs");
+            modelBuilder.Entity<UserPhotosEntity>().ToTable("UserPhotos");
 
             //Enum converter
             modelBuilder
                 .Entity<EmployeeEntity>()
                 .Property(c => c.JobTitle)
                 .HasConversion<string>();
-
-            modelBuilder.Entity<UserEntity>(u =>
-            {
-                u.Property(user => user.UserNationality).HasConversion<string>();
-                u.Property(user => user.UserGender).HasConversion<string>();
-            });
-
 
             modelBuilder.Entity<UserCardEntity>(c =>
             {
@@ -100,8 +95,14 @@ namespace Infrastructure.Context
 
             modelBuilder.Entity<DepositTariffsEntity>()
                 .HasOne(d => d.Bank)
-                .WithMany(b => b.Depoosits)
+                .WithMany(b => b.Deposits)
                 .HasForeignKey(d => d.BankId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserPhotosEntity>()
+                .HasOne(p=>p.User)
+                .WithMany(u=>u.UserPhotos)
+                .HasForeignKey(p=>p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

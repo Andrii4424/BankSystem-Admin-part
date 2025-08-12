@@ -1,9 +1,11 @@
 ﻿using Application.DTO;
 using Application.ServiceContracts.BankServiceContracts;
 using Application.ServiceContracts.ICardTarrifsService;
+using Application.ServiceContracts.IUserService;
 using Application.Services.BankService;
 using Application.Services.BankServices;
 using Application.Services.CardTarrifsService;
+using Application.Services.UserService;
 using Domain.RepositoryContracts;
 using Infrastructure.Context;
 using Infrastructure.Repository;
@@ -34,6 +36,7 @@ namespace WebUI.StartupServicesInjection
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IBankRepository), typeof(BankRepository));
             services.AddScoped(typeof(ICardTarrifsRepository), typeof(CardTarrifsRepository));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 
             //Services
             //Bank services
@@ -47,6 +50,14 @@ namespace WebUI.StartupServicesInjection
             services.AddScoped<ICardTarrifsAddService, CardTarrifsAddService>();
             services.AddScoped<ICardTarrifsUpdateService, CardTarrifsUpdateService>();
             services.AddScoped<ICardTarrifsDeleteService, CardTarrifsDeleteService>();
+
+            //User repository
+            services.AddScoped<IUserReadService, UserReadService>();
+            services.AddScoped<IUserAddService, UserAddService>();
+            services.AddScoped<IUserUpdateService, UserUpdateService>();
+            services.AddScoped<IUserDeleteService, UserDeleteService>();
+
+
 
             return services;
         }
