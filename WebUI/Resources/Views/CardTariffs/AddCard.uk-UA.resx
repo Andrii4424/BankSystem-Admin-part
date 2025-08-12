@@ -117,13 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greeting" xml:space="preserve">
-    <value>Вітаємо в адміністративній панелі! Бажаємо продуктивного дня.</value>
+  <data name="create" xml:space="preserve">
+    <value>Створити Нову Картку Для</value>
   </data>
-  <data name="opportunities" xml:space="preserve">
-    <value>В цій панелі Ви можете керувати банками, вакансіями, створювати новини та керувати користувачами</value>
+  <data name="cardName" xml:space="preserve">
+    <value>Назва Картки:</value>
   </data>
-  <data name="selectOption" xml:space="preserve">
-    <value>Виберіть дію в меню для початку роботи</value>
+  <data name="cardType" xml:space="preserve">
+    <value>Тип Картки:</value>
+  </data>
+  <data name="credit" xml:space="preserve">
+    <value>Кредитна</value>
+  </data>
+  <data name="debit" xml:space="preserve">
+    <value>Дебетова</value>
+  </data>
+  <data name="cardLevel" xml:space="preserve">
+    <value>Рівень Картки:</value>
+  </data>
+  <data name="validityPeriod" xml:space="preserve">
+    <value>Строк Дії (у роках):</value>
+  </data>
+  <data name="creditLimit" xml:space="preserve">
+    <value>Максимальний Кредитний Ліміт:</value>
+  </data>
+  <data name="interestRate" xml:space="preserve">
+    <value>Процентна Ставка (місячна):</value>
+  </data>
+  <data name="paymentSystems" xml:space="preserve">
+    <value>Доступні Платіжні Системи:</value>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>Доступна Валюта:</value>
+  </data>
+  <data name="maintenanceCost" xml:space="preserve">
+    <value>Річна Вартість Обслуговування:</value>
+  </data>
+  <data name="p2pToAnother" xml:space="preserve">
+    <value>P2P комісія на інший банк (у %):</value>
+  </data>
+  <data name="p2pInternal" xml:space="preserve">
+    <value>P2P комісія між клієнтами банку (у %):</value>
+  </data>
+  <data name="bin" xml:space="preserve">
+    <value>Перші 6 цифр номеру картки (BIN):</value>
+  </data>
+  <data name="cardColor" xml:space="preserve">
+    <value>Колір Картки:</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>була успішно створена!</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Помилка!</value>
+  </data>
+  <data name="createButton" xml:space="preserve">
+    <value>Створити Картку</value>
+  </data>
+  <data name="classic" xml:space="preserve">
+    <value>Класична</value>
+  </data>
+  <data name="premium" xml:space="preserve">
+    <value>Преміальна</value>
   </data>
 </root>

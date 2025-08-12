@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@inject IViewLocalizer Localizer
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="@Url.Content("~/StyleSheet.css")"/>
+    <link href="~/images/favicon/favicon-admin.svg" rel="icon" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 <body>
@@ -13,7 +15,7 @@
             <div id="back-icon">
                 @RenderSection("backButton", required: false)
             </div>
-            <h2 class="header-info">Admin Panel</h2>
+            <h2 class="header-info">@Localizer["header"] </h2>
         </div>
         <div id="language">
             <span id="language-name">EN&#9662;</span>
@@ -39,12 +41,12 @@
             </div>
 
             <ul class="ul-none d-flex flex-column gap-2 align-items-center" id="menu">
-                <li id="banks-menu-buttton"><a asp-controller="Bank" asp-action="BanksList" class="text-reset text-decoration-none">Banks</a></li>
-                <li><a asp-controller="CardTariffs" asp-action="CardTariffsList" class="text-reset text-decoration-none">Cards</a></li>
-                <li><a href="#" class="text-reset text-decoration-none">Clients</a></li>
-                <li><a href="#" class="text-reset text-decoration-none">Employees</a></li>
-                <li><a href="#" class="text-reset text-decoration-none">News</a></li>
-                <li><a href="#" class="text-reset text-decoration-none">Vacancies</a></li>
+                <li id="banks-menu-buttton"><a asp-controller="Bank" asp-action="BanksList" class="text-reset text-decoration-none">@Localizer["banks"]</a></li>
+                <li><a asp-controller="CardTariffs" asp-action="CardTariffsList" class="text-reset text-decoration-none">@Localizer["cards"]</a></li>
+                <li><a href="#" class="text-reset text-decoration-none">@Localizer["clients"]</a></li>
+                <li><a href="#" class="text-reset text-decoration-none">@Localizer["employees"]</a></li>
+                <li><a href="#" class="text-reset text-decoration-none">@Localizer["news"]</a></li>
+                <li><a href="#" class="text-reset text-decoration-none">@Localizer["vacancies"]</a></li>
             </ul>
 
             @RenderSection("Search", required: false)
@@ -68,7 +70,7 @@
 
                     <div class="col-sm-6">
                         <ul class="list-unstyled">
-                            <li><!--TO DO: bank image container--><h5 class="text-white">Bank System Admins</h5></li>
+                            <li><!--TO DO: bank image container--><h5 class="text-white">@Localizer["aboutUs"]</h5></li>
                             <li>
                                 <a href="https://github.com/Andrii4424" target="_blank">
                                     <img src="~/images/footer/github-logo.svg" alt="Github" class="footer-images" />
@@ -88,7 +90,7 @@
 
                     <div class="col-sm-6 text-white">
                         <ul class="list-unstyled">
-                            <li><h6>Contact Us</h6></li>
+                            <li><h6>@Localizer["contactUs"]</h6></li>
                             <li>Telegram: Pipsqueak3</li>
                             <li>andreyfalchevskiy@gmail.com</li>
                         </ul>
@@ -101,11 +103,11 @@
 
     <div id="confirm-delete-window">
         <div id="delete-window">
-            <h2>🗑️ Confirm Deletion</h2>
+            <h2>🗑️ @Localizer["confirmDelete"]</h2>
             <p id="confirm-delete-text"></p>
             <div class="delete-buttons">
-                <button class="confirm-delete-button">Yes, Delete</button>
-                <button class="cancel-delete-button">Cancel</button>
+                <button class="confirm-delete-button">@Localizer["delete"]</button>
+                <button class="cancel-delete-button">@Localizer["cancel"]</button>
             </div>
         </div>
     </div>

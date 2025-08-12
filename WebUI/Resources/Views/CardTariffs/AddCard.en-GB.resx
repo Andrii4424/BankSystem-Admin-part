@@ -117,13 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greeting" xml:space="preserve">
-    <value>Вітаємо в адміністративній панелі! Бажаємо продуктивного дня.</value>
+  <data name="create" xml:space="preserve">
+    <value>Create New Card for</value>
   </data>
-  <data name="opportunities" xml:space="preserve">
-    <value>В цій панелі Ви можете керувати банками, вакансіями, створювати новини та керувати користувачами</value>
+  <data name="cardName" xml:space="preserve">
+    <value>Card Name:</value>
   </data>
-  <data name="selectOption" xml:space="preserve">
-    <value>Виберіть дію в меню для початку роботи</value>
+  <data name="cardType" xml:space="preserve">
+    <value>Card Type:</value>
+  </data>
+  <data name="credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="debit" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+  <data name="cardLevel" xml:space="preserve">
+    <value>Card Level:</value>
+  </data>
+  <data name="validityPeriod" xml:space="preserve">
+    <value>Validity Period (in years):</value>
+  </data>
+  <data name="creditLimit" xml:space="preserve">
+    <value>Max Credit Limit:</value>
+  </data>
+  <data name="interestRate" xml:space="preserve">
+    <value>Interest Rate (mounthly):</value>
+  </data>
+  <data name="paymentSystems" xml:space="preserve">
+    <value>Enabled Payment Systems:</value>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>Enable Curency:</value>
+  </data>
+  <data name="maintenanceCost" xml:space="preserve">
+    <value>Annual Maintenance Cost:</value>
+  </data>
+  <data name="p2pToAnother" xml:space="preserve">
+    <value>P2P To Another Bank Commission (in %):</value>
+  </data>
+  <data name="p2pInternal" xml:space="preserve">
+    <value>P2P Internal Commission (in %):</value>
+  </data>
+  <data name="bin" xml:space="preserve">
+    <value>First 6 digits of the card number (BIN):</value>
+  </data>
+  <data name="cardColor" xml:space="preserve">
+    <value>Card Color:</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>has been successfully created!</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="createButton" xml:space="preserve">
+    <value>Create Card</value>
+  </data>
+  <data name="classic" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="premium" xml:space="preserve">
+    <value>Premium</value>
   </data>
 </root>

@@ -117,13 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greeting" xml:space="preserve">
-    <value>Вітаємо в адміністративній панелі! Бажаємо продуктивного дня.</value>
+  <data name="license" xml:space="preserve">
+    <value>Has License</value>
   </data>
-  <data name="opportunities" xml:space="preserve">
-    <value>В цій панелі Ви можете керувати банками, вакансіями, створювати новини та керувати користувачами</value>
+  <data name="rating" xml:space="preserve">
+    <value>Rating</value>
   </data>
-  <data name="selectOption" xml:space="preserve">
-    <value>Виберіть дію в меню для початку роботи</value>
+  <data name="yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="founder" xml:space="preserve">
+    <value>Founder</value>
+  </data>
+  <data name="director" xml:space="preserve">
+    <value>Director</value>
+  </data>
+  <data name="capitalization" xml:space="preserve">
+    <value>Capitalization</value>
+  </data>
+  <data name="clientsCount" xml:space="preserve">
+    <value>Clients Count</value>
+  </data>
+  <data name="activeClientsCount" xml:space="preserve">
+    <value>Active Clients Count</value>
+  </data>
+  <data name="blockedClientsCount" xml:space="preserve">
+    <value>Blocked Clients Count</value>
+  </data>
+  <data name="employeeCount" xml:space="preserve">
+    <value>Employee Count</value>
+  </data>
+  <data name="contactPhone" xml:space="preserve">
+    <value>Contact Phone</value>
+  </data>
+  <data name="website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="establishedDate" xml:space="preserve">
+    <value>Established Date</value>
+  </data>
+  <data name="noWebsite" xml:space="preserve">
+    <value>Unfotunately bank hasnt website yet</value>
+  </data>
+  <data name="legalAddress" xml:space="preserve">
+    <value>Legal Address</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Update Bank</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Delete Bank</value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>View Users</value>
+  </data>
+  <data name="employees" xml:space="preserve">
+    <value>View Employees</value>
+  </data>
+  <data name="addCard" xml:space="preserve">
+    <value>Add Card</value>
+  </data>
+  <data name="noCards" xml:space="preserve">
+    <value>No cards yet. Click</value>
+  </data>
+  <data name="createOne" xml:space="preserve">
+    <value>to create one</value>
+  </data>
+  <data name="cards" xml:space="preserve">
+    <value>Bank Cards:</value>
+  </data>
+  <data name="classic" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="debit" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+  <data name="premium" xml:space="preserve">
+    <value>Premium</value>
   </data>
 </root>

@@ -8,10 +8,26 @@ namespace WebUI.Filters
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if(context.Controller is Controller controller)
-            { 
-                if(context.ActionArguments.ContainsKey("elementsToLoad") && context.ActionArguments["elementsToLoad"] != null)
+            {
+                controller.ViewBag.FiltersValue = new Dictionary<string, string?>
                 {
-                    controller.ViewBag.StartCount = Convert.ToInt32(context.ActionArguments["elementsToLoad"]);
+                    ["LicenseFilter"] = null,
+                    ["SiteFilter"] = null,
+                    ["RatingFilter"] = null,
+                    ["ClientsCountFilter"] = null,
+                    ["CapitalizationFilter"] = null
+                };
+                if (context.ActionArguments.ContainsKey("elementsToLoad") && context.ActionArguments["elementsToLoad"] != null)
+                {
+                    int elementsToLoad = Convert.ToInt32(context.ActionArguments["elementsToLoad"]);
+                    if (elementsToLoad>=6)
+                    {
+                        controller.ViewBag.StartCount = elementsToLoad;
+                    }
+                    else
+                    {
+                        controller.ViewBag.StartCount = 6;
+                    }
                     controller.ViewBag.OrderMethod = context.ActionArguments["orderMethod"];
                     controller.ViewBag.SearchFilter = context.ActionArguments["searchValue"];
 

@@ -117,13 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greeting" xml:space="preserve">
-    <value>Вітаємо в адміністративній панелі! Бажаємо продуктивного дня.</value>
+  <data name="license" xml:space="preserve">
+    <value>Має Ліцензію</value>
   </data>
-  <data name="opportunities" xml:space="preserve">
-    <value>В цій панелі Ви можете керувати банками, вакансіями, створювати новини та керувати користувачами</value>
+  <data name="rating" xml:space="preserve">
+    <value>Рейтинг</value>
   </data>
-  <data name="selectOption" xml:space="preserve">
-    <value>Виберіть дію в меню для початку роботи</value>
+  <data name="yes" xml:space="preserve">
+    <value>Так</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>Ні</value>
+  </data>
+  <data name="founder" xml:space="preserve">
+    <value>Засновник</value>
+  </data>
+  <data name="director" xml:space="preserve">
+    <value>Директор</value>
+  </data>
+  <data name="capitalization" xml:space="preserve">
+    <value>Капіталізація</value>
+  </data>
+  <data name="clientsCount" xml:space="preserve">
+    <value>Кількість Клієнтів</value>
+  </data>
+  <data name="activeClientsCount" xml:space="preserve">
+    <value>Кількість Активних Клієнтів</value>
+  </data>
+  <data name="blockedClientsCount" xml:space="preserve">
+    <value>Кількість заблокованих клієнтів</value>
+  </data>
+  <data name="employeeCount" xml:space="preserve">
+    <value>Кількість Співробітників</value>
+  </data>
+  <data name="contactPhone" xml:space="preserve">
+    <value>Контактний Номер</value>
+  </data>
+  <data name="website" xml:space="preserve">
+    <value>Сайт</value>
+  </data>
+  <data name="establishedDate" xml:space="preserve">
+    <value>Established Date</value>
+  </data>
+  <data name="noWebsite" xml:space="preserve">
+    <value>На жаль, у банку немає сайту</value>
+  </data>
+  <data name="legalAddress" xml:space="preserve">
+    <value>Юридична Адреса</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Редагувати Банк</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Видалити Банк</value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>До Користувачів</value>
+  </data>
+  <data name="employees" xml:space="preserve">
+    <value>До Співробітників</value>
+  </data>
+  <data name="addCard" xml:space="preserve">
+    <value>Додати Картку</value>
+  </data>
+  <data name="noCards" xml:space="preserve">
+    <value>Наразі відсутні картки. Натисніть</value>
+  </data>
+  <data name="createOne" xml:space="preserve">
+    <value>для створення картки</value>
+  </data>
+  <data name="cards" xml:space="preserve">
+    <value>Банківські Картки:</value>
+  </data>
+  <data name="classic" xml:space="preserve">
+    <value>Класична</value>
+  </data>
+  <data name="credit" xml:space="preserve">
+    <value>Кредитна</value>
+  </data>
+  <data name="debit" xml:space="preserve">
+    <value>Дебетова</value>
+  </data>
+  <data name="premium" xml:space="preserve">
+    <value>Преміальна</value>
   </data>
 </root>

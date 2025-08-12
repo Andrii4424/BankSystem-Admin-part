@@ -3,7 +3,7 @@
 <div class="main-content-block">
 
 	<h4 class="empty-list " id="empty-list-title">
-		Bank list is empty, you can create bank by button bellow
+		@Localizer["emptyList"]
 	</h4>
 
 	<div id="elements-block" data-elements-list-count="@ViewBag.ModelCount" data-order-method="@ViewBag.OrderMethod"
@@ -27,7 +27,7 @@
 						</tr>
 						<tr>
 							<th>
-								We have @bank.ActiveClientsCount active clients
+								@Localizer["weHave"] @bank.ActiveClientsCount @Localizer["activeClients"]
 							</th>
 						</tr>
 					</table>
@@ -43,16 +43,16 @@
 						<input name="ratingFilter" class="update-bank-input-rating-filter" type="hidden">
 						<input name="clientsCountFilter" class="update-bank-input-clients-filter" type="hidden">
 						<input name="capitalizationFilter" class="update-bank-input-capitalization-filter" type="hidden">
-						<button class="update-element" type="submit">Update Bank</button>
+						<button class="update-element" type="submit">@Localizer["updateBank"]</button>
 					</form>
-					<button class="delete-element" data-element-name="@bank.BankName" data-element-id="@bank.Id">Delete Bank</button>
+					<button class="delete-element" data-element-name="@bank.BankName" data-element-id="@bank.Id">@Localizer["deleteBank"]</button>
 				</div>
 			</div>
 		}
 	</div>
 
 	<div class="d-flex flex-row align-items-center action-panel gap-4">
-		<button class="load-more" id="load-banks">Load More</button>
+		<button class="load-more" id="load-banks">@Localizer["load"]</button>
 		<form asp-controller="Bank" asp-action="AddBank" id="add-form" method="get">
 			<input name="elementsToLoad" id="add-bank-input" type="hidden">
 			<input name="orderMethod" id="add-bank-input-method" type="hidden">
@@ -62,7 +62,7 @@
 			<input name="ratingFilter" id="add-bank-input-rating-filter" type="hidden">
 			<input name="clientsCountFilter" id="add-bank-input-clients-filter" type="hidden">
 			<input name="capitalizationFilter" id="add-bank-input-capitalization-filter" type="hidden">
-			<button class="add-element" type="submit">Add Bank</button>
+			<button class="add-element" type="submit">@Localizer["add"]</button>
 		</form>
 	</div>
 </div>
@@ -81,8 +81,8 @@
 @section Search{
 	<div id="search" class="d-flex flex-row align-items-center">
 		<div id="find-element" class="d-flex flex-row align-items-center">
-			<input type="text" name="SearchBankName" id="search-input" placeholder="Enter the bank name" />
-			<button id="search-button">Search</button>
+			<input type="text" name="SearchBankName" id="search-input" placeholder="@Localizer["enterBankName"]" />
+			<button id="search-button">@Localizer["search"]</button>
 		</div>
 
 		<div id="filters" class="d-flex flex-row align-items-center">
@@ -90,22 +90,22 @@
 			<div id="sort-list">
 				<label>
 					<input type="radio" name="sort" value="oldest" checked>
-					The oldest banks
+					@Localizer["oldest"]
 				</label>
 
 				<label class="mt-1">
 					<input type="radio" name="sort" value="newest">
-					The newest banks
+					@Localizer["newest"]
 				</label>
 
 				<label class="mt-1">
 					<input type="radio" name="sort" value="rating-descending">
-					By rating
+					@Localizer["byRating"]
 				</label>
 
 				<label class="mt-1">
 					<input type="radio" name="sort" value="popularity-descending">
-					By popularity
+					@Localizer["byPopularity"]
 				</label>
 
 			</div>
@@ -114,33 +114,33 @@
 			<div id="filter-list">
 				<label class="header-label">
 					<input type="checkbox" name="filter" value="license-required" />
-					Only bank with licenses
+					@Localizer["onlyLicense"]
 				</label>
 
 				<label class="header-label mt-1" >
 					<input type="checkbox" name="filter" value="site-required" />
-					Only bank with sites
+					@Localizer["onlySites"]
 				</label>
 
 				<label class="header-label mt-1">
 					<input type="checkbox" name="filter" value="rating" class="value-filter" />
-					Minimal rating
+					@Localizer["minRating"]
 					<input type="number" name="filter" class="rating" min="1" max="5" step="0.1" disabled />
 				</label>
 
 				<label class="header-label mt-1">
 					<input type="checkbox" name="filter" value="clients-count" class="value-filter" />
-					Minimal clients count
+					@Localizer["minClients"]
 					<input type="number" name="filter" class="clients-count" min="0" disabled />
 				</label>
 
 				<label class="header-label mt-1">
 					<input type="checkbox" name="filter" value="capitalization" class="value-filter" />
-					Minimal capitalization
+					@Localizer["minCapitalization"]
 					<input type="number" name="filter" class="capitalization" min="0" disabled />
 				</label>
 
-				<button id="submit-filters">Use Filters</button>
+				<button id="submit-filters">@Localizer["useFilters"]</button>
 			</div>
 
 		</div>

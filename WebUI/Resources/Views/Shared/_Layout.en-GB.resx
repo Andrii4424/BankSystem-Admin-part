@@ -117,13 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greeting" xml:space="preserve">
-    <value>Вітаємо в адміністративній панелі! Бажаємо продуктивного дня.</value>
+  <data name="header" xml:space="preserve">
+    <value>Admin Panel</value>
   </data>
-  <data name="opportunities" xml:space="preserve">
-    <value>В цій панелі Ви можете керувати банками, вакансіями, створювати новини та керувати користувачами</value>
+  <data name="banks" xml:space="preserve">
+    <value>Banks</value>
   </data>
-  <data name="selectOption" xml:space="preserve">
-    <value>Виберіть дію в меню для початку роботи</value>
+  <data name="cards" xml:space="preserve">
+    <value>Cards</value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="employees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="news" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="vacancies" xml:space="preserve">
+    <value>Vacancies</value>
+  </data>
+  <data name="contactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="aboutUs" xml:space="preserve">
+    <value>About Us:</value>
+  </data>
+  <data name="confirmDelete" xml:space="preserve">
+    <value>Confirm Deletion</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Yes, Delete</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="clients" xml:space="preserve">
+    <value>Clients</value>
   </data>
 </root>

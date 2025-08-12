@@ -4,53 +4,53 @@
 <div class="main-content-block">
     <div class="add-entity-block">
         <form asp-controller="Bank" asp-action="AddBank" method="post" class="add-form" enctype="multipart/form-data">
-            <h2>Create New Bank</h2>
+            <h2>@Localizer["createTitle"]</h2>
             <label>
-                Bank Logo:
+                @Localizer["logo"]
                 <div class="file-wrapper">
                     <input name="bankLogo" type="file">
                 </div>
             </label>
             <label>
-                Bank Name:
+                @Localizer["name"]
                 <input asp-for="BankName">
             </label>
             <label>
-                Rating:
+                @Localizer["rating"]
                 <input asp-for="Rating" step="0.1" maxlength="3" required oninput="this.value = this.value.replace('.', ',')">
             </label>
             <div class="radio-elements">
-                <label>Bank has a license?</label>
+                <label>@Localizer["license"]</label>
                 <label>
-                    <input asp-for="HasLicense" type="radio" value="true" /> Yes
+                    <input asp-for="HasLicense" type="radio" value="true" /> @Localizer["yes"]
                 </label>
                 <label>
-                    <input asp-for="HasLicense" type="radio" value="false" /> No
+                    <input asp-for="HasLicense" type="radio" value="false" /> @Localizer["no"]
                 </label>
             </div>
             <label>
-                Founder Name:
+                @Localizer["founder"]
                 <input asp-for="BankFounderFullName">
             </label>
             <label>
-                Director Name:
+                @Localizer["director"]
                 <input asp-for="BankDirectorFullName">
             </label>
             <label>
-                Capitalization:
+                @Localizer["capitalization"]
                 <input asp-for="Capitalization">
             </label>
             <label>
-                Website Url (optional):
+                @Localizer["website"]
                 <input asp-for="WebsiteUrl">
             </label>
             <label>
-                Contact Phone:
+                @Localizer["phone"]
                 <input asp-for="ContactPhone" type="number">
             </label>
             <input asp-for="EstablishedDate" type="hidden" value="@DateTime.UtcNow">
             <label>
-                Legal Address:
+                @Localizer["legalAddress"]
                 <input asp-for="LegalAddress" placeholder="">
             </label>
 
@@ -59,12 +59,12 @@
             {
                 @if (ViewBag.Message == "Success!")
                 {
-                    <span class="success-message">@Model.BankName has been successfully created</span>
+                    <span class="success-message">@Model.BankName @Localizer["successCreate"]</span>
                 }
                 @if (ViewBag.Message != "Success!")
                 {
                     <div class="error-validation-message">
-                        <span>@ViewBag.Message</span>
+                        <span>@Localizer["error"]</span>
                         <ul>
                             @foreach (var error in ViewBag.Errors)
                             {
@@ -84,7 +84,7 @@
             <input name="capitalizationFilter" type="hidden" value="@ViewBag.FiltersValue["CapitalizationFilter"]">
 
 
-            <button type="submit" class="create-element">Create Bank</button>
+            <button type="submit" class="create-element">@Localizer["createBank"]</button>
         </form>
     </div>
 </div>

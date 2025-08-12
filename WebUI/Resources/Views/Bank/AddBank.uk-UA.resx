@@ -117,13 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greeting" xml:space="preserve">
-    <value>Вітаємо в адміністративній панелі! Бажаємо продуктивного дня.</value>
+  <data name="createTitle" xml:space="preserve">
+    <value>Створити Новий Банк</value>
   </data>
-  <data name="opportunities" xml:space="preserve">
-    <value>В цій панелі Ви можете керувати банками, вакансіями, створювати новини та керувати користувачами</value>
+  <data name="director" xml:space="preserve">
+    <value>ПІБ Директора:</value>
   </data>
-  <data name="selectOption" xml:space="preserve">
-    <value>Виберіть дію в меню для початку роботи</value>
+  <data name="founder" xml:space="preserve">
+    <value>ПІБ Засновника Банку:</value>
+  </data>
+  <data name="legalAddress" xml:space="preserve">
+    <value>Юридична Адреса:</value>
+  </data>
+  <data name="license" xml:space="preserve">
+    <value>У банку є ліцензія?</value>
+  </data>
+  <data name="сapitalization" xml:space="preserve">
+    <value>Капіталізація:</value>
+  </data>
+  <data name="logo" xml:space="preserve">
+    <value>Логотип Банку:</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Назва Банку:</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>Ні</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Контактний номер:</value>
+  </data>
+  <data name="rating" xml:space="preserve">
+    <value>Рейтинг:</value>
+  </data>
+  <data name="website" xml:space="preserve">
+    <value>Посилання на сайт (не обов'язково):</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Так</value>
+  </data>
+  <data name="successCreate" xml:space="preserve">
+    <value>був успішно створений</value>
+  </data>
+  <data name="createBank" xml:space="preserve">
+    <value>Створити Банк</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Помилка при створенні!</value>
   </data>
 </root>

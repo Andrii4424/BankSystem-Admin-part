@@ -3,45 +3,45 @@
 <div class="main-content-block">
     <div class="add-entity-block">
         <form asp-controller="Card" asp-action="AddCard" asp-route-bankId="@ViewBag.BankId" method="post" class="add-form" >
-            <h2>Create New Card for @ViewBag.BankName</h2>
+            <h2>@Localizer["create"] @ViewBag.BankName</h2>
             <input asp-for="BankId" value="@ViewBag.BankId" type="hidden">
             <label>
-                Card Name:
+                @Localizer["cardName"]
                 <input asp-for="CardName">
             </label>
             <div class="radio-elements">
-                <label>Card Type:</label>
+                <label>@Localizer["cardType"]</label>
                 <label>
-                    <input type="radio" name="Type" value="@CardType.Credit" checked /> Credit
+                    <input type="radio" name="Type" value="@CardType.Credit" checked /> @Localizer["credit"]
                 </label>
                 <label>
-                    <input type="radio" name="Type" value="@CardType.Debit" /> Debit
+                    <input type="radio" name="Type" value="@CardType.Debit" /> @Localizer["debit"]
                 </label>
             </div>
             <div class="radio-elements">
-                <label>CardLevel</label>
+                <label>@Localizer["cardLevel"]</label>
                 <label>
-                    <input asp-for="Level" type="radio" value="@CardLevel.Normal" checked/> Classic
+                    <input asp-for="Level" type="radio" value="@CardLevel.Normal" checked /> @Localizer["classic"]
                 </label>
                 <label>
-                    <input asp-for="Level" type="radio" value="@CardLevel.Premium" /> Premium
+                    <input asp-for="Level" type="radio" value="@CardLevel.Premium" /> @Localizer["premium"]
                 </label>
             </div>
             <label>
-                Validity Period (in years):
+                @Localizer["validityPeriod"]
                 <input asp-for="ValidityPeriod" step="0.5" maxlength="4"  required oninput="this.value = this.value.replace('.', ',')">
             </label>
             <label id ="credit-limit">
-                Max Credit Limit:
+                @Localizer["creditLimit"]
                 <input asp-for="MaxCreditLimit">
             </label>
             <label id="interest-rate">
-                Interest Rate (mounthly):
+                @Localizer["interestRate"]
                 <input asp-for="InterestRate" step="0.1" maxlength="4" oninput="this.value = this.value.replace('.', ',')">
             </label>
 
             <div class="radio-elements">
-                <label>Enabled Payment Systems:</label>
+                <label>@Localizer["paymentSystems"]</label>
                 <label>
                     <input name="EnabledPaymentSystems" type="checkbox" value="@PaymentSystem.Visa" /> Visa
                 </label>
@@ -51,7 +51,7 @@
             </div>
 
             <div class="radio-elements">
-                <label>Enable Curency:</label>
+                <label>@Localizer["currency"]</label>
                 <label>
                     <input name="EnableCurency" type="checkbox" value="@CardCurrency.UAH" /> UAH
                 </label>
@@ -64,23 +64,23 @@
             </div>
 
             <label>
-                Annual Maintenance Cost:
+                @Localizer["maintenanceCost"]
                 <input asp-for="AnnualMaintenanceCost" type="number">
             </label>
             <label>
-                P2P To Another Bank Commission (in %):
+                @Localizer["p2pToAnother"]
                 <input asp-for="P2PToAnotherBankCommission" oninput="this.value = this.value.replace('.', ',')">
             </label>
             <label>
-                P2P Internal Commission (in %):
+                @Localizer["p2pInternal"]
                 <input asp-for="P2PInternalCommission" oninput="this.value = this.value.replace('.', ',')">
             </label>
             <label>
-                First 6 digits of the card number (BIN):
+                @Localizer["bin"]
                 <input asp-for="BIN">
             </label>
             <label class="color-picker-wrapper">
-                Card Color:
+                @Localizer["cardColor"]
                 <div class="color-preview">
                     <input type="color" id="card-color" asp-for="CardColor" value="#29cf85">
                 </div>
@@ -91,12 +91,12 @@
             {
                 @if (ViewBag.Message == "Success!")
                 {
-                    <span class="success-message">@Model.CardName has been successfully created</span>
+                    <span class="success-message">@Model.CardName @Localizer["success"]</span>
                 }
                 @if (ViewBag.Message != "Success!")
                 {
                     <div class="error-validation-message">
-                        <span>@ViewBag.Message</span>
+                        <span>@Localizer["error"]</span>
                         <ul>
                             @foreach (var error in ViewBag.Errors)
                             {
@@ -106,7 +106,7 @@
                     </div>
                 }
             }
-            <button type="submit" class="create-element">Create Card</button>
+            <button type="submit" class="create-element">@Localizer["createButton"]</button>
         </form>
     </div>
 </div>

@@ -117,13 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greeting" xml:space="preserve">
-    <value>Вітаємо в адміністративній панелі! Бажаємо продуктивного дня.</value>
+  <data name="activeClients" xml:space="preserve">
+    <value>активних клієнтів</value>
   </data>
-  <data name="opportunities" xml:space="preserve">
-    <value>В цій панелі Ви можете керувати банками, вакансіями, створювати новини та керувати користувачами</value>
+  <data name="byPopularity" xml:space="preserve">
+    <value>За популярністю</value>
   </data>
-  <data name="selectOption" xml:space="preserve">
-    <value>Виберіть дію в меню для початку роботи</value>
+  <data name="byRating" xml:space="preserve">
+    <value>За рейтингом</value>
+  </data>
+  <data name="choseToAddCard" xml:space="preserve">
+    <value>Будь ласка виберіть банк, в який Ви бажаєте додати картку</value>
+  </data>
+  <data name="enterBankName" xml:space="preserve">
+    <value>Введіть назву банку</value>
+  </data>
+  <data name="license" xml:space="preserve">
+    <value>Тільки банки з ліцензіями</value>
+  </data>
+  <data name="loadButton" xml:space="preserve">
+    <value>Завантажити Ще</value>
+  </data>
+  <data name="minCapitalization" xml:space="preserve">
+    <value>Мінімальна капіталізація</value>
+  </data>
+  <data name="minClients" xml:space="preserve">
+    <value>Мінімальна кількість клієнтів</value>
+  </data>
+  <data name="minRating" xml:space="preserve">
+    <value>Мінімальний рейтинг</value>
+  </data>
+  <data name="newest" xml:space="preserve">
+    <value>Від найновіших банків</value>
+  </data>
+  <data name="oldest" xml:space="preserve">
+    <value>Від найстаріших банків</value>
+  </data>
+  <data name="searchButton" xml:space="preserve">
+    <value>Пошук</value>
+  </data>
+  <data name="sites" xml:space="preserve">
+    <value>Тільки банки з сайтами</value>
+  </data>
+  <data name="useFilters" xml:space="preserve">
+    <value>Застосувати Фільтри</value>
+  </data>
+  <data name="weHave" xml:space="preserve">
+    <value>Ми маємо</value>
   </data>
 </root>

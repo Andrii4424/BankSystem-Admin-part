@@ -3,32 +3,43 @@
 <div class="main-content-block">
     <div id="item-info-container" class="pt-3 mt-2 mb-5">
         <table id="item-info-table">
-            <tr><th>Bank</th><td><a asp-controller="Bank" asp-action="BankInfo" asp-route-bankId="@Model.BankId">@Model.BankName</a> </td></tr>
-            <tr><th>Card Name</th><td>@Model.CardName</td></tr>
-            <tr><th>Card Type</th><td>@Model.Type</td></tr>
-            <tr><th>Card Level</th>
-                <td>@if (Model.Level == CardLevel.Normal)
+            <tr><th>@Localizer["bank"]</th><td><a asp-controller="Bank" asp-action="BankInfo" asp-route-bankId="@Model.BankId">@Model.BankName</a> </td></tr>
+            <tr><th>@Localizer["cardName"]</th><td>@Model.CardName</td></tr>
+            <tr><th>@Localizer["cardType"]</th>
+                <td>
+                    @if (Model.Type == CardType.Debit)
                     {
-                        <span>Classic</span>
+                        <span>@Localizer["debit"]</span>
                     }
                     else
                     {
-                        <span>Premium</span>
+                        <span>@Localizer["credit"]</span>
                     }
                 </td>
             </tr>
-            <tr><th>Validity Period</th><td>@Model.ValidityPeriod</td></tr>
+            <tr><th>@Localizer["cardLevel"]</th>
+                <td>@if (Model.Level == CardLevel.Normal)
+                    {
+                        <span>@Localizer["classic"]</span>
+                    }
+                    else
+                    {
+                        <span>@Localizer["premium"]</span>
+                    }
+                </td>
+            </tr>
+            <tr><th>@Localizer["validityPeriod"]</th><td>@Model.ValidityPeriod @Localizer["years"]</td></tr>
             @if (Model.Type!=CardType.Debit)
             {
-                <tr><th>MaxCredit Limit</th><td>@Model.MaxCreditLimit</td></tr>
-                <tr><th>Interest Rate (mounthly)</th><td>@Model.InterestRate</td></tr>
+                <tr><th>@Localizer["creditLimit"]</th><td>@Model.MaxCreditLimit</td></tr>
+                <tr><th>@Localizer["interestRate"]</th><td>@Model.InterestRate</td></tr>
             }
             else
             {
-                <tr><th>MaxCredit Limit</th><td>0</td></tr>
-                <tr><th>Interest Rate (mounthly)</th><td>0</td></tr>
+                <tr><th>@Localizer["creditLimit"]</th><td>0</td></tr>
+                <tr><th>@Localizer["interestRate"]</th><td>0</td></tr>
             }
-            <tr><th>Enabled Payment Systems</th>
+            <tr><th>@Localizer["paymentSystems"]</th>
                 <td>
                     @if (Model.EnabledPaymentSystems.Contains(PaymentSystem.Visa) && Model.EnabledPaymentSystems.Contains(PaymentSystem.Mastercard))
                     {
@@ -44,7 +55,7 @@
                     }
                 </td>
             </tr>
-            <tr><th>Enable Curency</th>
+            <tr><th>@Localizer["enableCurrency"]</th>
                 <td>
                     @for (int i = 0; i < Model.EnableCurency.Count; i++)
                     {
@@ -69,12 +80,12 @@
                     }
                 </td>
             </tr>
-            <tr><th>Annual Maintenance Cost</th><td>@Model.AnnualMaintenanceCost</td></tr>
-            <tr><th>P2P To Another Bank Commission (in %)</th><td>@Model.P2PToAnotherBankCommission</td></tr>
-            <tr><th>P2P Internal Commission (in %)</th><td>@Model.P2PInternalCommission</td></tr>
-            <tr><th>BIN (first 6 card digits)</th><td>@Model.BIN</td></tr>
+            <tr><th>@Localizer["maintenanceCost"]</th><td>@Model.AnnualMaintenanceCost</td></tr>
+            <tr><th>@Localizer["p2pToAnother"]</th><td>@Model.P2PToAnotherBankCommission</td></tr>
+            <tr><th>@Localizer["p2pInternal"]</th><td>@Model.P2PInternalCommission</td></tr>
+            <tr><th>@Localizer["bin"]</th><td>@Model.BIN</td></tr>
             <tr>
-                <th>Card Color</th>
+                <th>@Localizer["color"]</th>
                 <td class="d-flex align-items-center"> 
                     <span id="card-info-color" style="background-color: @Model.CardColor;"></span>
                 </td>
@@ -83,8 +94,8 @@
         </table>
 
         <div id="item-info-action-buttons" class="two-buttons">
-            <a asp-controller="CardTariffs" asp-action="UpdateCard" asp-route-cardId="@Model.Id" asp-route-fromBankInfo="true" class="update">✏️ Update Card</a>
-            <a class="delete" data-element-name="@Model.CardName" data-element-id="@Model.Id">🗑️ Delete Card</a>
+            <a asp-controller="CardTariffs" asp-action="UpdateCard" asp-route-cardId="@Model.Id" asp-route-fromBankInfo="true" class="update">✏️ @Localizer["update"]</a>
+            <a class="delete" data-element-name="@Model.CardName" data-element-id="@Model.Id">🗑️ @Localizer["delete"]</a>
         </div>
 
     </div>

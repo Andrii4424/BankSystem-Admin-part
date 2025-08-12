@@ -117,13 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="greeting" xml:space="preserve">
-    <value>Вітаємо в адміністративній панелі! Бажаємо продуктивного дня.</value>
+  <data name="createTitle" xml:space="preserve">
+    <value>Create New Bank</value>
   </data>
-  <data name="opportunities" xml:space="preserve">
-    <value>В цій панелі Ви можете керувати банками, вакансіями, створювати новини та керувати користувачами</value>
+  <data name="director" xml:space="preserve">
+    <value>Director Name:</value>
   </data>
-  <data name="selectOption" xml:space="preserve">
-    <value>Виберіть дію в меню для початку роботи</value>
+  <data name="founder" xml:space="preserve">
+    <value>Founder Name:</value>
+  </data>
+  <data name="legalAddress" xml:space="preserve">
+    <value>Legal Address:</value>
+  </data>
+  <data name="license" xml:space="preserve">
+    <value>Bank has a license?</value>
+  </data>
+  <data name="сapitalization" xml:space="preserve">
+    <value>Capitalization:</value>
+  </data>
+  <data name="logo" xml:space="preserve">
+    <value>Bank Logo:</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Bank Name:</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Contact Phone:</value>
+  </data>
+  <data name="rating" xml:space="preserve">
+    <value>Rating:</value>
+  </data>
+  <data name="website" xml:space="preserve">
+    <value>Website Url (optional):</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="successCreate" xml:space="preserve">
+    <value>has been successfully created</value>
+  </data>
+  <data name="createBank" xml:space="preserve">
+    <value>Create Bank</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error!</value>
   </data>
 </root>

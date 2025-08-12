@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<th>
-						We have @bank.ActiveClientsCount active clients
+						@Localizer["weHave"] @bank.ActiveClientsCount @Localizer["activeClients"]
 					</th>
 				</tr>
 			</table>
@@ -40,9 +40,9 @@
 				<input name="ratingFilter" class="update-bank-input-rating-filter" type="hidden">
 				<input name="clientsCountFilter" class="update-bank-input-clients-filter" type="hidden">
 				<input name="capitalizationFilter" class="update-bank-input-capitalization-filter" type="hidden">
-				<button class="update-element" type="submit">Update Bank</button>
+				<button class="update-element" type="submit">@Localizer["updateButton"]</button>
 			</form>
-			<button class="delete-element" data-element-id="@bank.Id">Delete Bank</button>
+			<button class="delete-element" data-element-id="@bank.Id">@Localizer["deleteButton"]</button>
 		</div>
 	</div>
 }

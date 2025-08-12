@@ -3,7 +3,7 @@
 <div class="main-content-block">
 
 	<h4 class="empty-list " id="empty-list-title">
-		Card list is empty, you can create card by button bellow
+		@Localizer["emptyList"]
 	</h4>
 
 	<span class="elements-count" data-elements-list-count="@ViewBag.Count" style="display: none"></span>
@@ -34,14 +34,21 @@
 								}
 							</div>
 							<div class="card-details">
-								<h4>@card.Type</h4>
+								@if (card.Type==CardType.Debit)
+								{
+									<h4>@Localizer["debit"]</h4>
+								}
+								else
+								{
+									<h4>@Localizer["credit"]</h4>
+								}
 								@if (card.Level == CardLevel.Normal)
 								{
-									<h5>Classic</h5>
+									<h5>@Localizer["classic"]</h5>
 								}
 								@if (card.Level == CardLevel.Premium)
 								{
-									<h5>@card.Level</h5>
+									<h5>@Localizer["premium"]</h5>
 								}
 
 							</div>
@@ -51,18 +58,18 @@
 
 				<div class="action-buttons" id="card-action-buttons">
 					<form asp-controller="CardTariffs" asp-action="UpdateCard" asp-route-cardId="@card.Id" id="add-form" method="get">
-						<button class="update-element" type="submit">Update Card</button>
+						<button class="update-element" type="submit">@Localizer["updateButton"]</button>
 					</form>
-					<button class="delete-element" data-element-id="@card.Id" data-element-name="@card.CardName">Delete Card</button>
+					<button class="delete-element" data-element-id="@card.Id" data-element-name="@card.CardName">@Localizer["deleteButton"]</button>
 				</div>
 			</div>
 		}
 	</div>
 
 	<div class="d-flex flex-row align-items-center action-panel gap-4">
-		<button class="load-more">Load More</button>
+		<button class="load-more">@Localizer["loadButton"]</button>
 		<form asp-controller="Bank" asp-action="GetBanksForChose" asp-route-entity="card-tariffs" id="add-form" method="get">
-			<button class="add-element" type="submit">Add Card</button>
+			<button class="add-element" type="submit">@Localizer["addButton"]</button>
 		</form>
 	</div>
 </div>
@@ -81,8 +88,8 @@
 @section Search {
 	<form asp-controller="CardTariffs" asp-action="LoadCardTariffs" id="search" class="d-flex flex-row align-items-center" method="post">
 		<div id="find-element" class="d-flex flex-row align-items-center">
-			<input type="text" name="SearchValue" id="search-input" placeholder="Enter the card name" />
-			<button type="button" class="filter-submit-button" id="search-button">Search</button>
+			<input type="text" name="SearchValue" id="search-input" placeholder="@Localizer["searchInput"]" />
+			<button type="button" class="filter-submit-button" id="search-button">@Localizer["searchButton"]</button>
 		</div>
 		<input type="hidden" name="FirstElement" />
 		<input type="hidden" name="ElementsToLoad" />
@@ -92,22 +99,22 @@
 			<div id="sort-list" class="card-tarrifs-sort-list">
 				<label>
 					<input type="radio" name="SortValue" value="name-ascending" checked>
-					Name Ascending
+					@Localizer["nameAscending"]
 				</label>
 
 				<label class="mt-1">
 					<input type="radio" name="SortValue" value="name-descending">
-					Name Descending
+					@Localizer["nameDescending"]
 				</label>
 
 				<label class="mt-1">
 					<input type="radio" name="SortValue" value="annual-maintenance-cost">
-					By Maintenance Cost
+					@Localizer["maintenanceCost"]
 				</label>
 
 				<label class="mt-1">
 					<input type="radio" name="SortValue" value="validity-period">
-					By Validity Period
+					@Localizer["validityPeriod"]
 				</label>
 
 			</div>
@@ -117,12 +124,12 @@
 			<div id="filter-list">
 				<label class="header-label">
 					<input type="checkbox" name="BankNameCheckbox" class="filter bool-filters search-by-bank" value="false" placeholder="Enter the bank name" gap-1 />
-					Search by bank name
+					@Localizer["searchBankName"]
 					<input type="text" class="search-by-bank-input" name="ChosenBankName" disabled/>
 				</label>
 				
 				<label class="mt-1">
-					<div class="header-label">Card with payment system</div>
+					<div class="header-label">@Localizer["paymentSystems"]</div>
 					<div class="d-flex flex-direction-row gap-2">
 						<label>
 							<input type="checkbox" name="ChosenPaymentSystems" class="filter" value="@PaymentSystem.Visa" />
@@ -136,7 +143,7 @@
 				</label>
 
 				<label class="mt-1">
-					<div class="header-label">Card with currency</div>
+					<div class="header-label">@Localizer["currency"]</div>
 					<div class="d-flex flex-direction-row gap-2">
 						<label>
 							<input type="checkbox" name="ChosenCurrency" class="filter" value="@CardCurrency.UAH" />
@@ -154,34 +161,34 @@
 				</label>
 
 				<label class="mt-1">
-					<div class="header-label">Card Level</div>
+					<div class="header-label">@Localizer["cardLevel"]</div>
 					<div class="d-flex flex-direction-row gap-2">
 						<label>
 							<input type="checkbox" name="ChosenLevels" class="filter" value="@CardLevel.Normal" />
-							Classic
+							@Localizer["classic"]
 						</label>
 						<label>
 							<input type="checkbox" name="ChosenLevels" class="filter" value="@CardLevel.Premium" />
-							Premium
+							@Localizer["premium"]
 						</label>
 					</div>
 				</label>
 
 				<label class="mt-1">
-					<div class="header-label">Card Type</div>
+					<div class="header-label">@Localizer["cardType"]</div>
 					<div class="d-flex flex-direction-row gap-2">
 						<label>
 							<input type="checkbox" name="ChosenTypes" class="filter" value="@CardType.Credit" />
-							Credit
+							@Localizer["credit"]
 						</label>
 						<label>
 							<input type="checkbox" name="ChosenTypes" class="filter" value="@CardType.Debit" />
-							Debit
+							@Localizer["Debit"]
 						</label>
 					</div>
 				</label>
 
-				<button type="button" class="filter-submit-button" id="submit-filters">Use Filters</button>
+				<button type="button" class="filter-submit-button" id="submit-filters">@Localizer["filtersButton"]</button>
 			</div>
 
 		</div>

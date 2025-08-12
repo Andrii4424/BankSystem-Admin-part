@@ -34,11 +34,11 @@
 						<h4>@card.Type</h4>
 						@if (card.Level == CardLevel.Normal)
 						{
-							<h5>Classic</h5>
+							<h5>@Localizer["classic"]</h5>
 						}
 						@if (card.Level == CardLevel.Premium)
 						{
-							<h5>@card.Level</h5>
+							<h5>@Localizer["premium"]</h5>
 						}
 
 					</div>
@@ -48,9 +48,9 @@
 
 		<div class="action-buttons" id="card-action-buttons">
 			<form asp-controller="CardTariffs" asp-action="UpdateCard" asp-route-cardId="@card.Id"  id="add-form" method="get">
-				<button class="update-element" type="submit">Update Card</button>
+				<button class="update-element" type="submit">@Localizer["update"]</button>
 			</form>
-			<button class="delete-element" data-element-id="@card.Id" data-element-name="@card.CardName">Delete Card</button>
+			<button class="delete-element" data-element-id="@card.Id" data-element-name="@card.CardName">@Localizer["delete"]</button>
 		</div>
 	</div>
 }

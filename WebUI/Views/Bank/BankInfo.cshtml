@@ -8,22 +8,32 @@
         </div>
 
         <table id="item-info-table">
-            <tr><th>Rating</th><td>@Model.Rating</td></tr>
-            <tr><th>Has License</th><td>@Model.HasLicense</td></tr>
-            <tr><th>Founder</th><td>@Model.BankFounderFullName</td></tr>
-            <tr><th>Director</th><td>@Model.BankDirectorFullName</td></tr>
-            <tr><th>Capitalization</th><td>@Model.Capitalization</td></tr>
-            <tr><th>Clients Count</th><td>@Model.ClientsCount</td></tr>
-            <tr><th>Active clients Count</th><td>@Model.ActiveClientsCount</td></tr>
-            <tr><th>Blocked clients Count</th><td>@Model.BlockedClientsCount</td></tr>
-            <tr><th>Employee Count</th><td>@Model.EmployeesCount</td></tr>
-            <tr><th>Contact Phone</th><td>@Model.ContactPhone</td></tr>
+            <tr><th>@Localizer["rating"]</th><td>@Model.Rating</td></tr>
+            <tr><th>@Localizer["license"]</th>
+                <td>
+                    @if (Model.HasLicense)
+                    {
+                        <span>@Localizer["yes"]</span>
+                    }
+                    else{
+                        <span>@Localizer["no"]</span>
+                    }
+                </td>
+            </tr>
+            <tr><th>@Localizer["founder"]</th><td>@Model.BankFounderFullName</td></tr>
+            <tr><th>@Localizer["director"]</th><td>@Model.BankDirectorFullName</td></tr>
+            <tr><th>@Localizer["capitalization"]</th><td>@Model.Capitalization</td></tr>
+            <tr><th>@Localizer["clientsCount"]</th><td>@Model.ClientsCount</td></tr>
+            <tr><th>@Localizer["activeClientsCount"]</th><td>@Model.ActiveClientsCount</td></tr>
+            <tr><th>@Localizer["blockedClientsCount"]</th><td>@Model.BlockedClientsCount</td></tr>
+            <tr><th>@Localizer["employeeCount"]</th><td>@Model.EmployeesCount</td></tr>
+            <tr><th>@Localizer["contactPhone"]</th><td>@Model.ContactPhone</td></tr>
             <tr>
-                <th>Website</th>
+                <th>@Localizer["website"]</th>
                 <td>
                     @if (Model.WebsiteUrl == null)
                     {
-                        <span>Unfotunately bank hasnt website yet</span>
+                        <span>@Localizer["noWebsite"]</span>
                     }
                     else
                     {
@@ -31,16 +41,16 @@
                     }
                 </td>
             </tr>
-            <tr><th>Established Date</th><td>@Model.EstablishedDate</td></tr>
-            <tr><th>Legal Address</th><td>@Model.LegalAddress</td></tr>
+            <tr><th>@Localizer["establishedDate"]</th><td>@Model.EstablishedDate</td></tr>
+            <tr><th>@Localizer["legalAddress"]</th><td>@Model.LegalAddress</td></tr>
         </table>
 
         <div id="item-info-action-buttons">
-            <a asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId="@Model.Id" asp-route-fromBankInfo="true" class="update">✏️ Update Bank</a>
-            <a class="delete" data-element-name="@Model.BankName" data-element-id="@Model.Id">🗑️ Delete Bank</a>
-            <a href="#">👥 View Users</a>
-            <a href="#">🧑‍💼 View Employees</a>
-            <a asp-controller="CardTariffs" asp-action="AddCard" asp-route-bankId="@Model.Id">➕ Add Card</a>
+            <a asp-controller="Bank" asp-action="UpdateBank" asp-route-bankId="@Model.Id" asp-route-fromBankInfo="true" class="update">✏️ @Localizer["update"]</a>
+            <a class="delete" data-element-name="@Model.BankName" data-element-id="@Model.Id">🗑️ @Localizer["delete"]</a>
+            <a href="#">👥 @Localizer["users"]</a>
+            <a href="#">🧑‍💼 @Localizer["employees"]</a>
+            <a asp-controller="CardTariffs" asp-action="AddCard" asp-route-bankId="@Model.Id">➕ @Localizer["addCard"]</a>
         </div>
 
         <div id="bank-cards">
@@ -48,12 +58,12 @@
             {
                 <div class="text-center text-muted mt-3">
                     <i class="bi bi-credit-card fs-3"></i>
-                    <p class="mt-2">No cards yet. Click <strong>Add Card</strong> to create one</p>
+                    <p class="mt-2">@Localizer["noCards"] <strong>@Localizer["addCard"]</strong> @Localizer["createOne"]</p>
                 </div>
             }
             else
             {
-                <h4 class="ms-4">Bank Cards:</h4>
+                <h4 class="ms-4">@Localizer["cards"]</h4>
                 <div id="card-tariffs-icons">
                     @foreach (CardTariffsDto card in Model.Cards)
                     {
@@ -79,16 +89,22 @@
                                             }
                                         </div>
                                         <div class="card-details">
-                                            <h4>@card.Type</h4>
+                                            @if (card.Type == CardType.Debit)
+                                            {
+                                                <h4>@Localizer["debit"]</h4>
+                                            }
+                                            @if (card.Type == CardType.Credit)
+                                            {
+                                                <h4>@Localizer["credit"]</h4>
+                                            }
                                             @if (card.Level == CardLevel.Normal)
                                             {
-                                                <h5>Classic</h5>
+                                                <h5>@Localizer["classic"]</h5>
                                             }
                                             @if (card.Level == CardLevel.Premium)
                                             {
-                                                <h5>@card.Level</h5>
+                                                <h5>@Localizer["premium"]</h5>
                                             }
-
                                         </div>
                                     </div>
                                 </div>
