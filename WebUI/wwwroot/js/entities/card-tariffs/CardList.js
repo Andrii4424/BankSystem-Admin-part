@@ -15,7 +15,7 @@ elementsToLoadFilter.value = 12;
 
 loadButtonChecker();
 GeneralListMethods.CheckAndChangeTextColor();
-GeneralListMethods.EmptyListTitleChecker("Card");
+GeneralListMethods.EmptyListTitleChecker("Card", "Картки");
 //Filtration and pagination
 searchByBankCheckbox.addEventListener("change", () => {
     searchByBankInput.disabled = !searchByBankCheckbox.checked;
@@ -44,7 +44,7 @@ async function GetCards() {
         body: formData
     })
     await GeneralListMethods.AddElementsToEnd(response);
-    GeneralListMethods.EmptyListTitleChecker("Card");
+    GeneralListMethods.EmptyListTitleChecker("Card", "Картки");
     GeneralListMethods.CheckAndChangeTextColor();
     listCount = document.querySelectorAll(".elements-count")[document.querySelectorAll(".elements-count").length - 1].dataset.elementsListCount;
     loadButtonChecker();
@@ -86,7 +86,7 @@ function loadButtonChecker() {
 GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => {
     if (event.target.matches(".delete-element")) {
         chosenDeleteButton = event.target;
-        GeneralListMethods.OpenConfirmDeleteWindow(`${chosenDeleteButton.dataset.elementName} card`);
+        GeneralListMethods.OpenConfirmDeleteWindow(`${chosenDeleteButton.dataset.elementName} card`, `картку ${chosenDeleteButton.dataset.elementName}`);
     }
 });
 
@@ -106,7 +106,7 @@ GeneralListMethods.deleteWindow.addEventListener("click", async (event) => {
         //Checkers after delete
         elementsToLoadFilter.value = GeneralListMethods.GetElementsCount();
         loadButtonChecker();
-        GeneralListMethods.EmptyListTitleChecker("Card");
+        GeneralListMethods.EmptyListTitleChecker("Card", "Картки");
         GeneralListMethods.checkAndApplyColumns();
 
         GeneralListMethods.CloseConfirmDeleteWindow();

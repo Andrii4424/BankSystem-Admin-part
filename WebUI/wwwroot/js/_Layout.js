@@ -1,10 +1,11 @@
+import { GeneralListMethods } from "./GeneralListMethods.js";
 const openMenu = document.getElementById("open-menu");
 const closeMenu = document.getElementById("close-menu");
 const menu = document.getElementById("menu");
 const languageName = document.getElementById("language-name");
 const choseLanguageMenu = document.getElementById("chose-language");
 const languageInputs = document.querySelectorAll('input[name="language"]');
-const cookieLanguageValue = getCookieValue(".AspNetCore.Culture");
+const cookieLanguageValue = GeneralListMethods.getCookieValue(".AspNetCore.Culture");
 
 if (cookieLanguageValue !== null &&  cookieLanguageValue.includes("uk-UA")) {
     document.querySelector('input[name="language"][value="uk-UA"]').checked = true;
@@ -45,13 +46,3 @@ languageInputs.forEach(languageInput => {
     });
 });
 
-function getCookieValue(name) {
-    const cookies = document.cookie.split('; ');
-    for (let cookie of cookies) {
-        const [key, value] = cookie.split('=');
-        if (key === name) {
-            return value; 
-        }
-    }
-    return null; 
-}

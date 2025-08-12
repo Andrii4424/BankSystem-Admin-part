@@ -13,16 +13,27 @@
 
     //Checkers
     //Checks whether to display a message about an empty list
-    static EmptyListTitleChecker(propertyName) {
+    static EmptyListTitleChecker(propertyName, uaPropertyName) {
+        let cookieLanguageValue = this.getCookieValue(".AspNetCore.Culture");
         propertyName = propertyName.toLowerCase()
         if (this.GetElementsCount() === 0 && this.CheckForFilters()) {
             this.emptyListTitle.style.display = "block"
-            this.emptyListTitle.textContent = `No ${propertyName}s matched your search. You can create a new ${propertyName} by clicking the button below`;
+            if (cookieLanguageValue !== null && cookieLanguageValue.includes("uk-UA")) {
+                this.emptyListTitle.textContent = `${uaPropertyName} не знайдені за Вашим запитом. Ви можете створити ${uaPropertyName.toLowerCase()}, натиснувши відповідну кнопку знизу`;
+            }
+            else {
+                this.emptyListTitle.textContent = `No ${propertyName}s matched your search. You can create a new ${propertyName} by clicking the button below`;
+            }
         }
         else if (this.GetElementsCount() === 0 && !this.CheckForFilters()) {
             this.emptyListTitle.style.display = "block"
             const titlePropertyName = propertyName[0].toUpperCase() + propertyName.slice(1);
-            this.emptyListTitle.textContent = `${titlePropertyName} list is empty, you can create ${propertyName} by button bellow`;
+            if (cookieLanguageValue !== null && cookieLanguageValue.includes("uk-UA")) {
+                this.emptyListTitle.textContent = `Список ${uaPropertyName.toLowerCase()} пустий, Вы можете створити ${uaPropertyName.toLowerCase() }, натиснувши відповідну кнопку знизу`;
+            }
+            else {
+                this.emptyListTitle.textContent = `${titlePropertyName} list is empty, you can create ${propertyName} by button bellow`;
+            }
         }
         else {
             this.emptyListTitle.style.display = "none"
@@ -102,9 +113,15 @@
         this.elementsListBlock.insertAdjacentHTML("beforeend", await response.text());
     }
 
-    static OpenConfirmDeleteWindow(deleteName) {
+    static OpenConfirmDeleteWindow(deleteName, uaDeleteName) {
         this.deleteWindow.style.display = "flex";
-        this.deleteConfirmText.innerText =`Are you sure you want to delete ${deleteName}? This action cannot be undone.`;
+        let cookieLanguageValue = this.getCookieValue(".AspNetCore.Culture");
+        if (cookieLanguageValue !== null && cookieLanguageValue.includes("uk-UA")) {
+            this.deleteConfirmText.innerText = `Ви впевненні, що хочете видалити ${uaDeleteName}? Цю дію буде неможливо скасувати`;
+        }
+        else {
+            this.deleteConfirmText.innerText = `Are you sure you want to delete ${deleteName}? This action cannot be undone.`;
+        }
     }
 
     static CloseConfirmDeleteWindow() {
@@ -153,6 +170,16 @@
         return brightness < 128;
     }
 
-
+    //Get localization from cookie
+    static getCookieValue(name) {
+        const cookies = document.cookie.split('; ');
+        for (let cookie of cookies) {
+            const [key, value] = cookie.split('=');
+            if (key === name) {
+                return value;
+            }
+        }
+        return null;
+    }
 }
 

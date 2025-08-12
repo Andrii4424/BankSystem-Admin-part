@@ -49,7 +49,7 @@ async function LoadItems(firstElement, itemsToLoad) {
     await GeneralListMethods.AddElementsToEnd(response);
     LoadButtonChecker();
     GeneralListMethods.checkAndApplyColumns();
-    GeneralListMethods.EmptyListTitleChecker("Bank");
+    GeneralListMethods.EmptyListTitleChecker("Bank", "Банк");
 }
 
 //Filters sort and search handlers
@@ -238,7 +238,7 @@ GeneralListMethods.elementsListBlock.addEventListener("click", async (event) => 
         button = event.target;
         console.log(GeneralListMethods);
 
-        GeneralListMethods.OpenConfirmDeleteWindow(button.dataset.elementName);
+        GeneralListMethods.OpenConfirmDeleteWindow(button.dataset.elementName, button.dataset.elementName);
     }
 });
 
@@ -252,7 +252,7 @@ GeneralListMethods.deleteWindow.addEventListener("click", async (event) => {
         button.closest(".element-block").remove();
 
         LoadButtonChecker();
-        GeneralListMethods.EmptyListTitleChecker("Bank");
+        GeneralListMethods.EmptyListTitleChecker("Bank", "Банк");
         GeneralListMethods.checkAndApplyColumns();
 
         GeneralListMethods.CloseConfirmDeleteWindow();
@@ -274,4 +274,4 @@ async function DeleteItem(url) {
     await GeneralListMethods.AddElementsToEnd(replacedElement);
 }
 
-GeneralListMethods.EmptyListTitleChecker("Bank");
+GeneralListMethods.EmptyListTitleChecker("Bank", "Банк");
