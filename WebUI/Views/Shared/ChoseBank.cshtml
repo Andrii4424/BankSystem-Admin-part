@@ -140,4 +140,8 @@
 @section additionalScripts {
 	<script type="module" src="~/js/GenetalListEvents.js" defer></script>
 	<script type="module" src="~/js/entities/bank/ChoseBank.js" defer></script>
+	@if (ViewBag.Entity == "card-tariffs")
+	{
+		<script type="module" src="~/js/entities/card-tariffs/cardTariffsMenu.js" defer></script>
+	}
 }
