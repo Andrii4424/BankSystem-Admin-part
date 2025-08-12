@@ -43,11 +43,11 @@ namespace Application.DTO.FiltersDto
                     sortExpression = c => c.CardName;
                     break;
                 case "annual-maintenance-cost":
-                    ascending = false;
+                    ascending = true;
                     sortExpression = c => c.AnnualMaintenanceCost;
                     break;
                 case "validity-period":
-                    ascending = true;
+                    ascending = false;
                     sortExpression = c => c.ValidityPeriod;
                     break;
                 default:
