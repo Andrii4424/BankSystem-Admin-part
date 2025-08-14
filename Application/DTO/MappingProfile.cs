@@ -1,6 +1,8 @@
 ﻿using Application.DTO.BankProductDto;
+using Application.DTO.PersonDto;
 using AutoMapper;
 using Domain.Entities.Banks;
+using Domain.Entities.Persons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,11 @@ namespace Application.DTO
             CreateMap<CardTariffsEntity, CardTariffsDto>();
             CreateMap<CardTariffsDto, CardTariffsEntity>()
                 .ForMember(dest => dest.Id, opt=> opt.Ignore());
+
+            //Users
+            CreateMap<UserEntity, UserDto>();
+            CreateMap<UserDto, UserEntity>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }

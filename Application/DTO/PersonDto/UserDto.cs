@@ -1,5 +1,7 @@
 ﻿using Domain.Entities.Banks;
 using Domain.Enums.UserEnums;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -59,11 +61,8 @@ namespace Application.DTO.PersonDto
         [Display(Name = "Bank password")]
         public string BankPassword { get; set; }
 
+        [BindNever]
         public string? ProfilePicturePath { get; set; }
-
-        [Required(ErrorMessage = "{0} has to be provided")]
-        [Display(Name = "Document photo path")]
-        public string DocumentPhotoPath { get; set; }
 
         [Required(ErrorMessage = "{0} has to be provided")]
         [Display(Name = "Birthday")]
@@ -76,5 +75,7 @@ namespace Application.DTO.PersonDto
         [Required(ErrorMessage = "{0} has to be provided")]
         [Display(Name = "Gender")]
         public Gender UserGender { get; set; }
+
+        public bool IsEmployeed { get; set; }
     }
 }

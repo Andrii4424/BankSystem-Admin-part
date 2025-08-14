@@ -7,8 +7,8 @@ namespace Application.DTO.FiltersDto
 {
     public class UserFilters
     {
-        public int? FirstElement { get; set; }
-        public int? ElementsToLoad { get; set; }
+        public int FirstElement { get; set; }
+        public int ElementsToLoad { get; set; }
 
         //Filters, search and sort settings
         public string? SearchValue { get; set; }
@@ -27,34 +27,35 @@ namespace Application.DTO.FiltersDto
             ElementsToLoad = 12;
         }
         
-        public Filters<CardTariffsEntity> ToGeneralFilters()
+        public Filters<UserEntity> ToGeneralFilters()
         {
-            Expression<Func<CardTariffsEntity, bool>>? searchFilter = SearchValue != null ? c => c.CardName.Contains(SearchValue.Trim()) : null;
+            Expression<Func<UserEntity, bool>>? searchFilter = SearchValue != null ? u => (u.FirstName.Contains(SearchValue.Trim()) 
+            || u.Surname.Contains(SearchValue.Trim()) || u.Patronymic.Contains(SearchValue.Trim())) : null;
 
-            Expression<Func<CardTariffsEntity, object>>? sortExpression;
+            Expression<Func<UserEntity, object>>? sortExpression;
             bool ascending;
 
             switch (SortValue)
             {
                 case "name-descending":
                     ascending = true;
-                    sortExpression = c => c.CardName;
+                    sortExpression = u => u.Surname;
                     break;
                 case "name-ascending":
                     ascending = false;
-                    sortExpression = c => c.CardName;
+                    sortExpression = u => u.Surname;
                     break;
                 case "age-ascending":
                     ascending = true;
-                    sortExpression = c => c.AnnualMaintenanceCost;
+                    sortExpression = u => u.Birthday;
                     break;
                 case "age-descending":
                     ascending = false;
-                    sortExpression = c => c.ValidityPeriod;
+                    sortExpression = u => u.Birthday;
                     break;
                 default:
                     ascending = false;
-                    sortExpression = c => c.CardName;
+                    sortExpression = u => u.Surname;
                     break;
             }
 
@@ -75,9 +76,9 @@ namespace Application.DTO.FiltersDto
             }
             if (WithProfilePicture != null)
             {
-                filters.Add(u => u.UserNationality != "~");
+                filters.Add(u => u.ProfilePicturePath != "uploads/no-avatar.svg");
             }
-            return new Filters<CardTariffsEntity>(FirstElement, ElementsToLoad, searchFilter, sortExpression, ascending, filters);
+            return new Filters<UserEntity>(FirstElement, ElementsToLoad, searchFilter, sortExpression, ascending, filters);
         }
     }
 }
