@@ -22,7 +22,7 @@ namespace Application.Services.UserService
             _env = env;
         }
 
-        public async Task<OperationResult> AddUser(UserDto userDto, List<IFormFile>? documents, IFormFile? profilePhoto)
+        /*public async Task<OperationResult> AddUser(UserDto userDto, List<IFormFile>? documents, IFormFile? profilePhoto)
         {
             _logger.LogInformation("Trying to add user with surname {surname}", userDto.Surname);
             if (profilePhoto==null)
@@ -43,6 +43,6 @@ namespace Application.Services.UserService
 
 
             //Надо сделать добавление фото для документов, лого сделано, и дальше все оставшиеся круд операции
-        }
+        }*/
     }
 }

@@ -42,9 +42,11 @@ app.UseRequestLocalization();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseHttpsRedirection();
 }
 else
 {
+    app.UseHsts();
     app.UseExceptionHandlerMiddleware();
 }
 

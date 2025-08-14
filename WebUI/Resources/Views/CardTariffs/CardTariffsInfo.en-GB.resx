@@ -139,13 +139,13 @@
     <value>Card Color</value>
   </data>
   <data name="credit" xml:space="preserve">
-    <value>Кредитна</value>
+    <value>Credit</value>
   </data>
   <data name="creditLimit" xml:space="preserve">
     <value>Max Credit Limit</value>
   </data>
   <data name="debit" xml:space="preserve">
-    <value>Дебетова</value>
+    <value>Debit</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>Delete Card</value>
