@@ -38,12 +38,11 @@ AddApplicationServices.AddServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 app.UseRequestLocalization();
+app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
-    app.UseHttpsRedirection();
-}
+    app.UseDeveloperExceptionPage();}
 else
 {
     app.UseHsts();
